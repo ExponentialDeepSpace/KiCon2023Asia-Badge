@@ -1,0 +1,48 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 8659c260-f029-4e72-8b9a-85fff45eea40)
+
+  (paper "A4")
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 153.67 62.23) (size 41.91 34.29) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid aaa75721-24d0-46d7-8555-ce5df44f2a38)
+    (property "Sheetname" "LED Matrix" (at 153.67 61.5184 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "LED_Matrix.kicad_sch" (at 153.67 97.1046 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "KiCon2023"
+        (path "/8659c260-f029-4e72-8b9a-85fff45eea40" (page "3"))
+      )
+    )
+  )
+
+  (sheet (at 67.31 60.96) (size 44.45 34.29) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc)
+    (property "Sheetname" "MCU" (at 67.31 60.2484 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "MCU.kicad_sch" (at 67.31 95.8346 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "KiCon2023"
+        (path "/8659c260-f029-4e72-8b9a-85fff45eea40" (page "2"))
+      )
+    )
+  )
+
+  (sheet_instances
+    (path "/" (page "1"))
+  )
+)

@@ -1,0 +1,19 @@
+# export files for BOM
+*.csv
+*.tsv
+*.xml
+# backup files
+*.bak
+*-backups
+_autosave*
+\#*
+*.log
+*.lck
+# it saves editor settings like visible layers, selection filters, etc
+*.kicad_prl
+Output
+*.zip
+production
+*.swp
+# Save/Restore Layout Plugin output
+*.pckl

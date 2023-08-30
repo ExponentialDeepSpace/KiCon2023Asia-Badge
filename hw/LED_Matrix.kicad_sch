@@ -1,0 +1,27 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 5638a736-cde1-4ae8-a6a5-81389102e144)
+
+  (paper "A4")
+
+  (lib_symbols
+  )
+
+
+  (sheet (at 77.47 46.99) (size 19.05 12.7) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid c99079d6-455e-4e03-b1d3-7c0b687dccf3)
+    (property "Sheetname" "LED Column 1" (at 77.47 46.2784 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "LED_Column.kicad_sch" (at 77.47 60.2746 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "KiCon2023"
+        (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aaa75721-24d0-46d7-8555-ce5df44f2a38" (page "4"))
+      )
+    )
+  )
+)

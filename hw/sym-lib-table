@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "IotPi_MCU_nationstech")(type "KiCad")(uri "${KIPRJMOD}/../Symbols/IotPi_MCU_nationstech.kicad_sym")(options "")(descr ""))
+)
