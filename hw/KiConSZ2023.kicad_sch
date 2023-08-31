@@ -530,6 +530,23 @@
     (uuid ff1f6706-453e-49a4-8a0f-0d5832b4df98)
   )
 
+  (sheet (at 45.72 167.64) (size 27.94 22.86) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 8c3d77ce-3286-43c7-9eb6-2cc129677791)
+    (property "Sheetname" "USB" (at 45.72 166.9284 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "USB.kicad_sch" (at 45.72 191.0846 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "KiConSZ2023"
+        (path "/8659c260-f029-4e72-8b9a-85fff45eea40" (page "58"))
+      )
+    )
+  )
+
   (sheet (at 177.8 48.26) (size 63.5 68.58) (fields_autoplaced)
     (stroke (width 0.1524) (type solid))
     (fill (color 0 0 0 0.0000))

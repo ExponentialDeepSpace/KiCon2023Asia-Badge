@@ -3039,6 +3039,10 @@
     )
   )
 
+  (text "Internal USB D+ 1.5K Pull Up resistor" (at 213.36 83.82 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 28a7c0a4-3937-4bc0-a9d2-fd2f4b0e0fb7)
+  )
   (text "100nF for VRef" (at 198.12 34.29 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 4339b224-aed7-4e1a-94fb-cb1ebee86bb8)

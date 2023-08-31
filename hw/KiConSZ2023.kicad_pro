@@ -550,6 +550,10 @@
     [
       "8328711c-0c94-40b8-b0e0-d3d035cabe99",
       "RGB LED Cell 5"
+    ],
+    [
+      "8c3d77ce-3286-43c7-9eb6-2cc129677791",
+      "USB"
     ]
   ],
   "text_variables": {}

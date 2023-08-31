@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "IotPi_Connector_USB")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Connector_USB.pretty")(options "")(descr ""))
+)
