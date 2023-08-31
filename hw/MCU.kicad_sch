@@ -2802,10 +2802,22 @@
     (property "Datasheet" "~" (at 240.03 25.4 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 240.03 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 240.03 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 240.03 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 240.03 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 6961d191-c8ac-48d5-be25-e97f83603cc6))
     (pin "2" (uuid 40259d22-6431-418f-87ce-18bd9eef12cc))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "C?") (unit 1)
         )
@@ -2828,10 +2840,22 @@
     (property "Datasheet" "~" (at 232.41 134.62 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 232.41 139.7 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 232.41 139.7 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 232.41 139.7 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 232.41 139.7 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 6a931517-e511-4ccb-92a8-3960bf5468a7))
     (pin "2" (uuid 7e5ce4ee-3ada-4e52-8384-c9f3e585844f))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "SW?") (unit 1)
         )
@@ -2854,10 +2878,22 @@
     (property "Datasheet" "~" (at 242.57 147.32 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 242.57 147.32 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 242.57 147.32 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 242.57 147.32 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 242.57 147.32 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 7b45e8e9-f795-4982-98c5-3245cfad6cbf))
     (pin "2" (uuid 5522076e-5df9-4c3d-91bd-af84f947736c))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "R?") (unit 1)
         )
@@ -2882,7 +2918,7 @@
     )
     (pin "1" (uuid 456fcc48-751a-4be6-8636-c4d6e381efc2))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "#PWR0202") (unit 1)
         )
@@ -2907,7 +2943,7 @@
     )
     (pin "1" (uuid 6d76677f-766a-4000-8a21-3506dac2a5ef))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "#PWR0204") (unit 1)
         )
@@ -2932,7 +2968,7 @@
     )
     (pin "1" (uuid e1128fc4-48e2-4279-8912-7bbd8e13c046))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "#PWR0203") (unit 1)
         )
@@ -2957,7 +2993,7 @@
     )
     (pin "1" (uuid 35f2def4-a9ed-4e4e-8922-a7e58deddc9f))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "#PWR0201") (unit 1)
         )
@@ -2980,10 +3016,22 @@
     (property "Datasheet" "~" (at 241.3 110.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 241.3 110.49 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 241.3 110.49 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 241.3 110.49 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 241.3 110.49 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 682e75ba-24d2-428d-9e33-862fa26b799b))
     (pin "2" (uuid 05860388-11c7-4c4b-b9c3-09c516922da4))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "C?") (unit 1)
         )
@@ -3006,10 +3054,22 @@
     (property "Datasheet" "~" (at 238.76 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 238.76 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 238.76 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 238.76 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 238.76 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 3b8323fe-f308-4fc6-8789-67f29c513a1a))
     (pin "2" (uuid e788c5e0-f6e8-415d-94b9-82504d38381a))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "C?") (unit 1)
         )
@@ -3032,10 +3092,22 @@
     (property "Datasheet" "~" (at 226.06 25.4 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 226.06 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 226.06 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 226.06 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 226.06 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 753c4b98-fc64-42de-aa11-0cab7f4e50aa))
     (pin "2" (uuid e3f62ad1-2c23-4ba1-b9cb-8447f927453c))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "C?") (unit 1)
         )
@@ -3058,10 +3130,22 @@
     (property "Datasheet" "~" (at 232.41 97.79 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 232.41 97.79 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 232.41 97.79 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 232.41 97.79 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 232.41 97.79 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 289bb91a-0033-4428-8026-9cfea0707bad))
     (pin "2" (uuid 48b241c3-79d5-402e-94eb-f282a080e5af))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "R?") (unit 1)
         )
@@ -3084,10 +3168,22 @@
     (property "Datasheet" "~" (at 250.19 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 250.19 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 250.19 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 250.19 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 250.19 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 3c431025-f48b-4b07-86ca-e595730cfe9e))
     (pin "2" (uuid 6d836ada-195b-44d4-81d3-1fcbaaa4ccf2))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "C?") (unit 1)
         )
@@ -3108,6 +3204,18 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.nationstech.com/uploadfile/file/20230815/1692092902796561.pdf" (at 140.97 130.81 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Description" "" (at 140.97 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 140.97 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 140.97 90.17 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 140.97 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 746dab68-67bc-4391-beb2-d8ff53d4cf6f))
@@ -3175,7 +3283,7 @@
     (pin "8" (uuid 8f680729-40c6-4e0a-8ccf-54d8dcff5f8a))
     (pin "9" (uuid c1f123c6-686c-4158-bf0d-4c320babf96e))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "U?") (unit 1)
         )
@@ -3198,10 +3306,22 @@
     (property "Datasheet" "~" (at 252.73 25.4 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 252.73 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 252.73 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 252.73 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 252.73 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid e127371e-f837-43a2-adfc-45a28985b999))
     (pin "2" (uuid 959b20de-137c-4497-9c35-a8f834b9f545))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "C?") (unit 1)
         )
@@ -3224,10 +3344,22 @@
     (property "Datasheet" "~" (at 226.06 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 226.06 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 226.06 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 226.06 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 226.06 44.45 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 6989e926-67a1-49d5-9120-0d566105ad93))
     (pin "2" (uuid 9a070c45-ef05-4844-a46a-74866bd6c65c))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "C?") (unit 1)
         )
@@ -3250,10 +3382,22 @@
     (property "Datasheet" "~" (at 265.43 25.4 0)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Description" "" (at 265.43 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "" (at 265.43 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor" "" (at 265.43 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Vendor Model" "" (at 265.43 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 60bb6111-df30-4a05-9d59-0d29d7407571))
     (pin "2" (uuid c2c56129-cc11-4ec6-af30-303683310011))
     (instances
-      (project "KiCon2023"
+      (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
           (reference "C?") (unit 1)
         )

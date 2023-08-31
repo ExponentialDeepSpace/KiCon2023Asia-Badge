@@ -247,7 +247,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "KiCon2023.kicad_pro",
+    "filename": "KiConSZ2023.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -338,6 +338,290 @@
     [
       "c99079d6-455e-4e03-b1d3-7c0b687dccf3",
       "LED Column 1"
+    ],
+    [
+      "1900e701-4dbd-4411-9644-b756e67fc98c",
+      "RGB LED Cell 1"
+    ],
+    [
+      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
+      "RGB LED Cell 2"
+    ],
+    [
+      "f9315e0c-985e-4f87-9caa-59fc27526f62",
+      "RGB LED Cell 3"
+    ],
+    [
+      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
+      "RGB LED Cell 4"
+    ],
+    [
+      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
+      "RGB LED Cell 5"
+    ],
+    [
+      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
+      "RGB LED Cell 6"
+    ],
+    [
+      "9c2089be-7443-4e04-8990-12b57e0e78cf",
+      "RGB LED Cell 7"
+    ],
+    [
+      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
+      "RGB LED Cell 8"
+    ],
+    [
+      "333dd360-984d-4dcd-8f6a-73c8396351d8",
+      "LED Column 2"
+    ],
+    [
+      "1900e701-4dbd-4411-9644-b756e67fc98c",
+      "RGB LED Cell 1"
+    ],
+    [
+      "f9315e0c-985e-4f87-9caa-59fc27526f62",
+      "RGB LED Cell 3"
+    ],
+    [
+      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
+      "RGB LED Cell 4"
+    ],
+    [
+      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
+      "RGB LED Cell 5"
+    ],
+    [
+      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
+      "RGB LED Cell 2"
+    ],
+    [
+      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
+      "RGB LED Cell 6"
+    ],
+    [
+      "9c2089be-7443-4e04-8990-12b57e0e78cf",
+      "RGB LED Cell 7"
+    ],
+    [
+      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
+      "RGB LED Cell 8"
+    ],
+    [
+      "fcab9466-0fa7-4e63-a405-d450d575e6dc",
+      "LED Column 3"
+    ],
+    [
+      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
+      "RGB LED Cell 8"
+    ],
+    [
+      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
+      "RGB LED Cell 6"
+    ],
+    [
+      "9c2089be-7443-4e04-8990-12b57e0e78cf",
+      "RGB LED Cell 7"
+    ],
+    [
+      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
+      "RGB LED Cell 5"
+    ],
+    [
+      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
+      "RGB LED Cell 4"
+    ],
+    [
+      "f9315e0c-985e-4f87-9caa-59fc27526f62",
+      "RGB LED Cell 3"
+    ],
+    [
+      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
+      "RGB LED Cell 2"
+    ],
+    [
+      "1900e701-4dbd-4411-9644-b756e67fc98c",
+      "RGB LED Cell 1"
+    ],
+    [
+      "60fa32f5-97b4-4b1e-bd03-d9e273b123bc",
+      "LED Column 4"
+    ],
+    [
+      "1900e701-4dbd-4411-9644-b756e67fc98c",
+      "RGB LED Cell 1"
+    ],
+    [
+      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
+      "RGB LED Cell 8"
+    ],
+    [
+      "9c2089be-7443-4e04-8990-12b57e0e78cf",
+      "RGB LED Cell 7"
+    ],
+    [
+      "f9315e0c-985e-4f87-9caa-59fc27526f62",
+      "RGB LED Cell 3"
+    ],
+    [
+      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
+      "RGB LED Cell 4"
+    ],
+    [
+      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
+      "RGB LED Cell 5"
+    ],
+    [
+      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
+      "RGB LED Cell 2"
+    ],
+    [
+      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
+      "RGB LED Cell 6"
+    ],
+    [
+      "059a77b9-b2b4-40f5-b844-255fd60c44b2",
+      "LED Column 5"
+    ],
+    [
+      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
+      "RGB LED Cell 4"
+    ],
+    [
+      "1900e701-4dbd-4411-9644-b756e67fc98c",
+      "RGB LED Cell 1"
+    ],
+    [
+      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
+      "RGB LED Cell 6"
+    ],
+    [
+      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
+      "RGB LED Cell 8"
+    ],
+    [
+      "f9315e0c-985e-4f87-9caa-59fc27526f62",
+      "RGB LED Cell 3"
+    ],
+    [
+      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
+      "RGB LED Cell 5"
+    ],
+    [
+      "9c2089be-7443-4e04-8990-12b57e0e78cf",
+      "RGB LED Cell 7"
+    ],
+    [
+      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
+      "RGB LED Cell 2"
+    ],
+    [
+      "6f4c7c12-aca0-4887-a194-76fe3f237744",
+      "LED Column 6"
+    ],
+    [
+      "9c2089be-7443-4e04-8990-12b57e0e78cf",
+      "RGB LED Cell 7"
+    ],
+    [
+      "f9315e0c-985e-4f87-9caa-59fc27526f62",
+      "RGB LED Cell 3"
+    ],
+    [
+      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
+      "RGB LED Cell 4"
+    ],
+    [
+      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
+      "RGB LED Cell 6"
+    ],
+    [
+      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
+      "RGB LED Cell 2"
+    ],
+    [
+      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
+      "RGB LED Cell 8"
+    ],
+    [
+      "1900e701-4dbd-4411-9644-b756e67fc98c",
+      "RGB LED Cell 1"
+    ],
+    [
+      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
+      "RGB LED Cell 5"
+    ],
+    [
+      "ab46e813-a943-4627-9482-92b20766cb3b",
+      "LED Column 7"
+    ],
+    [
+      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
+      "RGB LED Cell 5"
+    ],
+    [
+      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
+      "RGB LED Cell 2"
+    ],
+    [
+      "f9315e0c-985e-4f87-9caa-59fc27526f62",
+      "RGB LED Cell 3"
+    ],
+    [
+      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
+      "RGB LED Cell 6"
+    ],
+    [
+      "9c2089be-7443-4e04-8990-12b57e0e78cf",
+      "RGB LED Cell 7"
+    ],
+    [
+      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
+      "RGB LED Cell 8"
+    ],
+    [
+      "1900e701-4dbd-4411-9644-b756e67fc98c",
+      "RGB LED Cell 1"
+    ],
+    [
+      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
+      "RGB LED Cell 4"
+    ],
+    [
+      "27106c74-0708-43b8-ae40-77e602812695",
+      "LED Column 8"
+    ],
+    [
+      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
+      "RGB LED Cell 6"
+    ],
+    [
+      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
+      "RGB LED Cell 8"
+    ],
+    [
+      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
+      "RGB LED Cell 5"
+    ],
+    [
+      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
+      "RGB LED Cell 2"
+    ],
+    [
+      "9c2089be-7443-4e04-8990-12b57e0e78cf",
+      "RGB LED Cell 7"
+    ],
+    [
+      "1900e701-4dbd-4411-9644-b756e67fc98c",
+      "RGB LED Cell 1"
+    ],
+    [
+      "f9315e0c-985e-4f87-9caa-59fc27526f62",
+      "RGB LED Cell 3"
+    ],
+    [
+      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
+      "RGB LED Cell 4"
     ]
   ],
   "text_variables": {}
