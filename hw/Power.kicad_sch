@@ -200,7 +200,7 @@
     (property "Value" "Single or Dual AA Battery" (at 146.05 36.2585 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "" (at 142.24 35.306 90)
+    (property "Footprint" "Battery:BatteryHolder_Keystone_2460_1xAA" (at 142.24 35.306 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 142.24 35.306 90)
