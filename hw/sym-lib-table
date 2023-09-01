@@ -2,4 +2,5 @@
   (version 7)
   (lib (name "IotPi_MCU_nationstech")(type "KiCad")(uri "${KIPRJMOD}/../Symbols/IotPi_MCU_nationstech.kicad_sym")(options "")(descr ""))
   (lib (name "IotPi_Regulator_Switching")(type "KiCad")(uri "/home/hongbo/Developer/Embedded/IotPi/KiConShenZhen2023/Symbols/IotPi_Regulator_Switching.kicad_sym")(options "")(descr ""))
+  (lib (name "IotPi_Power_Protections")(type "KiCad")(uri "/home/hongbo/Developer/Embedded/IotPi/KiConShenZhen2023/Symbols/IotPi_Power_Protections.kicad_sym")(options "")(descr ""))
 )
