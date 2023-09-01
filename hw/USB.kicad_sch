@@ -780,7 +780,7 @@
   (symbol (lib_id "Connector:USB_C_Receptacle_USB2.0") (at 48.26 81.28 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 8951ca23-7d75-42e2-8dfc-f329cda8da3e)
-    (property "Reference" "J2" (at 48.26 58.42 0)
+    (property "Reference" "J3" (at 48.26 58.42 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "USB_C_Receptacle_USB2.0" (at 48.26 60.96 0)
@@ -824,7 +824,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "J2") (unit 1)
+          (reference "J3") (unit 1)
         )
       )
     )
