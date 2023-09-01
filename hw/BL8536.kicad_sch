@@ -362,7 +362,7 @@
   (symbol (lib_id "power:GND") (at 151.13 101.6 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 8f3f49dc-7814-4a55-84dc-c748b37489ff)
-    (property "Reference" "#PWR06101" (at 151.13 107.95 0)
+    (property "Reference" "#PWR?" (at 151.13 107.95 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 151.13 106.68 0)
@@ -378,7 +378,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18/5797d23a-80e1-444f-98ef-f45b207fb046"
-          (reference "#PWR06101") (unit 1)
+          (reference "#PWR?") (unit 1)
         )
       )
     )

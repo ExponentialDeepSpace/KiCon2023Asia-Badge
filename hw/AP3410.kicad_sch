@@ -424,7 +424,7 @@
   (symbol (lib_id "power:GND") (at 152.4 88.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 22cac970-4324-436f-9b50-337cedb79835)
-    (property "Reference" "#PWR06002" (at 152.4 95.25 0)
+    (property "Reference" "#PWR?" (at 152.4 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 152.4 93.98 0)
@@ -440,7 +440,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18/a840a96c-0798-4e19-9437-8cd8130a96d6"
-          (reference "#PWR06002") (unit 1)
+          (reference "#PWR?") (unit 1)
         )
       )
     )
@@ -525,7 +525,7 @@
   (symbol (lib_id "power:GND") (at 78.74 83.82 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4571f98a-a325-4fd1-8d2e-a5df34c198b1)
-    (property "Reference" "#PWR06001" (at 78.74 90.17 0)
+    (property "Reference" "#PWR?" (at 78.74 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 78.74 88.9 0)
@@ -541,7 +541,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18/a840a96c-0798-4e19-9437-8cd8130a96d6"
-          (reference "#PWR06001") (unit 1)
+          (reference "#PWR?") (unit 1)
         )
       )
     )
@@ -626,7 +626,7 @@
   (symbol (lib_id "power:GND") (at 168.91 88.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d82ce76c-dd9a-4310-99f5-76946170388f)
-    (property "Reference" "#PWR06003" (at 168.91 95.25 0)
+    (property "Reference" "#PWR?" (at 168.91 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 168.91 93.98 0)
@@ -642,7 +642,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18/a840a96c-0798-4e19-9437-8cd8130a96d6"
-          (reference "#PWR06003") (unit 1)
+          (reference "#PWR?") (unit 1)
         )
       )
     )

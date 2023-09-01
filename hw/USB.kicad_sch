@@ -730,7 +730,7 @@
   (symbol (lib_id "power:GND") (at 210.82 91.44 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2e5f5b32-7720-4321-9424-52f8680d48d6)
-    (property "Reference" "#PWR05802" (at 210.82 97.79 0)
+    (property "Reference" "#PWR?" (at 210.82 97.79 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 210.82 96.52 0)
@@ -746,7 +746,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "#PWR05802") (unit 1)
+          (reference "#PWR?") (unit 1)
         )
       )
     )
@@ -755,7 +755,7 @@
   (symbol (lib_id "power:GND") (at 48.26 109.22 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 83b5891e-487d-40f8-a9fe-a862dbba32f5)
-    (property "Reference" "#PWR05801" (at 48.26 115.57 0)
+    (property "Reference" "#PWR?" (at 48.26 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 48.26 114.3 0)
@@ -771,7 +771,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "#PWR05801") (unit 1)
+          (reference "#PWR?") (unit 1)
         )
       )
     )
@@ -839,7 +839,7 @@
     (property "Value" "PUSB3FR4" (at 105.41 102.87 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "" (at 96.52 101.6 0)
+    (property "Footprint" "IotPi_Package_DFN_QFN:Nexperia_DFN2510A-10" (at 96.52 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (at 96.52 101.6 0)
@@ -905,7 +905,7 @@
   (symbol (lib_id "power:GND") (at 96.52 114.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f75a81ed-0148-4583-a5ad-0e15ca69d268)
-    (property "Reference" "#PWR05803" (at 96.52 120.65 0)
+    (property "Reference" "#PWR?" (at 96.52 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 96.52 119.38 0)
@@ -921,7 +921,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "#PWR05803") (unit 1)
+          (reference "#PWR?") (unit 1)
         )
       )
     )

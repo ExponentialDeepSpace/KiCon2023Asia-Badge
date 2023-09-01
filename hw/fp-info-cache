@@ -1,4 +1,4 @@
-21613690007127627
+21618770640668170
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59444,12 +59444,33 @@ THT
 4
 2
 IotPi_Connector_USB
-IotP
+USB_C_Receptacle_Dealon_USB-TYPE-C-019_6P_TopMnt_Horizontal
 USB 2.0 Type C Receptacle, GCT, 16P, top mounted, horizontal, 5A: https://atta.szlcsc.com/upload/public/pdf/source/20211217/AE540A2D77B84677A3A029B8D0DDD2E1.pdf
 USB C Type-C Receptacle SMD USB 2.0 16P 16C
 0
 20
 17
+IotPi_Package_DFN_QFN
+Nexperia_DFN2510A-10
+
+
+0
+8
+8
+IotPi_Switch
+MS-22D28-G020
+
+
+0
+6
+3
+IotPi_Switch
+SKRPACE010
+
+
+0
+4
+4
 Jumper
 SolderJumper-2_P1.3mm_Bridged2Bar_Pad1.0x1.5mm
 SMD Solder Jumper, 1x1.5mm Pads, 0.3mm gap, bridged with 2 copper strips
