@@ -692,7 +692,7 @@
   (symbol (lib_id "Device:R") (at 196.85 73.66 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 15319f06-2a25-4c47-b02d-841f393a4561)
-    (property "Reference" "R?" (at 196.85 67.31 90)
+    (property "Reference" "R148" (at 196.85 67.31 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "5K1" (at 196.85 69.85 90)
@@ -721,7 +721,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "R?") (unit 1)
+          (reference "R148") (unit 1)
         )
       )
     )
@@ -730,7 +730,7 @@
   (symbol (lib_id "power:GND") (at 210.82 91.44 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2e5f5b32-7720-4321-9424-52f8680d48d6)
-    (property "Reference" "#PWR?" (at 210.82 97.79 0)
+    (property "Reference" "#PWR08" (at 210.82 97.79 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 210.82 96.52 0)
@@ -746,7 +746,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR08") (unit 1)
         )
       )
     )
@@ -755,7 +755,7 @@
   (symbol (lib_id "power:GND") (at 48.26 109.22 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 83b5891e-487d-40f8-a9fe-a862dbba32f5)
-    (property "Reference" "#PWR?" (at 48.26 115.57 0)
+    (property "Reference" "#PWR06" (at 48.26 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 48.26 114.3 0)
@@ -771,7 +771,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR06") (unit 1)
         )
       )
     )
@@ -780,7 +780,7 @@
   (symbol (lib_id "Connector:USB_C_Receptacle_USB2.0") (at 48.26 81.28 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 8951ca23-7d75-42e2-8dfc-f329cda8da3e)
-    (property "Reference" "J?" (at 48.26 58.42 0)
+    (property "Reference" "J2" (at 48.26 58.42 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "USB_C_Receptacle_USB2.0" (at 48.26 60.96 0)
@@ -824,7 +824,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "J?") (unit 1)
+          (reference "J2") (unit 1)
         )
       )
     )
@@ -833,7 +833,7 @@
   (symbol (lib_id "IotPi_Power_Protections:PUSB3FR4") (at 96.52 101.6 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d4963f2f-9c9c-47e9-95d5-880df0408d82)
-    (property "Reference" "U?" (at 105.41 100.33 0)
+    (property "Reference" "U3" (at 105.41 100.33 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "PUSB3FR4" (at 105.41 102.87 0)
@@ -858,7 +858,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "U?") (unit 1)
+          (reference "U3") (unit 1)
         )
       )
     )
@@ -867,7 +867,7 @@
   (symbol (lib_id "Device:R") (at 196.85 86.36 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d7fed674-e949-4e1b-8b66-d5cafcd2557c)
-    (property "Reference" "R?" (at 196.85 80.01 90)
+    (property "Reference" "R149" (at 196.85 80.01 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "5K1" (at 196.85 82.55 90)
@@ -896,7 +896,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "R?") (unit 1)
+          (reference "R149") (unit 1)
         )
       )
     )
@@ -905,7 +905,7 @@
   (symbol (lib_id "power:GND") (at 96.52 114.3 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f75a81ed-0148-4583-a5ad-0e15ca69d268)
-    (property "Reference" "#PWR?" (at 96.52 120.65 0)
+    (property "Reference" "#PWR07" (at 96.52 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 96.52 119.38 0)
@@ -921,7 +921,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR07") (unit 1)
         )
       )
     )

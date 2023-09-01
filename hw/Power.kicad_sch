@@ -264,7 +264,7 @@
   (symbol (lib_id "power:GND") (at 162.56 29.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5a908a99-76d2-41fc-a9fd-70b0b094fec3)
-    (property "Reference" "#PWR?" (at 162.56 35.56 0)
+    (property "Reference" "#PWR010" (at 162.56 35.56 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 162.56 34.29 0)
@@ -280,7 +280,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR010") (unit 1)
         )
       )
     )
@@ -289,7 +289,7 @@
   (symbol (lib_id "Device:Battery_Cell") (at 142.24 36.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5b5151dc-5c8c-4129-84a5-035818fe1022)
-    (property "Reference" "BT?" (at 146.05 33.7185 0)
+    (property "Reference" "BT2" (at 146.05 33.7185 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "Single or Dual AA Battery" (at 146.05 36.2585 0)
@@ -306,7 +306,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
-          (reference "BT?") (unit 1)
+          (reference "BT2") (unit 1)
         )
       )
     )
@@ -315,7 +315,7 @@
   (symbol (lib_id "power:GND") (at 142.24 41.91 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 9712ba00-9eb2-4daf-960d-2312037a1740)
-    (property "Reference" "#PWR?" (at 142.24 48.26 0)
+    (property "Reference" "#PWR09" (at 142.24 48.26 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 142.24 46.99 0)
@@ -331,7 +331,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR09") (unit 1)
         )
       )
     )
@@ -340,7 +340,7 @@
   (symbol (lib_id "Switch:SW_SPDT") (at 152.4 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d1decc42-e95f-44e7-b074-4c5a48bc61de)
-    (property "Reference" "SW?" (at 152.4 19.05 0)
+    (property "Reference" "SW4" (at 152.4 19.05 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_SPDT" (at 152.4 21.59 0)
@@ -358,7 +358,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
-          (reference "SW?") (unit 1)
+          (reference "SW4") (unit 1)
         )
       )
     )

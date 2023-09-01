@@ -3573,7 +3573,7 @@
   (symbol (lib_id "Device:C") (at 241.3 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0d743b24-7176-4441-a445-3ed2072df049)
-    (property "Reference" "C?" (at 245.11 25.4 0)
+    (property "Reference" "C6" (at 245.11 25.4 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 245.11 27.94 0)
@@ -3602,7 +3602,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "C?") (unit 1)
+          (reference "C6") (unit 1)
         )
       )
     )
@@ -3611,7 +3611,7 @@
   (symbol (lib_id "Switch:SW_Push") (at 254 142.24 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1e2e1111-ae3d-4028-8744-e2c21a92e7d8)
-    (property "Reference" "SW?" (at 254 134.62 0)
+    (property "Reference" "SW3" (at 254 134.62 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SKRPACE010" (at 254 137.16 0)
@@ -3640,7 +3640,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "SW?") (unit 1)
+          (reference "SW3") (unit 1)
         )
       )
     )
@@ -3649,7 +3649,7 @@
   (symbol (lib_id "Device:R") (at 264.16 149.86 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1e8468bb-494d-484d-95a9-de86f7a4fde3)
-    (property "Reference" "R?" (at 266.7 148.59 0)
+    (property "Reference" "R3" (at 266.7 148.59 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10K" (at 266.7 151.13 0)
@@ -3678,7 +3678,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "R?") (unit 1)
+          (reference "R3") (unit 1)
         )
       )
     )
@@ -3687,7 +3687,7 @@
   (symbol (lib_id "Switch:SW_Push") (at 254 111.76 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 254f6ae5-28fd-49b1-8fef-3c751f40ef31)
-    (property "Reference" "SW?" (at 255.27 110.49 90)
+    (property "Reference" "SW2" (at 255.27 110.49 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "SKRPACE010" (at 255.27 113.03 90)
@@ -3716,7 +3716,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "SW?") (unit 1)
+          (reference "SW2") (unit 1)
         )
       )
     )
@@ -3725,7 +3725,7 @@
   (symbol (lib_id "power:GND") (at 114.3 177.8 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 33f67edd-33c3-4ea0-bdf5-15cf4f3f4d13)
-    (property "Reference" "#PWR?" (at 114.3 184.15 0)
+    (property "Reference" "#PWR03" (at 114.3 184.15 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 114.3 182.88 0)
@@ -3741,7 +3741,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR03") (unit 1)
         )
       )
     )
@@ -3750,7 +3750,7 @@
   (symbol (lib_id "power:GND") (at 264.16 157.48 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5385c624-545a-4d25-b7a3-be4190bec6df)
-    (property "Reference" "#PWR?" (at 264.16 163.83 0)
+    (property "Reference" "#PWR05" (at 264.16 163.83 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 264.16 162.56 0)
@@ -3766,7 +3766,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR05") (unit 1)
         )
       )
     )
@@ -3775,7 +3775,7 @@
   (symbol (lib_id "power:GND") (at 254 121.92 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5b576c5e-5a08-42f6-b83c-b0dde16dc0c1)
-    (property "Reference" "#PWR?" (at 254 128.27 0)
+    (property "Reference" "#PWR04" (at 254 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 254 127 0)
@@ -3791,7 +3791,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR04") (unit 1)
         )
       )
     )
@@ -3800,7 +3800,7 @@
   (symbol (lib_id "power:VDD") (at 40.64 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5c0ce713-d998-4f92-95b3-e806fb9a2830)
-    (property "Reference" "#PWR?" (at 40.64 30.48 0)
+    (property "Reference" "#PWR02" (at 40.64 30.48 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VDD" (at 40.64 22.86 0)
@@ -3816,7 +3816,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "#PWR?") (unit 1)
+          (reference "#PWR02") (unit 1)
         )
       )
     )
@@ -3825,7 +3825,7 @@
   (symbol (lib_id "Device:C") (at 266.7 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 87b495d1-68c9-4789-91ef-09203d97913a)
-    (property "Reference" "C?" (at 270.51 110.49 0)
+    (property "Reference" "C9" (at 270.51 110.49 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 270.51 113.03 0)
@@ -3854,7 +3854,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "C?") (unit 1)
+          (reference "C9") (unit 1)
         )
       )
     )
@@ -3863,7 +3863,7 @@
   (symbol (lib_id "Device:C") (at 181.61 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 8b0e3833-3f96-4863-a5ec-614e465933e6)
-    (property "Reference" "C?" (at 185.42 25.4 0)
+    (property "Reference" "C3" (at 185.42 25.4 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1u" (at 185.42 27.94 0)
@@ -3892,7 +3892,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "C?") (unit 1)
+          (reference "C3") (unit 1)
         )
       )
     )
@@ -3901,7 +3901,7 @@
   (symbol (lib_id "Device:C") (at 227.33 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 8bad9826-43e2-454d-b1ae-114ced78c467)
-    (property "Reference" "C?" (at 231.14 25.4 0)
+    (property "Reference" "C5" (at 231.14 25.4 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 231.14 27.94 0)
@@ -3930,7 +3930,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "C?") (unit 1)
+          (reference "C5") (unit 1)
         )
       )
     )
@@ -3939,7 +3939,7 @@
   (symbol (lib_id "Device:R") (at 254 96.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 93a62bd7-4327-4e8f-8808-b5e3c394a0e4)
-    (property "Reference" "R?" (at 256.54 95.25 0)
+    (property "Reference" "R2" (at 256.54 95.25 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10K" (at 256.54 97.79 0)
@@ -3968,7 +3968,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "R?") (unit 1)
+          (reference "R2") (unit 1)
         )
       )
     )
@@ -3977,7 +3977,7 @@
   (symbol (lib_id "Device:C") (at 193.04 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid aefa957f-2143-4566-b81f-96f9af899778)
-    (property "Reference" "C?" (at 196.85 25.4 0)
+    (property "Reference" "C4" (at 196.85 25.4 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 196.85 27.94 0)
@@ -4006,7 +4006,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "C?") (unit 1)
+          (reference "C4") (unit 1)
         )
       )
     )
@@ -4015,7 +4015,7 @@
   (symbol (lib_id "IotPi_MCU_nationstech:N32L40xRyLz") (at 157.48 99.06 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b5215f8f-a1be-4366-9803-9c6eed0d7eab)
-    (property "Reference" "U?" (at 157.48 96.52 0)
+    (property "Reference" "U2" (at 157.48 96.52 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "N32L406RBL7" (at 157.48 99.06 0)
@@ -4106,7 +4106,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "U?") (unit 1)
+          (reference "U2") (unit 1)
         )
       )
     )
@@ -4115,7 +4115,7 @@
   (symbol (lib_id "Device:C") (at 254 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d2d25654-4081-42bf-a397-eeee4085cd77)
-    (property "Reference" "C?" (at 257.81 25.4 0)
+    (property "Reference" "C7" (at 257.81 25.4 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 257.81 27.94 0)
@@ -4144,7 +4144,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "C?") (unit 1)
+          (reference "C7") (unit 1)
         )
       )
     )
@@ -4153,7 +4153,7 @@
   (symbol (lib_id "Device:C") (at 168.91 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d35d0e92-fea4-4685-aa62-97a30c2eafdb)
-    (property "Reference" "C?" (at 172.72 25.4 0)
+    (property "Reference" "C2" (at 172.72 25.4 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10n" (at 172.72 27.94 0)
@@ -4182,7 +4182,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "C?") (unit 1)
+          (reference "C2") (unit 1)
         )
       )
     )
@@ -4191,7 +4191,7 @@
   (symbol (lib_id "Device:C") (at 266.7 26.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid fbe66239-ddb9-4cf4-ae81-3855136cb74f)
-    (property "Reference" "C?" (at 270.51 25.4 0)
+    (property "Reference" "C8" (at 270.51 25.4 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4.7u" (at 270.51 27.94 0)
@@ -4220,7 +4220,7 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/aebeadc6-0cb2-44f8-88a5-80ae76b1b2bc"
-          (reference "C?") (unit 1)
+          (reference "C8") (unit 1)
         )
       )
     )
