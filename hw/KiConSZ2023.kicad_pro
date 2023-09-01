@@ -554,6 +554,18 @@
     [
       "8c3d77ce-3286-43c7-9eb6-2cc129677791",
       "USB"
+    ],
+    [
+      "f453823a-a381-482a-9343-94fafcdcaf18",
+      "Power"
+    ],
+    [
+      "a840a96c-0798-4e19-9437-8cd8130a96d6",
+      "Buck DCDC to 3.3V"
+    ],
+    [
+      "5797d23a-80e1-444f-98ef-f45b207fb046",
+      "Boost DCDC to 3.3V"
     ]
   ],
   "text_variables": {}

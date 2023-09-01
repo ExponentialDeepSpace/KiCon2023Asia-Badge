@@ -1,0 +1,37 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 57bd8b2d-66a6-4bae-8dd0-51c70e522ef6)
+
+  (paper "A4")
+
+  (lib_symbols
+  )
+
+
+  (wire (pts (xy 30.48 30.48) (xy 43.18 30.48))
+    (stroke (width 0) (type default))
+    (uuid 462cedfd-d210-4d32-a0ef-6e020d51326b)
+  )
+  (wire (pts (xy 30.48 25.4) (xy 43.18 25.4))
+    (stroke (width 0) (type default))
+    (uuid a3bbd7d3-97b1-4444-a078-b83a73327436)
+  )
+
+  (label "VOUT_3V3" (at 43.18 30.48 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 07c83898-77e9-436e-a377-156dc34eb85f)
+  )
+  (label "Battery_In" (at 43.18 25.4 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid e322d510-5e06-4669-b9d7-78788b2ce74d)
+  )
+
+  (hierarchical_label "Battery_In" (shape input) (at 30.48 25.4 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 57de5431-b697-42a8-a888-724a8f8bc93f)
+  )
+  (hierarchical_label "VOUT_3V3" (shape output) (at 30.48 30.48 180) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid d12baa21-bf7a-4960-bc12-ad00bea26512)
+  )
+)

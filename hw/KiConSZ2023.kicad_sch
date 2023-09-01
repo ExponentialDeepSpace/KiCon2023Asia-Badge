@@ -540,6 +540,18 @@
     (property "Sheetfile" "USB.kicad_sch" (at 45.72 191.0846 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
+    (pin "USB_DP" bidirectional (at 45.72 172.72 180)
+      (effects (font (size 1.27 1.27)) (justify left))
+      (uuid 033140b7-24d2-42d7-91df-3d14b25d5daf)
+    )
+    (pin "VBUS" output (at 45.72 182.88 180)
+      (effects (font (size 1.27 1.27)) (justify left))
+      (uuid 9d48f78d-0925-45e3-a327-90a6b635f918)
+    )
+    (pin "USB_DN" bidirectional (at 45.72 175.26 180)
+      (effects (font (size 1.27 1.27)) (justify left))
+      (uuid 7d3e2ba7-4a6a-44ba-8805-34cb58b6569f)
+    )
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40" (page "58"))
@@ -837,6 +849,27 @@
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40" (page "2"))
+      )
+    )
+  )
+
+  (sheet (at 93.98 167.64) (size 30.48 22.86) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid f453823a-a381-482a-9343-94fafcdcaf18)
+    (property "Sheetname" "Power" (at 93.98 166.9284 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "Power.kicad_sch" (at 93.98 191.0846 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (pin "VBUS" input (at 93.98 172.72 180)
+      (effects (font (size 1.27 1.27)) (justify left))
+      (uuid 65cfd296-2b4f-4670-91a5-f3a96c44816c)
+    )
+    (instances
+      (project "KiConSZ2023"
+        (path "/8659c260-f029-4e72-8b9a-85fff45eea40" (page "59"))
       )
     )
   )
