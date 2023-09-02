@@ -1,7 +1,7 @@
 (fp_lib_table
   (version 7)
   (lib (name "IotPi_Connector_USB")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Connector_USB.pretty")(options "")(descr ""))
-  (lib (name "IotPi_Package_DFN_QFN")(type "KiCad")(uri "/home/hongbo/Developer/Embedded/IotPi/KiConShenZhen2023/Footprints/IotPi_Package_DFN_QFN.pretty")(options "")(descr ""))
-  (lib (name "IotPi_Switch")(type "KiCad")(uri "/home/hongbo/Developer/Embedded/IotPi/KiConShenZhen2023/Footprints/IotPi_Switch.pretty")(options "")(descr ""))
-  (lib (name "IotPi_LED")(type "KiCad")(uri "/home/hongbo/Developer/Embedded/IotPi/KiConShenZhen2023/Footprints/IotPi_LED.pretty")(options "")(descr ""))
+  (lib (name "IotPi_Package_DFN_QFN")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Package_DFN_QFN.pretty")(options "")(descr ""))
+  (lib (name "IotPi_Switch")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Switch.pretty")(options "")(descr ""))
+  (lib (name "IotPi_LED")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_LED.pretty")(options "")(descr ""))
 )

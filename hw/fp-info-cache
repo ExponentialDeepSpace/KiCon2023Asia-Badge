@@ -1,4 +1,4 @@
-21620464268318923
+21620464268344060
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59459,8 +59459,8 @@ MeiHua_RGB_LED_Reverse_Mounting_MHT151RGBCT
 4
 IotPi_Package_DFN_QFN
 Nexperia_DFN2510A-10
-
-
+System-level ESD protection for USB 2.0 and SuperSpeed USB 3.2 at 10 Gbps, HDMI,{return}DisplayPort, eSATA and LVDS
+ESD
 0
 10
 10
