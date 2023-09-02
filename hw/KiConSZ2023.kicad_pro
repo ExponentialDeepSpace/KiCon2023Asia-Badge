@@ -711,6 +711,10 @@
     [
       "5797d23a-80e1-444f-98ef-f45b207fb046",
       "Boost DCDC to 3.3V"
+    ],
+    [
+      "9fd63ff6-4460-4ed6-85b8-cb8f3d367f6e",
+      "QMI8658A"
     ]
   ],
   "text_variables": {}

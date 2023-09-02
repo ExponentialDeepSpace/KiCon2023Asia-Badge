@@ -896,6 +896,23 @@
     )
   )
 
+  (sheet (at 265.43 170.18) (size 30.48 20.32) (fields_autoplaced)
+    (stroke (width 0.1524) (type solid))
+    (fill (color 0 0 0 0.0000))
+    (uuid 9fd63ff6-4460-4ed6-85b8-cb8f3d367f6e)
+    (property "Sheetname" "QMI8658A" (at 265.43 169.4684 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "QMI8658A.kicad_sch" (at 265.43 191.0846 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+      (project "KiConSZ2023"
+        (path "/8659c260-f029-4e72-8b9a-85fff45eea40" (page "62"))
+      )
+    )
+  )
+
   (sheet (at 177.8 48.26) (size 63.5 68.58) (fields_autoplaced)
     (stroke (width 0.1524) (type solid))
     (fill (color 0 0 0 0.0000))
