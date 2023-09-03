@@ -1,4 +1,4 @@
-21622157909114347
+21623851029710739
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59443,6 +59443,13 @@ THT
 0
 4
 2
+IotPi_Connector_Hirose
+BM20B(0.8)-10DS-0.4V
+
+
+0
+14
+11
 IotPi_Connector_USB
 USB_C_Receptacle_Dealon_USB-TYPE-C-019_6P_TopMnt_Horizontal
 USB 2.0 Type C Receptacle, GCT, 16P, top mounted, horizontal, 5A: https://atta.szlcsc.com/upload/public/pdf/source/20211217/AE540A2D77B84677A3A029B8D0DDD2E1.pdf
