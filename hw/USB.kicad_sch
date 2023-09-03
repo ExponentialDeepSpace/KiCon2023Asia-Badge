@@ -431,10 +431,6 @@
           (name "CH1" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
         )
-        (pin no_connect line (at 10.16 -5.08 180) (length 2.54) hide
-          (name "" (effects (font (size 1.27 1.27))))
-          (number "10" (effects (font (size 1.27 1.27))))
-        )
         (pin input line (at -2.54 10.16 270) (length 2.54)
           (name "CH2" (effects (font (size 1.27 1.27))))
           (number "2" (effects (font (size 1.27 1.27))))
@@ -451,21 +447,9 @@
           (name "CH4" (effects (font (size 1.27 1.27))))
           (number "5" (effects (font (size 1.27 1.27))))
         )
-        (pin no_connect line (at 10.16 5.08 180) (length 2.54) hide
-          (name "" (effects (font (size 1.27 1.27))))
-          (number "6" (effects (font (size 1.27 1.27))))
-        )
-        (pin no_connect line (at 10.16 2.54 180) (length 2.54) hide
-          (name "" (effects (font (size 1.27 1.27))))
-          (number "7" (effects (font (size 1.27 1.27))))
-        )
         (pin power_in line (at 0 -10.16 90) (length 2.54) hide
           (name "GND" (effects (font (size 1.27 1.27))))
           (number "8" (effects (font (size 1.27 1.27))))
-        )
-        (pin no_connect line (at 10.16 -2.54 180) (length 2.54) hide
-          (name "" (effects (font (size 1.27 1.27))))
-          (number "9" (effects (font (size 1.27 1.27))))
         )
       )
     )
@@ -940,15 +924,11 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid d5275b65-1c3b-4696-94f5-f8a843a8d87f))
-    (pin "10" (uuid 6d9dbb69-6a50-46ab-8791-22a4faa30b47))
     (pin "2" (uuid 4f3e8b11-f532-4712-8be2-d59103294681))
     (pin "3" (uuid 6703fc22-fd04-4d41-9188-90e1f7bc7922))
     (pin "4" (uuid 71800870-fe12-4821-866f-4534e4ee7536))
     (pin "5" (uuid b8393085-23b3-416c-9474-6a0590b559fe))
-    (pin "6" (uuid 0eab69f3-902f-4226-8d66-0af5d13af62f))
-    (pin "7" (uuid 9cdb47c4-27e0-4e5f-a286-360c38e65b28))
     (pin "8" (uuid e5a4f3de-b2da-4411-b5b0-4e0806b83d28))
-    (pin "9" (uuid 021a6a42-8390-4c2b-962e-9825eb555162))
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/8c3d77ce-3286-43c7-9eb6-2cc129677791"
