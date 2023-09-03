@@ -1951,7 +1951,7 @@
 
   (footprint "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" (layer "F.Cu")
     (tstamp 219da176-4dc2-451c-b51f-82330a794412)
-    (at 196.1 136.3)
+    (at 197.6 133)
     (descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
     (tags "capacitor handsolder")
     (property "Description" "容值: 10uF 精度: ±10% 额定电压: 25V 材质(温度系数): X5R 材质:X5R 每盘2000个 7''REEL")
@@ -2647,7 +2647,7 @@
 
   (footprint "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" (layer "F.Cu")
     (tstamp 2bb12bc2-d453-4d5e-8ff8-20fa28609c66)
-    (at 195.5 133.3)
+    (at 193 131.7)
     (descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal with elongated pad for handsoldering. (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator")
     (tags "capacitor handsolder")
     (property "Description" "容值: 4.7uF 精度: ±10% 额定电压: 25V 材质(温度系数): X5R 材质:X5R")
@@ -3968,7 +3968,7 @@
 
   (footprint "Package_TO_SOT_SMD:SOT-23-5_HandSoldering" (layer "F.Cu")
     (tstamp 40c3a086-2b7a-4839-85e5-35f4df5ce6b0)
-    (at 188.1 134.2)
+    (at 185.6 133.7)
     (descr "5-pin SOT23 package")
     (tags "SOT-23-5 hand-soldering")
     (property "Description" "功能类型: 降压型 同步整流: 是 输出类型: 可调 输出通道数: 1 拓扑结构: 降压式 输入电压: 2.5V~5.5V 输出电压:")
@@ -5643,7 +5643,7 @@
 
   (footprint "Inductor_SMD:L_Sunlord_SWPA3015S" (layer "F.Cu")
     (tstamp 6ac1211b-f0b2-40e8-b72c-e627dd07ffe9)
-    (at 183.8 138 180)
+    (at 180.2 133.4 180)
     (descr "Inductor, Sunlord, SWPA3015S, 3.0x3.0x1.5mm, https://www.sunlordinc.com/UploadFiles/PDF_Cat/20120704094224784.pdf")
     (tags "Inductor swpa")
     (property "Description" "电感值:2.2uH,直流电阻(DCR):78mΩ,类型:-,精度:±30%,车规等级:-,额定电流:1.6A,饱和电流(Isat):2A")
