@@ -736,6 +736,14 @@
     (uuid 86fe81fb-1696-45e2-8d81-7c6fbc06020f)
   )
 
+  (netclass_flag "" (length 2.54) (shape round) (at 64.77 66.04 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 1101952d-bd0f-40e1-8ff9-f372f30ceec9)
+    (property "Netclass" "PWR" (at 65.4685 63.5 0)
+      (effects (font (size 1.27 1.27) italic) (justify left))
+    )
+  )
+
   (symbol (lib_id "Device:R") (at 196.85 73.66 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 15319f06-2a25-4c47-b02d-841f393a4561)
