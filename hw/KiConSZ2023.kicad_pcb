@@ -17372,6 +17372,13 @@
       )
     )
   )
+  (group "IMU" (id 9ea9e0ff-8866-4155-aa3f-13b83d6e7aee)
+    (members
+      06302f38-29e9-485b-ae2b-9903667062dc
+      5ceef4c9-9feb-4084-8748-36bae586bdb0
+      6f6d8f7f-1f84-400c-a635-df800f8f8b7a
+    )
+  )
   (group "" (id a7041021-519a-4577-a788-cc382824ef9b)
     (members
       10de7cee-dc43-4272-afdd-4b53e9d41c83
