@@ -4,6 +4,14 @@
 
   (paper "A4")
 
+  (title_block
+    (title "KiCad 2023 Shen Zhen Badge")
+    (date "2023-09-04")
+    (rev "1")
+    (company "Qingdao IotPi Information Technology Ltd.,")
+    (comment 1 "Designed by Yang Hongbo")
+  )
+
   (lib_symbols
     (symbol "Device:Q_NMOS_GSD" (pin_names (offset 0) hide) (in_bom yes) (on_board yes)
       (property "Reference" "Q" (at 5.08 1.27 0)
