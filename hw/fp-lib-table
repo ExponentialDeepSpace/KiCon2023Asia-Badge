@@ -6,4 +6,5 @@
   (lib (name "IotPi_LED")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_LED.pretty")(options "")(descr ""))
   (lib (name "IotPi_Logo")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Logo.pretty")(options "")(descr ""))
   (lib (name "IotPi_Connector_Hirose")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Connector_Hirose.pretty")(options "")(descr ""))
+  (lib (name "IotPi_Package_LGA")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Package_LGA.pretty")(options "")(descr ""))
 )

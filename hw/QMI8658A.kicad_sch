@@ -420,7 +420,7 @@
     (property "Value" "QMI8658A" (at 153.3241 85.09 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y" (at 149.86 124.46 0)
+    (property "Footprint" "IotPi_Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y" (at 149.86 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.qstcorp.com/upload/pdf/202301/13-52-25%20QMI8658A%20Datasheet%20Rev%20A.pdf" (at 148.59 127 0)

@@ -1,4 +1,4 @@
-21623851179123738
+21628947261503072
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -46963,6 +46963,13 @@ USB Type-C Receptacle Through-hole Right angle
 20
 17
 Connector_USB
+USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal
+USB 2.0 Type C Receptacle, GCT, 16P, top mounted, horizontal, 5A: https://gct.co/files/drawings/usb4105.pdf
+USB C Type-C Receptacle SMD USB 2.0 16P 16C USB4105-15-A USB4105-15-A-060 USB4105-15-A-120 USB4105-GF-A USB4105-GF-A-060 USB4105-GF-A-120
+0
+20
+17
+Connector_USB
 USB_C_Receptacle_GCT_USB4115-03-C
 USB TYPE C, VERT RCPT PCB, SMT, https://gct.co/files/drawings/usb4115.pdf
 USB C Type-C Receptacle SMD
@@ -59450,6 +59457,13 @@ BM20B(0.8)-10DS-0.4V
 0
 14
 11
+IotPi_Connector_Hirose
+Hirose_FH12-10S-0.5SH_1x10-1MP_P0.50mm_Horizontal
+Hirose FH12, FFC/FPC connector, FH12-10S-0.5SH, 10 Pins per row (https://www.hirose.com/product/en/products/FH12/FH12-24S-0.5SH(55)/), generated with kicad-footprint-generator
+connector Hirose FH12 horizontal
+0
+12
+11
 IotPi_Connector_USB
 USB_C_Receptacle_Dealon_USB-TYPE-C-019_6P_TopMnt_Horizontal
 USB 2.0 Type C Receptacle, GCT, 16P, top mounted, horizontal, 5A: https://atta.szlcsc.com/upload/public/pdf/source/20211217/AE540A2D77B84677A3A029B8D0DDD2E1.pdf
@@ -59478,6 +59492,13 @@ ESD
 0
 10
 6
+IotPi_Package_LGA
+LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y
+LGA, 14 Pin (https://www.st.com/resource/en/datasheet/lsm6ds3tr-c.pdf), generated with kicad-footprint-generator ipc_noLead_generator.py
+LGA NoLead
+0
+14
+14
 IotPi_Switch
 MS-22D28-G020
 
