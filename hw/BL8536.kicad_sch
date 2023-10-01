@@ -131,13 +131,11 @@
       (property "ki_description" "Boost Converter" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "BL8536CB3xx_0_1"
+      (symbol "BL8536CB3xx_1_1"
         (rectangle (start -5.08 5.08) (end 5.08 -5.08)
           (stroke (width 0) (type default))
-          (fill (type none))
+          (fill (type background))
         )
-      )
-      (symbol "BL8536CB3xx_1_1"
         (pin power_in line (at 0 -7.62 90) (length 2.54)
           (name "GND" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
