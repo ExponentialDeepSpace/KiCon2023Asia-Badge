@@ -397,7 +397,7 @@
     (property "Datasheet" "" (at 83.82 105.41 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 3dfebd49-14ec-4430-8f2a-6d1efd9746bd))
+    (pin "1" (uuid 0754b158-4456-49da-8880-62652f5572b8))
     (instances
       (project "DisplayConverterTesterBoard"
         (path "/58d9d6aa-d5e3-4b7b-b546-d57c329de758/edcee65f-25a8-4aef-871d-10e28d870fa2"
@@ -427,7 +427,7 @@
     (property "Datasheet" "" (at 138.43 78.74 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid b30e9c6e-e318-4744-99d3-77d7ac1d93cd))
+    (pin "1" (uuid cab9a9e5-b433-4f00-9ae3-9b57e9836b49))
     (instances
       (project "DisplayConverterTesterBoard"
         (path "/58d9d6aa-d5e3-4b7b-b546-d57c329de758/edcee65f-25a8-4aef-871d-10e28d870fa2"
@@ -469,8 +469,8 @@
     (property "Vendor Model" "CC0805KRX7R9BB104" (at 100.33 96.52 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 4b9e96fb-5002-4adb-9f30-c6e0faf3e690))
-    (pin "2" (uuid 4e00926a-6d8c-4124-84c6-929bfa139e84))
+    (pin "1" (uuid ff753de6-5885-4cfc-8c63-e6b32df8dfee))
+    (pin "2" (uuid 109abc30-4c02-456e-9294-d3134335f039))
     (instances
       (project "DisplayConverterTesterBoard"
         (path "/58d9d6aa-d5e3-4b7b-b546-d57c329de758/7553e832-beab-499d-896a-2d765e7d0d57"
@@ -515,8 +515,8 @@
     (property "Vendor Model" "CL21B105KBFNNNE" (at 83.82 96.52 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid f1a4ac56-2511-443d-b7d5-0dd957d9b7b1))
-    (pin "2" (uuid f1eaa31a-903d-4ab3-8ca4-ffd6f1ae5f93))
+    (pin "1" (uuid 6a6ddeb0-def9-433a-b98a-72632005258f))
+    (pin "2" (uuid 43267eb1-58f3-4e98-9568-55844beb309a))
     (instances
       (project "DisplayConverterTesterBoard"
         (path "/58d9d6aa-d5e3-4b7b-b546-d57c329de758/7553e832-beab-499d-896a-2d765e7d0d57"
@@ -561,17 +561,17 @@
     (property "Vendor Model" "BM20B(0.8)-10DS-0.4V" (at 137.16 63.5 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 4c655ab2-274a-4860-be9d-93a756d5a8cc))
-    (pin "10" (uuid ab5dbf98-bbf0-4a13-be5f-4cf929cab38c))
-    (pin "2" (uuid d0949117-7cfb-4b7f-89c1-1d25e602d232))
-    (pin "3" (uuid abd5607a-860c-4329-9373-72299a5c099a))
-    (pin "4" (uuid b8e91829-1de8-4087-95de-92370abc7f99))
-    (pin "5" (uuid 4e411812-b05e-4cae-b451-196884d2332d))
-    (pin "6" (uuid 34b7ff74-80f3-4971-9469-83609eb0c7fa))
-    (pin "7" (uuid 296a8341-3208-4853-ad71-8ff30926e28a))
-    (pin "8" (uuid eee4511a-cd0b-480b-b8a0-c401797983a7))
-    (pin "9" (uuid cb0efd05-c7dd-4222-b567-f5aa2ad02541))
-    (pin "MP" (uuid 9db74823-c8b6-46e3-85c5-526180b97463))
+    (pin "1" (uuid 8d4a4c93-104d-4d60-ac4c-59b463488625))
+    (pin "10" (uuid 7f67ae8e-4c38-440a-8a20-d5f498ef5239))
+    (pin "2" (uuid f343f128-6fe8-4293-8ee5-598a64d3cd41))
+    (pin "3" (uuid 06de0aa3-d450-42f8-b58b-6eb1faa4c3ed))
+    (pin "4" (uuid 3e9cbdba-cc98-46dc-b4e4-7488c568c449))
+    (pin "5" (uuid fc627abd-3be7-4d09-8c17-4970e935936f))
+    (pin "6" (uuid 7be5af23-27e2-4f8c-8ec3-5ea9fedbd10b))
+    (pin "7" (uuid 9c47a165-628a-4877-9521-559015881a22))
+    (pin "8" (uuid e906bf78-4128-4ee2-bfa5-255c6fda715a))
+    (pin "9" (uuid e3679207-405b-4e9c-9140-e3967a0dc119))
+    (pin "MP" (uuid 3ebe6ee6-9d18-47cc-bbea-027d34ac9ace))
     (instances
       (project "DisplayConverterTesterBoard"
         (path "/58d9d6aa-d5e3-4b7b-b546-d57c329de758/edcee65f-25a8-4aef-871d-10e28d870fa2"
@@ -601,7 +601,7 @@
     (property "Datasheet" "" (at 100.33 105.41 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid b526ef05-489e-44e3-bebc-d33ef8a37115))
+    (pin "1" (uuid f21e1701-4c44-4881-b44d-c6983bcd61a7))
     (instances
       (project "DisplayConverterTesterBoard"
         (path "/58d9d6aa-d5e3-4b7b-b546-d57c329de758/edcee65f-25a8-4aef-871d-10e28d870fa2"

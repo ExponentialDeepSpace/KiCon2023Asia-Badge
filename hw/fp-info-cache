@@ -1,4 +1,4 @@
-21628947956917524
+21634039339380607
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59471,6 +59471,13 @@ USB C Type-C Receptacle SMD USB 2.0 16P 16C
 0
 20
 17
+IotPi_Holes
+Strip_Hole
+
+
+0
+0
+0
 IotPi_LED
 MeiHua_RGB_LED_Reverse_Mounting_MHT151RGBCT
 
@@ -59478,8 +59485,22 @@ MeiHua_RGB_LED_Reverse_Mounting_MHT151RGBCT
 0
 4
 4
+IotPi_LED
+XL-1615RGBC
+XingLight RGB LED
+
+0
+4
+4
 IotPi_Logo
-KiConSZ2023
+KiCon_Logo
+
+
+0
+0
+0
+IotPi_Logo
+ShenZhen2023_Logo
 
 
 0

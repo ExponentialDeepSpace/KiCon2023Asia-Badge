@@ -518,165 +518,28 @@
     },
     "net_colors": null,
     "netclass_assignments": {
-      "/LED Matrix/HighSide_Input_Row_Source_1": "LED",
-      "/LED Matrix/HighSide_Input_Row_Source_2": "LED",
-      "/LED Matrix/HighSide_Input_Row_Source_3": "LED",
-      "/LED Matrix/HighSide_Input_Row_Source_4": "LED",
-      "/LED Matrix/HighSide_Input_Row_Source_5": "LED",
-      "/LED Matrix/HighSide_Input_Row_Source_6": "LED",
-      "/LED Matrix/HighSide_Input_Row_Source_7": "LED",
-      "/LED Matrix/HighSide_Input_Row_Source_8": "LED",
-      "/LED Matrix/LED Column 1/LowSide_Input_Source_B": "LED",
-      "/LED Matrix/LED Column 1/LowSide_Input_Source_G": "LED",
-      "/LED Matrix/LED Column 1/LowSide_Input_Source_R": "LED",
-      "/LED Matrix/LED Column 2/LowSide_Input_Source_B": "LED",
-      "/LED Matrix/LED Column 2/LowSide_Input_Source_G": "LED",
-      "/LED Matrix/LED Column 2/LowSide_Input_Source_R": "LED",
-      "/LED Matrix/LED Column 3/LowSide_Input_Source_B": "LED",
-      "/LED Matrix/LED Column 3/LowSide_Input_Source_G": "LED",
-      "/LED Matrix/LED Column 3/LowSide_Input_Source_R": "LED",
-      "/LED Matrix/LED Column 4/LowSide_Input_Source_B": "LED",
-      "/LED Matrix/LED Column 4/LowSide_Input_Source_G": "LED",
-      "/LED Matrix/LED Column 4/LowSide_Input_Source_R": "LED",
-      "/LED Matrix/LED Column 5/LowSide_Input_Source_B": "LED",
-      "/LED Matrix/LED Column 5/LowSide_Input_Source_G": "LED",
-      "/LED Matrix/LED Column 5/LowSide_Input_Source_R": "LED",
-      "/LED Matrix/LED Column 6/LowSide_Input_Source_B": "LED",
-      "/LED Matrix/LED Column 6/LowSide_Input_Source_G": "LED",
-      "/LED Matrix/LED Column 6/LowSide_Input_Source_R": "LED",
+      "/HighSide_Input_Row_1": "LED",
+      "/HighSide_Input_Row_2": "LED",
+      "/HighSide_Input_Row_3": "LED",
+      "/HighSide_Input_Row_4": "LED",
+      "/HighSide_Input_Row_5": "LED",
+      "/HighSide_Input_Row_6": "LED",
+      "/LED Row/LowSide_Input_Source_B": "LED",
+      "/LED Row/LowSide_Input_Source_G": "LED",
+      "/LED Row/LowSide_Input_Source_R": "LED",
       "/Power/Battery_Holder_In": "PWR",
       "/Power/Battery_In": "PWR",
       "/Power/Buck DCDC to 3.3V/LX": "PWR",
       "/VBUS": "PWR",
-      "Net-(D10-BK)": "LED",
-      "Net-(D10-GK)": "LED",
-      "Net-(D10-RK)": "LED",
-      "Net-(D11-BK)": "LED",
-      "Net-(D11-GK)": "LED",
-      "Net-(D11-RK)": "LED",
-      "Net-(D12-BK)": "LED",
-      "Net-(D12-GK)": "LED",
-      "Net-(D12-RK)": "LED",
-      "Net-(D13-BK)": "LED",
-      "Net-(D13-GK)": "LED",
-      "Net-(D13-RK)": "LED",
-      "Net-(D14-BK)": "LED",
-      "Net-(D14-GK)": "LED",
-      "Net-(D14-RK)": "LED",
-      "Net-(D15-BK)": "LED",
-      "Net-(D15-GK)": "LED",
-      "Net-(D15-RK)": "LED",
-      "Net-(D16-BK)": "LED",
-      "Net-(D16-GK)": "LED",
-      "Net-(D16-RK)": "LED",
-      "Net-(D17-BK)": "LED",
-      "Net-(D17-GK)": "LED",
-      "Net-(D17-RK)": "LED",
-      "Net-(D18-BK)": "LED",
-      "Net-(D18-GK)": "LED",
-      "Net-(D18-RK)": "LED",
-      "Net-(D19-BK)": "LED",
-      "Net-(D19-GK)": "LED",
-      "Net-(D19-RK)": "LED",
       "Net-(D2-BK)": "LED",
       "Net-(D2-GK)": "LED",
       "Net-(D2-RK)": "LED",
-      "Net-(D20-BK)": "LED",
-      "Net-(D20-GK)": "LED",
-      "Net-(D20-RK)": "LED",
-      "Net-(D21-BK)": "LED",
-      "Net-(D21-GK)": "LED",
-      "Net-(D21-RK)": "LED",
-      "Net-(D22-BK)": "LED",
-      "Net-(D22-GK)": "LED",
-      "Net-(D22-RK)": "LED",
-      "Net-(D23-BK)": "LED",
-      "Net-(D23-GK)": "LED",
-      "Net-(D23-RK)": "LED",
-      "Net-(D24-BK)": "LED",
-      "Net-(D24-GK)": "LED",
-      "Net-(D24-RK)": "LED",
-      "Net-(D25-BK)": "LED",
-      "Net-(D25-GK)": "LED",
-      "Net-(D25-RK)": "LED",
-      "Net-(D26-BK)": "LED",
-      "Net-(D26-GK)": "LED",
-      "Net-(D26-RK)": "LED",
-      "Net-(D27-BK)": "LED",
-      "Net-(D27-GK)": "LED",
-      "Net-(D27-RK)": "LED",
-      "Net-(D28-BK)": "LED",
-      "Net-(D28-GK)": "LED",
-      "Net-(D28-RK)": "LED",
-      "Net-(D29-BK)": "LED",
-      "Net-(D29-GK)": "LED",
-      "Net-(D29-RK)": "LED",
       "Net-(D3-BK)": "LED",
       "Net-(D3-GK)": "LED",
       "Net-(D3-RK)": "LED",
-      "Net-(D30-BK)": "LED",
-      "Net-(D30-GK)": "LED",
-      "Net-(D30-RK)": "LED",
-      "Net-(D31-BK)": "LED",
-      "Net-(D31-GK)": "LED",
-      "Net-(D31-RK)": "LED",
-      "Net-(D32-BK)": "LED",
-      "Net-(D32-GK)": "LED",
-      "Net-(D32-RK)": "LED",
-      "Net-(D33-BK)": "LED",
-      "Net-(D33-GK)": "LED",
-      "Net-(D33-RK)": "LED",
-      "Net-(D34-BK)": "LED",
-      "Net-(D34-GK)": "LED",
-      "Net-(D34-RK)": "LED",
-      "Net-(D35-BK)": "LED",
-      "Net-(D35-GK)": "LED",
-      "Net-(D35-RK)": "LED",
-      "Net-(D36-BK)": "LED",
-      "Net-(D36-GK)": "LED",
-      "Net-(D36-RK)": "LED",
-      "Net-(D37-BK)": "LED",
-      "Net-(D37-GK)": "LED",
-      "Net-(D37-RK)": "LED",
-      "Net-(D38-BK)": "LED",
-      "Net-(D38-GK)": "LED",
-      "Net-(D38-RK)": "LED",
-      "Net-(D39-BK)": "LED",
-      "Net-(D39-GK)": "LED",
-      "Net-(D39-RK)": "LED",
       "Net-(D4-BK)": "LED",
       "Net-(D4-GK)": "LED",
       "Net-(D4-RK)": "LED",
-      "Net-(D40-BK)": "LED",
-      "Net-(D40-GK)": "LED",
-      "Net-(D40-RK)": "LED",
-      "Net-(D41-BK)": "LED",
-      "Net-(D41-GK)": "LED",
-      "Net-(D41-RK)": "LED",
-      "Net-(D42-BK)": "LED",
-      "Net-(D42-GK)": "LED",
-      "Net-(D42-RK)": "LED",
-      "Net-(D43-BK)": "LED",
-      "Net-(D43-GK)": "LED",
-      "Net-(D43-RK)": "LED",
-      "Net-(D44-BK)": "LED",
-      "Net-(D44-GK)": "LED",
-      "Net-(D44-RK)": "LED",
-      "Net-(D45-BK)": "LED",
-      "Net-(D45-GK)": "LED",
-      "Net-(D45-RK)": "LED",
-      "Net-(D46-BK)": "LED",
-      "Net-(D46-GK)": "LED",
-      "Net-(D46-RK)": "LED",
-      "Net-(D47-BK)": "LED",
-      "Net-(D47-GK)": "LED",
-      "Net-(D47-RK)": "LED",
-      "Net-(D48-BK)": "LED",
-      "Net-(D48-GK)": "LED",
-      "Net-(D48-RK)": "LED",
-      "Net-(D49-BK)": "LED",
-      "Net-(D49-GK)": "LED",
-      "Net-(D49-RK)": "LED",
       "Net-(D5-BK)": "LED",
       "Net-(D5-GK)": "LED",
       "Net-(D5-RK)": "LED",
@@ -686,12 +549,6 @@
       "Net-(D7-BK)": "LED",
       "Net-(D7-GK)": "LED",
       "Net-(D7-RK)": "LED",
-      "Net-(D8-BK)": "LED",
-      "Net-(D8-GK)": "LED",
-      "Net-(D8-RK)": "LED",
-      "Net-(D9-BK)": "LED",
-      "Net-(D9-GK)": "LED",
-      "Net-(D9-RK)": "LED",
       "Net-(U4-FB)": "PWR",
       "Net-(U5-SW)": "PWR"
     },
@@ -777,226 +634,6 @@
       "MCU"
     ],
     [
-      "aaa75721-24d0-46d7-8555-ce5df44f2a38",
-      "LED Matrix"
-    ],
-    [
-      "c99079d6-455e-4e03-b1d3-7c0b687dccf3",
-      "LED Column 1"
-    ],
-    [
-      "1900e701-4dbd-4411-9644-b756e67fc98c",
-      "RGB LED Cell 1"
-    ],
-    [
-      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
-      "RGB LED Cell 2"
-    ],
-    [
-      "f9315e0c-985e-4f87-9caa-59fc27526f62",
-      "RGB LED Cell 3"
-    ],
-    [
-      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
-      "RGB LED Cell 4"
-    ],
-    [
-      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
-      "RGB LED Cell 5"
-    ],
-    [
-      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
-      "RGB LED Cell 6"
-    ],
-    [
-      "9c2089be-7443-4e04-8990-12b57e0e78cf",
-      "RGB LED Cell 7"
-    ],
-    [
-      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
-      "RGB LED Cell 8"
-    ],
-    [
-      "333dd360-984d-4dcd-8f6a-73c8396351d8",
-      "LED Column 2"
-    ],
-    [
-      "1900e701-4dbd-4411-9644-b756e67fc98c",
-      "RGB LED Cell 1"
-    ],
-    [
-      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
-      "RGB LED Cell 2"
-    ],
-    [
-      "f9315e0c-985e-4f87-9caa-59fc27526f62",
-      "RGB LED Cell 3"
-    ],
-    [
-      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
-      "RGB LED Cell 4"
-    ],
-    [
-      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
-      "RGB LED Cell 5"
-    ],
-    [
-      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
-      "RGB LED Cell 6"
-    ],
-    [
-      "9c2089be-7443-4e04-8990-12b57e0e78cf",
-      "RGB LED Cell 7"
-    ],
-    [
-      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
-      "RGB LED Cell 8"
-    ],
-    [
-      "fcab9466-0fa7-4e63-a405-d450d575e6dc",
-      "LED Column 3"
-    ],
-    [
-      "1900e701-4dbd-4411-9644-b756e67fc98c",
-      "RGB LED Cell 1"
-    ],
-    [
-      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
-      "RGB LED Cell 2"
-    ],
-    [
-      "f9315e0c-985e-4f87-9caa-59fc27526f62",
-      "RGB LED Cell 3"
-    ],
-    [
-      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
-      "RGB LED Cell 4"
-    ],
-    [
-      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
-      "RGB LED Cell 5"
-    ],
-    [
-      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
-      "RGB LED Cell 6"
-    ],
-    [
-      "9c2089be-7443-4e04-8990-12b57e0e78cf",
-      "RGB LED Cell 7"
-    ],
-    [
-      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
-      "RGB LED Cell 8"
-    ],
-    [
-      "60fa32f5-97b4-4b1e-bd03-d9e273b123bc",
-      "LED Column 4"
-    ],
-    [
-      "1900e701-4dbd-4411-9644-b756e67fc98c",
-      "RGB LED Cell 1"
-    ],
-    [
-      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
-      "RGB LED Cell 2"
-    ],
-    [
-      "f9315e0c-985e-4f87-9caa-59fc27526f62",
-      "RGB LED Cell 3"
-    ],
-    [
-      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
-      "RGB LED Cell 4"
-    ],
-    [
-      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
-      "RGB LED Cell 5"
-    ],
-    [
-      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
-      "RGB LED Cell 6"
-    ],
-    [
-      "9c2089be-7443-4e04-8990-12b57e0e78cf",
-      "RGB LED Cell 7"
-    ],
-    [
-      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
-      "RGB LED Cell 8"
-    ],
-    [
-      "059a77b9-b2b4-40f5-b844-255fd60c44b2",
-      "LED Column 5"
-    ],
-    [
-      "1900e701-4dbd-4411-9644-b756e67fc98c",
-      "RGB LED Cell 1"
-    ],
-    [
-      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
-      "RGB LED Cell 2"
-    ],
-    [
-      "f9315e0c-985e-4f87-9caa-59fc27526f62",
-      "RGB LED Cell 3"
-    ],
-    [
-      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
-      "RGB LED Cell 4"
-    ],
-    [
-      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
-      "RGB LED Cell 5"
-    ],
-    [
-      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
-      "RGB LED Cell 6"
-    ],
-    [
-      "9c2089be-7443-4e04-8990-12b57e0e78cf",
-      "RGB LED Cell 7"
-    ],
-    [
-      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
-      "RGB LED Cell 8"
-    ],
-    [
-      "6f4c7c12-aca0-4887-a194-76fe3f237744",
-      "LED Column 6"
-    ],
-    [
-      "1900e701-4dbd-4411-9644-b756e67fc98c",
-      "RGB LED Cell 1"
-    ],
-    [
-      "77ec6484-601e-4f5f-bdd4-7aced7e4e9e6",
-      "RGB LED Cell 2"
-    ],
-    [
-      "f9315e0c-985e-4f87-9caa-59fc27526f62",
-      "RGB LED Cell 3"
-    ],
-    [
-      "8e0482ec-8dd9-49a9-882c-0f3ee53039ec",
-      "RGB LED Cell 4"
-    ],
-    [
-      "8328711c-0c94-40b8-b0e0-d3d035cabe99",
-      "RGB LED Cell 5"
-    ],
-    [
-      "cc64458f-8148-4b86-b60b-0dd63dc99a1f",
-      "RGB LED Cell 6"
-    ],
-    [
-      "9c2089be-7443-4e04-8990-12b57e0e78cf",
-      "RGB LED Cell 7"
-    ],
-    [
-      "b68dbfb1-6749-4707-a0fc-0922122f44a1",
-      "RGB LED Cell 8"
-    ],
-    [
       "8c3d77ce-3286-43c7-9eb6-2cc129677791",
       "USB"
     ],
@@ -1013,16 +650,36 @@
       "Boost DCDC to 3.3V"
     ],
     [
-      "9fd63ff6-4460-4ed6-85b8-cb8f3d367f6e",
-      "QMI8658A"
+      "899f961c-3c82-468d-857e-32de43733c4e",
+      "RGB LED Cell2_1"
     ],
     [
       "819c2fa4-174e-4b19-a2a7-0999f9a0f31d",
       "Display 0.96in"
     ],
     [
-      "14da542a-e977-4fb1-9766-18659ce66a67",
-      "LED NMOS Row Matrix"
+      "38f3fd88-9054-43c1-8581-e7e16760c3b6",
+      "LED Row"
+    ],
+    [
+      "19e885bf-eb9c-4b8c-a661-b5f630e0cd03",
+      "RGB LED Cell2_2"
+    ],
+    [
+      "9aab2f96-2f83-4a9e-aff6-e492ab5e0954",
+      "RGB LED Cell2_3"
+    ],
+    [
+      "e3165a5a-7315-43f5-8c1f-cd62efb8c5dc",
+      "RGB LED Cell2_4"
+    ],
+    [
+      "a7fb187c-f6da-472a-ac47-76892064107d",
+      "RGB LED Cell2_5"
+    ],
+    [
+      "1d56c731-c791-44b2-b3f6-30349cea127e",
+      "RGB LED Cell2_6"
     ]
   ],
   "text_variables": {}
