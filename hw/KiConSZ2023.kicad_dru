@@ -1,0 +1,6 @@
+(version 1)
+
+(rule "90R Exception"
+	(layer outer)
+	(condition "A.intersectsCourtyard('U*') || A.intersectsCourtyard('J3')")
+	(constraint clearance (min 0.1mm)))
