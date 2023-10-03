@@ -618,6 +618,10 @@
       {
         "netclass": "LED",
         "pattern": "*/SAO*_*_GPIO*"
+      },
+      {
+        "netclass": "PWR",
+        "pattern": "VDD*"
       }
     ]
   },
