@@ -616,7 +616,7 @@
         "pattern": "/USB_D*"
       },
       {
-        "netclass": "PWM",
+        "netclass": "LED",
         "pattern": "*/SAO*_*_GPIO*"
       }
     ]
