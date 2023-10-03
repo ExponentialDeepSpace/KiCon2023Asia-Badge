@@ -1,4 +1,4 @@
-21634039339380607
+21637451202406544
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59492,6 +59492,13 @@ XingLight RGB LED
 0
 4
 4
+IotPi_LED
+XL-1615RGBC_no-silkscreen
+XingLight RGB LED
+
+0
+4
+4
 IotPi_Logo
 KiCon_Logo
 
@@ -59520,6 +59527,13 @@ LGA NoLead
 0
 14
 14
+IotPi_Package_TO_SOT_SMD
+SOT-523_no-silkscreen
+SOT523, https://www.diodes.com/assets/Package-Files/SOT523.pdf
+SOT-523
+0
+3
+3
 IotPi_Switch
 MS-22D28-G020
 

@@ -296,7 +296,7 @@
     (property "Datasheet" "" (at 163.83 38.1 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid c5c8d6af-c5fd-437c-89e1-2a4a926138ce))
+    (pin "1" (uuid 51b24102-5869-4695-9244-35a8d4d4e777))
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
@@ -321,8 +321,8 @@
     (property "Datasheet" "~" (at 143.51 44.196 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid e2f4f602-91ba-4792-bfab-5f86399c2c2a))
-    (pin "2" (uuid 564528d9-2b1f-4098-b470-7df67a38386f))
+    (pin "1" (uuid 14b9a655-5d09-4cac-a140-cfcc9de62b91))
+    (pin "2" (uuid 98f4f7bc-d83b-4dc4-937c-ea33a87fd7fb))
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
@@ -347,7 +347,7 @@
     (property "Datasheet" "" (at 143.51 50.8 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d4c62e7c-6c99-4341-9ea2-d342ec7142c0))
+    (pin "1" (uuid 11ab3576-6134-4bed-83fe-24f9f13b8729))
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
@@ -384,9 +384,9 @@
     (property "Vendor Model" "MS-22D28-G020" (at 153.67 35.56 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 10970a14-b65d-45ab-b64a-11d059667ea1))
-    (pin "2" (uuid 35a2d919-5ec4-40fa-ae99-f5cc51430eea))
-    (pin "3" (uuid b305f8bd-90d1-4c62-a857-c9b20656a869))
+    (pin "1" (uuid 478cf1a0-51c4-4490-9051-bed51797d86b))
+    (pin "2" (uuid 96c779f5-1386-40a3-95b6-8635bd14f8ab))
+    (pin "3" (uuid ea9eb763-6d93-4311-9f3b-0d669e12e98b))
     (instances
       (project "KiConSZ2023"
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
