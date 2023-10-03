@@ -542,6 +542,7 @@
       "/LED Row/LowSide_Input_Source_R": "LED",
       "/Power/Battery_Holder_In": "PWR",
       "/Power/Battery_In": "PWR",
+      "/Power/Battery_SW": "PWR",
       "/Power/Buck DCDC to 3.3V/LX": "PWR",
       "/VBUS": "PWR",
       "Net-(D10-A)": "LED",
