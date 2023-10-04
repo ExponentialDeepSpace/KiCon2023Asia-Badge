@@ -661,7 +661,7 @@
     (property "Sheetname" "Buck DCDC to 3.3V" (at 91.44 65.3284 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
-    (property "Sheetfile" "AP3410.kicad_sch" (at 91.44 86.9446 0)
+    (property "Sheetfile" "Buck_DCDC.kicad_sch" (at 91.44 86.9446 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
     (pin "VBUS" input (at 91.44 71.12 180)
