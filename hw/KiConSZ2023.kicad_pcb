@@ -16116,7 +16116,7 @@
     )
 
     (stroke (width 0.15) (type solid)) (fill none) (layer "Edge.Cuts") (tstamp 086f5042-ba49-4fa5-8690-3d73953663bb))
-  (gr_text "Designed By Yang Hongbo\n(yanghongbo@iotpi.io)\nfrom Qingdao IotPi Ltd.,\n\n2023 Oct. 03\n\ngithub.com/iotpi/KiConShenZhen2023" (at 144.55 127.8) (layer "B.SilkS") (tstamp 8adfcce4-0ac4-491b-8677-52661301cb48)
+  (gr_text "Designed By Yang Hongbo\n(yanghongbo@iotpi.io)\nfrom Qingdao IotPi Ltd.,\n\n2023 Oct. 05 (rev 2.0)\n\ngithub.com/iotpi/KiConShenZhen2023" (at 144.55 127.8) (layer "B.SilkS") (tstamp 8adfcce4-0ac4-491b-8677-52661301cb48)
     (effects (font (size 1 1) (thickness 0.1)) (justify left bottom mirror))
   )
   (gr_text "SWDCLK" (at 53.9 124.2) (layer "F.SilkS") (tstamp 0e09de49-3229-4c7d-ac58-dde6d7721458)
