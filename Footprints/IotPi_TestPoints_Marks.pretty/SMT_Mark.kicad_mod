@@ -1,7 +1,7 @@
 (footprint "SMT_Mark" (version 20221018) (generator pcbnew)
   (layer "F.Cu")
   (attr board_only exclude_from_bom)
-  (fp_text reference "REF**" (at 0 -0.5 unlocked) (layer "F.SilkS") hide
+  (fp_text reference "MK**" (at 0 -0.5 unlocked) (layer "F.Fab") hide
       (effects (font (size 1 1) (thickness 0.1)))
     (tstamp 2a3e6c83-57a6-4ee6-a8c9-7ed8d7901e44)
   )
