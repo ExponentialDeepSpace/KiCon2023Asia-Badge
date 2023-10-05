@@ -9,4 +9,5 @@
   (lib (name "IotPi_Package_LGA")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Package_LGA.pretty")(options "")(descr ""))
   (lib (name "IotPi_Holes")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Holes.pretty")(options "")(descr ""))
   (lib (name "IotPi_Package_TO_SOT_SMD")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_Package_TO_SOT_SMD.pretty")(options "")(descr ""))
+  (lib (name "IotPi_TestPoints_Marks")(type "KiCad")(uri "${KIPRJMOD}/../Footprints/IotPi_TestPoints_Marks.pretty")(options "")(descr ""))
 )
