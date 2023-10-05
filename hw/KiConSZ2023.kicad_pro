@@ -594,7 +594,7 @@
       "Net-(D9-BK)": "LED",
       "Net-(D9-GK)": "LED",
       "Net-(D9-RK)": "LED",
-      "Net-(U5-SW)": "PWR"
+      "unconnected-(L3-Pad2)": "PWR"
     },
     "netclass_patterns": [
       {

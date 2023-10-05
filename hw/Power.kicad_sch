@@ -636,7 +636,7 @@
     (property "Sheetname" "Boost DCDC to 3.3V" (at 170.18 65.3284 0)
       (effects (font (size 1.27 1.27)) (justify left bottom))
     )
-    (property "Sheetfile" "BL8536.kicad_sch" (at 170.18 86.9446 0)
+    (property "Sheetfile" "Boost_DCDC.kicad_sch" (at 170.18 86.9446 0)
       (effects (font (size 1.27 1.27)) (justify left top))
     )
     (pin "VOUT_3V3" output (at 170.18 76.2 180)
