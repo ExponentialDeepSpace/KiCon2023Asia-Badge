@@ -18031,7 +18031,7 @@
   (gr_text "Designed By Yang Hongbo\n(yanghongbo@iotpi.io)\nfrom Qingdao IotPi Ltd.,\n\n2023 Oct. 05 (rev 2.0)\n\ngithub.com/iotpi/KiConShenZhen2023" (at 194 101.35) (layer "B.SilkS") (tstamp 8adfcce4-0ac4-491b-8677-52661301cb48)
     (effects (font (size 1 1) (thickness 0.1)) (justify left bottom mirror))
   )
-  (gr_text "KiCon Asia 2023 Badge © 2023 by Yang Hongbo \nis licensed under CC BY 4.0. \nTo view a copy of this license, \nvisit http://creativecommons.org/licenses/by/4.0/" (at 175.3 109.05) (layer "B.SilkS") (tstamp ab42788a-1c69-49d6-b8b0-b57831860d14)
+  (gr_text "KiCon Asia 2023 Badge\n© 2023 by Yang Hongbo \nis licensed under CC BY 4.0. \nTo view a copy of this license, \nvisit http://creativecommons.org/licenses/by/4.0/" (at 176.25 110.6) (layer "B.SilkS") (tstamp ab42788a-1c69-49d6-b8b0-b57831860d14)
     (effects (font (size 1 1) (thickness 0.11)) (justify left bottom mirror))
   )
   (gr_text "SWDCLK" (at 103.35 97.75) (layer "F.SilkS") (tstamp 0e09de49-3229-4c7d-ac58-dde6d7721458)
