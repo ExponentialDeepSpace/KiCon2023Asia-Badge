@@ -18,3 +18,4 @@ production
 # Save/Restore Layout Plugin output
 *.pckl
 place_footprints.ini
+*~
