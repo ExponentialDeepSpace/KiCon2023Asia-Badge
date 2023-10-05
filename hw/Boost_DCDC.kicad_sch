@@ -378,7 +378,7 @@
     (property "Description" "钽电容 B3528-21 47µF ±10% 10V 650mΩ" (at 176.53 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C15850" (at 176.53 90.17 0)
+    (property "LCSC" "C110785" (at 176.53 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Vendor" "Sunlord(顺络)" (at 176.53 90.17 0)

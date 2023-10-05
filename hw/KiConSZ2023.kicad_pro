@@ -193,8 +193,7 @@
         0.25,
         0.3,
         0.4,
-        0.5,
-        1.0
+        0.5
       ],
       "via_dimensions": [
         {
@@ -503,7 +502,7 @@
         "name": "LED",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgb(193, 185, 82)",
-        "track_width": 0.3,
+        "track_width": 0.2,
         "via_diameter": 0.56,
         "via_drill": 0.3,
         "wire_width": 6
@@ -520,7 +519,7 @@
         "name": "PWM",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgb(43, 0, 255)",
-        "track_width": 0.5,
+        "track_width": 0.2,
         "via_diameter": 0.56,
         "via_drill": 0.3,
         "wire_width": 6
@@ -537,7 +536,7 @@
         "name": "PWR",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgb(255, 21, 38)",
-        "track_width": 0.5,
+        "track_width": 0.2,
         "via_diameter": 0.56,
         "via_drill": 0.3,
         "wire_width": 6
