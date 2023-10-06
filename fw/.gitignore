@@ -1,0 +1,6 @@
+*~
+target
+compile_commands.json
+build
+env.sh
+.ccls-cache

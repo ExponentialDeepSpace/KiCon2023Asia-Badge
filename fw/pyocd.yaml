@@ -1,0 +1,3 @@
+pack:
+  - ./Nationstech.N32L40x_DFP.1.0.0.pack
+target_override: "n32l406rb"
