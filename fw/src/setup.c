@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Yang Hongbo, Qingdao IotPi Ltd.,
+ * Copyright 2023 Yang Hongbo, Beijing Exponential Deep Space Ltd.,
  *
  * KiCon 2023 Asia Badge Firmware is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License
