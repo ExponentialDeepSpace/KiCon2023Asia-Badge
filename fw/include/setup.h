@@ -19,7 +19,6 @@
 #ifndef SETUP_H
 #define SETUP_H
 
-void RCC_Config();
-void GPIO_Config();
-
+#define LED_PWM_CLOCK 20000 // 20Khz
+void Setup();
 #endif // SETUP_H

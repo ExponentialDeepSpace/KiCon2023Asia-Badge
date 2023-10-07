@@ -19,6 +19,11 @@
 #include <n32l40x.h>
 #include "setup.h"
 
+static void RCC_Config();
+static void GPIO_Config();
+static void PWM_Config();
+
+
 void RCC_Config() {
   RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_USB
                           |RCC_APB1_PERIPH_I2C1
@@ -180,10 +185,10 @@ void GPIO_IO_Config() {
   // PA1 for HighSide_Row_6
   // PA2 for HighSide_Row_4
   // PA3 for HighSide_Row_3
-  initValue.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_6 | GPIO_PIN_4 | GPIO_PIN_3;
-  initValue.GPIO_Pull = GPIO_No_Pull;
-  initValue.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitPeripheral(GPIOA, &initValue);
+  // initValue.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_6 | GPIO_PIN_4 | GPIO_PIN_3;
+  // initValue.GPIO_Pull = GPIO_No_Pull;
+  // initValue.GPIO_Mode = GPIO_Mode_Out_PP;
+  // GPIO_InitPeripheral(GPIOA, &initValue);
 
   // Setup GPIOB
   // PB1 for HighSide_Row_12
@@ -193,17 +198,17 @@ void GPIO_IO_Config() {
   // PB13 for HighSide_Row_8
   // PB14 for HighSide_Row_5
   // PB15 for HighSide_Row_1
-  initValue.Pin = GPIO_PIN_1 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-  initValue.GPIO_Pull = GPIO_No_Pull;
-  initValue.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitPeripheral(GPIOB, &initValue);
+  // initValue.Pin = GPIO_PIN_1 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+  // initValue.GPIO_Pull = GPIO_No_Pull;
+  // initValue.GPIO_Mode = GPIO_Mode_Out_PP;
+  // GPIO_InitPeripheral(GPIOB, &initValue);
 
   // Setup GPIOC
   // PC10 for HighSide_Row_2
-  initValue.Pin = GPIO_PIN_10;
-  initValue.GPIO_Pull = GPIO_No_Pull;
-  initValue.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitPeripheral(GPIOC, &initValue);
+  // initValue.Pin = GPIO_PIN_10;
+  // initValue.GPIO_Pull = GPIO_No_Pull;
+  // initValue.GPIO_Mode = GPIO_Mode_Out_PP;
+  // GPIO_InitPeripheral(GPIOC, &initValue);
 
 
   // PB4/5 for EVB testing
@@ -221,4 +226,43 @@ void GPIO_Config() {
   GPIO_I2C_Config();
 
   GPIO_IO_Config();
+}
+
+void PWM_Config() {
+  TIM_TimeBaseInitType timInit;
+  TIM_InitTimBaseStruct(&timInit);
+
+  OCInitType ocInit;
+  TIM_InitOcStruct(&ocInit);
+
+  uint16_t period = SystemCoreClock / LED_PWM_CLOCK - 1;
+  timInit.Period = period;
+  timInit.Prescaler = 0;
+  timInit.CntMode = TIM_CNT_MODE_UP;
+  TIM_InitTimeBase(TIM1, &timInit);
+
+  ocInit.OcMode = TIM_OCMODE_PWM1;
+  ocInit.OutputState = TIM_OUTPUT_STATE_ENABLE;
+  ocInit.Pulse = 1200;
+
+  // TIM3_CH1 for LowSide_B_Col_1
+  TIM_InitOc1(TIM1, &ocInit);
+
+  // TIM3_CH2 for LowSide_R_Col_1
+  TIM_InitOc2(TIM1, &ocInit);
+
+  // TIM3_CH3 for LowSide_G_Col_1
+  TIM_InitOc3(TIM1, &ocInit);
+
+  // TIM_ConfigDma(TIM3, TIM_DMABASE_AR, TIM_DMABURST_LENGTH_3TRANSFERS);
+
+  TIM_Enable(TIM1, ENABLE);
+  TIM_EnableCtrlPwmOutputs(TIM1, ENABLE);
+}
+
+void Setup() {
+  RCC_Config();
+  GPIO_Config();
+
+  PWM_Config();
 }

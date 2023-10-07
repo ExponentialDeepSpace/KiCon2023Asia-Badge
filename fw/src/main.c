@@ -17,10 +17,8 @@
  */
 
 #include <n32l40x.h>
-
+#include <assert.h>
 #include "setup.h"
-
-#define LED_PWM_CLOCK 20000 // 20Khz
 
 int main(void)
 {
@@ -29,9 +27,8 @@ int main(void)
   // HCLK/AHB = 48Mhz (DIV1)
   // PCLK2/APB2 = 24Mhz (DIV2)
   // PCLK1/APB1 = 12Mhz (DIV4)
-  
-  RCC_Config();
-  GPIO_Config();
+
+  Setup();
   
   volatile unsigned long long i = 0;
 
@@ -39,16 +36,17 @@ int main(void)
   GPIO_ResetBits(GPIOB, GPIO_PIN_5);
 
   while (1) {
-    GPIO_SetBits(GPIOB, GPIO_PIN_4);
+    // GPIO_SetBits(GPIOB, GPIO_PIN_4);
     GPIO_ResetBits(GPIOB, GPIO_PIN_5);
     i = 0;
     while (i < 1000000) i ++;
     i = 0;
-    GPIO_SetBits(GPIOB, GPIO_PIN_5);
+    // GPIO_SetBits(GPIOB, GPIO_PIN_5);
     GPIO_ResetBits(GPIOB, GPIO_PIN_4);
     while (i < 1000000) i ++;
 
   }
   return 0;
 }
+
 
