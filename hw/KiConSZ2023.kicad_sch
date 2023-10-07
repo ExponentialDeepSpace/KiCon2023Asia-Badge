@@ -5,10 +5,10 @@
   (paper "A3")
 
   (title_block
-    (title "KiCad 2023 Shen Zhen Badge")
-    (date "2023-10-04")
+    (title "KiCad 2023 Asia Badge")
+    (date "2023-10-07")
     (rev "2")
-    (company "Qingdao IotPi Information Technology Ltd.,")
+    (company "Beijing Exponential Deep Space")
     (comment 1 "Designed by Yang Hongbo")
   )
 
