@@ -22,8 +22,14 @@ DEBUG = 0
 else
 DEBUG = 1
 endif
+
 # optimization
+
+ifeq ($(DEBUG), 1)
+OPT = -O0
+else
 OPT = -Os
+endif
 
 #######################################
 # Build path
