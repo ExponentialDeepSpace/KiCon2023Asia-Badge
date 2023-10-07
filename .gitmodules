@@ -1,0 +1,3 @@
+[submodule "fw/PyCortexMDebug"]
+	path = fw/PyCortexMDebug
+	url = https://github.com/bnahill/PyCortexMDebug
