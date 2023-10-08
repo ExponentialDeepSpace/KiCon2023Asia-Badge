@@ -247,6 +247,23 @@ static void DMA_Config() {
   DMA_RequestRemap(DMA_REMAP_TIM1_UP, DMA, DMA_CH1, ENABLE);
 }
 
+/*
+ * LowSide_B_Col_1 -> TIM3_CH1                        -------     -------     -------
+ * LowSide_R_Col_1 -> TIM3_CH2                        |     |    /     /      | D10 |
+ * LowSide_G_Col_1 -> TIM3_CH3                        | D2  |   / D6  /       |_____|
+ * HighSide_Row_1  -> TIM9_CH4 -> D2                  |     |  /     /        
+ * HighSide_Row_2  -> PC10     -> D3                  |     | /     /         
+ * HighSide_Row_3  -> TIM5_CH4 -> D4                  |     |/     /           _____          ______       ______          _______
+ * HighSide_Row_4  -> TIM5_CH3 -> D5                  | D3     D5 |           |     |        /      |     /      \        |  D12  |
+ * HighSide_Row_5  -> TIM9_CH3 -> D6                  |     |\     \          | D9  |       /      /     /        \       |   _   |
+ * HighSide_Row_6  -> TIM2_CH2 -> D7                  |     | \     \         |     |      /  _ _ /     /          \      |  | |  |
+ * HighSide_Row_7  -> TIM9_CH1 -> D10                 |     |  \     \        |     |     /   | D11    |    D13     |     |  | |  |
+ * HighSide_Row_8  -> TIM9_CH2 -> D9                  |     |   \     \       |     |     \   |        |            |     |  | |  |
+ * HighSide_Row_9  -> TIM2_CH1 -> D8                  |     |    \     \      |     |      \  ----      \          /      |  | |  |
+ * HighSide_Row_10 -> TIM2_CH4 -> D11                 | D4  |     \ D7  \     | D8  |       \     \      \        /       |  | |  |
+ * HighSide_Row_11 -> TIM2_CH3 -> D13                 |     |      \     \    |     |        \_____\__    \______/        |__| |__|
+ * HighSide_Row_12 -> TIM3_CH4 -> D12                 -------       -------   -------
+ */
 static void TIM_Config() {
   TIM_TimeBaseInitType timInit;
   TIM_InitTimBaseStruct(&timInit);
@@ -254,9 +271,10 @@ static void TIM_Config() {
   OCInitType ocInit;
   TIM_InitOcStruct(&ocInit);
 
-  uint16_t period = SystemCoreClock / LED_PWM_CLOCK - 1;
+  const uint16_t prescaler = 1;
+  uint16_t period = SystemCoreClock / prescaler / LED_PWM_CLOCK - 1;
   timInit.Period = period;
-  timInit.Prescaler = 0;
+  timInit.Prescaler = prescaler - 1;
   timInit.CntMode = TIM_CNT_MODE_UP;
   timInit.RepetCnt = 0xff;
   TIM_InitTimeBase(TIM1, &timInit);
