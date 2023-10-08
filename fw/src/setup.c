@@ -19,12 +19,10 @@
 #include <n32l40x.h>
 #include "setup.h"
 
-static void RCC_Config();
-static void GPIO_Config();
-static void PWM_Config();
 
 
-void RCC_Config() {
+static void
+RCC_Config() {
   RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_USB
                           |RCC_APB1_PERIPH_I2C1
                           |RCC_APB1_PERIPH_TIM3
@@ -176,7 +174,7 @@ static void GPIO_PWM_Config() {
 
 }
 
-void GPIO_IO_Config() {
+static void GPIO_IO_Config() {
   GPIO_InitType initValue;
   GPIO_InitStruct(&initValue);
   initValue.GPIO_Current = GPIO_DC_12mA;
@@ -219,7 +217,7 @@ void GPIO_IO_Config() {
 
 }
 
-void GPIO_Config() {
+static void GPIO_Config() {
 
   GPIO_PWM_Config();
   GPIO_SPI_Config();
@@ -228,7 +226,8 @@ void GPIO_Config() {
   GPIO_IO_Config();
 }
 
-void PWM_Config() {
+static void DMA_Config() {
+static void TIM_Config() {
   TIM_TimeBaseInitType timInit;
   TIM_InitTimBaseStruct(&timInit);
 
