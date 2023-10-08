@@ -429,7 +429,7 @@
     (property "Reference" "U5" (at 151.13 73.66 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "ME2118C33M5G" (at 151.13 76.2 0)
+    (property "Value" "ME2188C33M5G" (at 151.13 76.2 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 151.13 83.82 0)
