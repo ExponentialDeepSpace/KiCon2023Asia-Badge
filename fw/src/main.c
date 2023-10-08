@@ -49,4 +49,22 @@ int main(void)
   return 0;
 }
 
+void DMA_Channel1_IRQHandler(void) {
+  int i = 0;
+  i++;
+
+  DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
+}
+
+void TIM1_UP_IRQHandler(void) {
+  int i = 0;
+  i++;
+  TIM_ClrIntPendingBit(TIM1, TIM_INT_UPDATE);
+}
+
+void TIM1_CC_IRQHandler(void) {
+  int i = 0;
+  i++;
+  TIM_ClrIntPendingBit(TIM1, TIM_INT_CC1);
+}
 

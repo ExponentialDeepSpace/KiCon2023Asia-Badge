@@ -19,10 +19,11 @@
 #include <n32l40x.h>
 #include "setup.h"
 
-
+static uint16_t periods[] = {2400, 1800, 1200, 600, 0, 600, 1200, 1800};
 
 static void
 RCC_Config() {
+  RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_DMA, ENABLE);
   RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_USB
                           |RCC_APB1_PERIPH_I2C1
                           |RCC_APB1_PERIPH_TIM3
@@ -37,8 +38,6 @@ RCC_Config() {
                           , ENABLE);
 
   DBG_ConfigPeriph(DBG_TIM1_STOP | DBG_TIM8_STOP, ENABLE);
-
-  
 }
 static void GPIO_SPI_Config() {
   GPIO_InitType initValue;
@@ -227,6 +226,27 @@ static void GPIO_Config() {
 }
 
 static void DMA_Config() {
+  DMA_InitType dmaInit;
+  DMA_StructInit(&dmaInit);
+
+  DMA_DeInit(DMA_CH1);
+  dmaInit.PeriphAddr = (uint32_t)&TIM1->DADDR;
+  dmaInit.PeriphInc = DMA_PERIPH_INC_DISABLE;
+  dmaInit.PeriphDataSize = DMA_PERIPH_DATA_SIZE_HALFWORD;
+  dmaInit.Direction = DMA_DIR_PERIPH_DST;
+  dmaInit.MemAddr = (uint32_t)&periods;
+  dmaInit.Mem2Mem = DMA_M2M_DISABLE;
+  dmaInit.BufSize = sizeof(periods) / sizeof(periods[0]);
+  dmaInit.MemDataSize = DMA_MemoryDataSize_HalfWord;
+  dmaInit.DMA_MemoryInc = DMA_MEM_INC_ENABLE;
+  dmaInit.CircularMode = DMA_MODE_CIRCULAR;
+  dmaInit.Priority = DMA_PRIORITY_HIGH;
+
+  DMA_Init(DMA_CH1, &dmaInit);
+  DMA_ConfigInt(DMA_CH1, DMA_INT_HTX1|DMA_INT_TXC1|DMA_INT_ERR1, ENABLE);
+  DMA_RequestRemap(DMA_REMAP_TIM1_UP, DMA, DMA_CH1, ENABLE);
+}
+
 static void TIM_Config() {
   TIM_TimeBaseInitType timInit;
   TIM_InitTimBaseStruct(&timInit);
@@ -238,11 +258,12 @@ static void TIM_Config() {
   timInit.Period = period;
   timInit.Prescaler = 0;
   timInit.CntMode = TIM_CNT_MODE_UP;
+  timInit.RepetCnt = 0xff;
   TIM_InitTimeBase(TIM1, &timInit);
 
   ocInit.OcMode = TIM_OCMODE_PWM1;
   ocInit.OutputState = TIM_OUTPUT_STATE_ENABLE;
-  ocInit.Pulse = 1200;
+  ocInit.Pulse = period / 2;
 
   // TIM3_CH1 for LowSide_B_Col_1
   TIM_InitOc1(TIM1, &ocInit);
@@ -253,15 +274,52 @@ static void TIM_Config() {
   // TIM3_CH3 for LowSide_G_Col_1
   TIM_InitOc3(TIM1, &ocInit);
 
-  // TIM_ConfigDma(TIM3, TIM_DMABASE_AR, TIM_DMABURST_LENGTH_3TRANSFERS);
+  TIM_ConfigArPreload(TIM1, DISABLE);
+  TIM_ConfigDma(TIM1, TIM_DMABASE_CAPCMPDAT1, TIM_DMABURST_LENGTH_1TRANSFER);
+  TIM_EnableDma(TIM1, TIM_DMA_UPDATE, ENABLE);
 
-  TIM_Enable(TIM1, ENABLE);
-  TIM_EnableCtrlPwmOutputs(TIM1, ENABLE);
+  TIM_ConfigInt(TIM1, TIM_INT_UPDATE|TIM_INT_CC1, ENABLE);
+  // TIM_EnableUpdateEvt_r(TIM1, ENABLE);
+
+
+}
+
+static void NVIC_Config() {
+  NVIC_InitType nvicInit = {0};
+  nvicInit.NVIC_IRQChannel = DMA_Channel1_IRQn;
+  nvicInit.NVIC_IRQChannelCmd = ENABLE;
+  
+  NVIC_Init(&nvicInit);
+
+  nvicInit.NVIC_IRQChannel = TIM1_UP_IRQn;
+  nvicInit.NVIC_IRQChannelCmd = ENABLE;
+  
+  NVIC_Init(&nvicInit);
+
+  nvicInit.NVIC_IRQChannel = TIM1_CC_IRQn;
+  nvicInit.NVIC_IRQChannelCmd = ENABLE;
+  
+  NVIC_Init(&nvicInit);
 }
 
 void Setup() {
+  NVIC_Config();
+  
   RCC_Config();
   GPIO_Config();
 
-  PWM_Config();
+  DMA_Config();
+  TIM_Config();
+
+
+  TIM_SetCnt(TIM1, periods[0] + 1);
+  TIM_GenerateEvent(TIM1, TIM_EVTGEN_UDGN);
+
+  DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
+  DMA_EnableChannel(DMA_CH1, ENABLE);
+
+  TIM_ClrIntPendingBit(TIM1, TIM_INT_UPDATE|TIM_INT_CC1|TIM_INT_CC2|TIM_INT_CC3|TIM_INT_CC4);
+  TIM_Enable(TIM1, ENABLE);
+  TIM_EnableCtrlPwmOutputs(TIM1, ENABLE);
+
 }
