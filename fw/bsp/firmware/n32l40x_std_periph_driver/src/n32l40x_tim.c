@@ -2432,7 +2432,7 @@ void TIM_SelectOcMode(TIM_Module* TIMx, uint16_t Channel, uint16_t OcMode)
 /*     } */
 /* } */
 
-/* TIMx UDIS bit set to 0 to enable update event, 1 to disable update event
+/* TIMx UDIS bit set to 0 to enable update event, 1 to disable update event */
 void TIM_EnableUpdateEvt_r(TIM_Module* TIMx, FunctionalState Cmd)
 {
     /* Check the parameters */
