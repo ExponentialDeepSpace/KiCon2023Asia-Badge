@@ -2414,20 +2414,39 @@ void TIM_SelectOcMode(TIM_Module* TIMx, uint16_t Channel, uint16_t OcMode)
  * @param Cmd new state of the TIMx UDIS bit
  *   This parameter can be: ENABLE or DISABLE.
  */
-void TIM_EnableUpdateEvt(TIM_Module* TIMx, FunctionalState Cmd)
+
+/* void TIM_EnableUpdateEvt(TIM_Module* TIMx, FunctionalState Cmd) */
+/* { */
+/*     /\* Check the parameters *\/ */
+/*     assert_param(IsTimAllModule(TIMx)); */
+/*     assert_param(IS_FUNCTIONAL_STATE(Cmd)); */
+/*     if (Cmd != DISABLE) */
+/*     { */
+/*         /\* Set the Update Disable Bit *\/ */
+/*         TIMx->CTRL1 |= TIM_CTRL1_UPDIS; */
+/*     } */
+/*     else */
+/*     { */
+/*         /\* Reset the Update Disable Bit *\/ */
+/*         TIMx->CTRL1 &= (uint32_t) ~((uint32_t)TIM_CTRL1_UPDIS); */
+/*     } */
+/* } */
+
+/* TIMx UDIS bit set to 0 to enable update event, 1 to disable update event
+void TIM_EnableUpdateEvt_r(TIM_Module* TIMx, FunctionalState Cmd)
 {
     /* Check the parameters */
     assert_param(IsTimAllModule(TIMx));
     assert_param(IS_FUNCTIONAL_STATE(Cmd));
     if (Cmd != DISABLE)
     {
-        /* Set the Update Disable Bit */
-        TIMx->CTRL1 |= TIM_CTRL1_UPDIS;
+        /* Reset the Update Disable Bit */
+        TIMx->CTRL1 &= (uint32_t) ~((uint32_t)TIM_CTRL1_UPDIS);
     }
     else
     {
-        /* Reset the Update Disable Bit */
-        TIMx->CTRL1 &= (uint32_t) ~((uint32_t)TIM_CTRL1_UPDIS);
+        /* Set the Update Disable Bit */
+        TIMx->CTRL1 |= TIM_CTRL1_UPDIS;
     }
 }
 
