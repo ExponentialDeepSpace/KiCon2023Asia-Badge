@@ -201,37 +201,37 @@ typedef struct
 /* LIST2: TIM 1, 8 */
 #define IsTimList2Module(PERIPH) (((PERIPH) == TIM1) || ((PERIPH) == TIM8))
 
-/* LIST3: TIM 1, 2, 3, 4, 5 and 8 */
+/* LIST3: TIM 1, 2, 3, 4, 5, 8, and 9 */
 #define IsTimList3Module(PERIPH)                                                                                       \
     (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM3) || ((PERIPH) == TIM4) || ((PERIPH) == TIM5)  || ((PERIPH) == TIM9)       \
      || ((PERIPH) == TIM8))
 
-/* LIST4: TIM 1, 2, 3, 4, 5, 8 */
+/* LIST4: TIM 1, 2, 3, 4, 5, 8 and 9*/
 #define IsTimList4Module(PERIPH)                                                                                       \
     (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM3) || ((PERIPH) == TIM4) || ((PERIPH) == TIM5)  || ((PERIPH) == TIM9)       \
      || ((PERIPH) == TIM8))
 
-/* LIST5: TIM 1, 2, 3, 4, 5, 8 */
+/* LIST5: TIM 1, 2, 3, 4, 5, 8 and 9 */
 #define IsTimList5Module(PERIPH)                                                                                       \
     (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM3) || ((PERIPH) == TIM4) || ((PERIPH) == TIM5)  || ((PERIPH) == TIM9)       \
      || ((PERIPH) == TIM8))
 
-/* LIST6: TIM 1, 2, 3, 4, 5, 8 */
+/* LIST6: TIM 1, 2, 3, 4, 5, 8 and 9*/
 #define IsTimList6Module(PERIPH)                                                                                       \
     (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM3) || ((PERIPH) == TIM4) || ((PERIPH) == TIM5)  || ((PERIPH) == TIM9)       \
      || ((PERIPH) == TIM8))
 
-/* LIST7: TIM 1, 2, 3, 4, 5, 6, 7, 8 */
+/* LIST7: TIM 1, 2, 3, 4, 5, 6, 7, 8 and 9*/
 #define IsTimList7Module(PERIPH)                                                                                       \
     (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM3) || ((PERIPH) == TIM4) || ((PERIPH) == TIM5) || ((PERIPH) == TIM9)        \
      || ((PERIPH) == TIM6) || ((PERIPH) == TIM7) || ((PERIPH) == TIM8))
 
-/* LIST8: TIM 1, 2, 3, 4, 5, 8 */
+/* LIST8: TIM 1, 2, 3, 4, 5, 8 and 9*/
 #define IsTimList8Module(PERIPH)                                                                                       \
     (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM3) || ((PERIPH) == TIM4) || ((PERIPH) == TIM5)  || ((PERIPH) == TIM9)       \
      || ((PERIPH) == TIM8))
 
-/* LIST9: TIM 1, 2, 3, 4, 5, 6, 7, 8 */
+/* LIST9: TIM 1, 2, 3, 4, 5, 6, 7, 8 and 9*/
 #define IsTimList9Module(PERIPH)                                                                                       \
     (((PERIPH) == TIM1) || ((PERIPH) == TIM2) || ((PERIPH) == TIM3) || ((PERIPH) == TIM4) || ((PERIPH) == TIM5)  || ((PERIPH) == TIM9)       \
      || ((PERIPH) == TIM6) || ((PERIPH) == TIM7) || ((PERIPH) == TIM8))
