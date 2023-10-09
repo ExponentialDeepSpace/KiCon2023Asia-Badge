@@ -22,12 +22,6 @@
 
 int main(void)
 {
-  // Default Clock (defined in system_n32l40x.c:SetSysClock())
-  // SystemCoreclock = 48Mhz (for USB)
-  // HCLK/AHB = 48Mhz (DIV1)
-  // PCLK2/APB2 = 24Mhz (DIV2)
-  // PCLK1/APB1 = 12Mhz (DIV4)
-
   Setup();
   
   volatile unsigned long long i = 0;

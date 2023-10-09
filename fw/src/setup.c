@@ -20,6 +20,12 @@
 #include "setup.h"
 
 static uint16_t periods[] = {2400, 1800, 1200, 600, 0, 600, 1200, 1800};
+#define TIM_SELECTED_SLAVE_MODE TIM_SLAVE_MODE_GATED
+// Default Clock (defined in system_n32l40x.c:SetSysClock())
+// SystemCoreclock = 48Mhz (for USB)
+// HCLK/AHB = 48Mhz (DIV1)
+// PCLK2/APB2 = 24Mhz (DIV2)
+// PCLK1/APB1 = 12Mhz (DIV4)
 
 static void
 RCC_Config() {
@@ -93,120 +99,10 @@ static void GPIO_I2C_Config() {
 
 }
 
-static void GPIO_PWM_Config() {
-  GPIO_InitType initValue;
-  GPIO_InitStruct(&initValue);
-  initValue.GPIO_Mode = GPIO_Mode_AF_PP;
-  initValue.GPIO_Current = GPIO_DC_12mA;
-
-  // Setup TIM1
-
-  // Setup PA8/9/10 for TIM1_CH1/2/3
-  // TIM1_CH1 for SAO_1_GPIO1
-  // TIM1_CH2 for SAO_2_GPIO2
-  // TIM1_CH3 for SAO_2_GPIO1
-  initValue.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
-  initValue.GPIO_Alternate = GPIO_AF2_TIM1;
-  GPIO_InitPeripheral(GPIOA, &initValue);
-
-  // Setup TIM2
-
-  // Setup PB10/11 for TIM2_CH3/4
-  // TIM2_CH3 
-  // initValue.Pin = GPIO_PIN_10 | GPIO_PIN_11;
-  // initValue.GPIO_Alternate = GPIO_AF2_TIM2;
-  // GPIO_InitPeripheral(GPIOB, &initValue);
-
-  // Setup TIM3
-
-  // Setup PA6/7 for TIM3_CH1/2
-  // TIM3_CH1 for LowSide_B_Col_1
-  // TIM3_CH2 for LowSide_R_Col_1
-  initValue.Pin = GPIO_PIN_6 | GPIO_PIN_7;
-  initValue.GPIO_Alternate = GPIO_AF2_TIM3;
-  GPIO_InitPeripheral(GPIOA, &initValue);
-
-  // Setup PB0 for TIM3_CH3
-  // TIM3_CH3 for LowSide_G_Col_1
-  initValue.Pin = GPIO_PIN_0;// | GPIO_PIN_1;
-  initValue.GPIO_Alternate = GPIO_AF2_TIM3;
-  GPIO_InitPeripheral(GPIOB, &initValue);
-
-  // Setup TIM4
-
-  // Setup PB6/7/8/9 for TIM4_CH1/2/3/4
-  // initValue.Pin = GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9;
-  // initValue.GPIO_Alternate = GPIO_AF2_TIM4;
-  // GPIO_InitPeripheral(GPIOB, &initValue);
-
-  // Setup TIM5
-
-  // Setup PA0 for TIM5_CH1
-  // initValue.Pin = GPIO_PIN_0;
-  // initValue.GPIO_Alternate = GPIO_AF1_TIM5;
-  // GPIO_InitPeripheral(GPIOA, &initValue);
-
-  // Setup PA1/3 for TIM5_CH2/4
-  // initValue.Pin = GPIO_PIN_1 | GPIO_PIN_3;
-  // initValue.GPIO_Alternate = GPIO_AF7_TIM5;
-  // GPIO_InitPeripheral(GPIOA, &initValue);
-
-  // Setup PA2 for TIM5_CH3
-  // initValue.Pin = GPIO_PIN_2;
-  // initValue.GPIO_Alternate = GPIO_AF6_TIM5;
-  // GPIO_InitPeripheral(GPIOA, &initValue);
-
-  // Setup TIM8
-
-  // Setup PC6 for TIM8_CH1
-  // TIM8_CH1 for SAO_1_GPIO2
-  initValue.Pin = GPIO_PIN_6;
-  initValue.GPIO_Alternate = GPIO_AF6_TIM8;
-  GPIO_InitPeripheral(GPIOC, &initValue);
-
-  // Setup TIM9
-
-  // Setup PB12/13/14/15 for TIM9_CH1/2/3/4
-  // initValue.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-  // initValue.GPIO_Alternate = GPIO_AF1_TIM9;
-  // GPIO_InitPeripheral(GPIOB, &initValue);
-
-}
-
 static void GPIO_IO_Config() {
   GPIO_InitType initValue;
   GPIO_InitStruct(&initValue);
   initValue.GPIO_Current = GPIO_DC_12mA;
-  // Setup GPIOA
-  // PA0 for HighSide_Row_9
-  // PA1 for HighSide_Row_6
-  // PA2 for HighSide_Row_4
-  // PA3 for HighSide_Row_3
-  // initValue.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_6 | GPIO_PIN_4 | GPIO_PIN_3;
-  // initValue.GPIO_Pull = GPIO_No_Pull;
-  // initValue.GPIO_Mode = GPIO_Mode_Out_PP;
-  // GPIO_InitPeripheral(GPIOA, &initValue);
-
-  // Setup GPIOB
-  // PB1 for HighSide_Row_12
-  // PB10 for HighSide_Row_11
-  // PB11 for HighSide_Row_10
-  // PB12 for HighSide_Row_7
-  // PB13 for HighSide_Row_8
-  // PB14 for HighSide_Row_5
-  // PB15 for HighSide_Row_1
-  // initValue.Pin = GPIO_PIN_1 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-  // initValue.GPIO_Pull = GPIO_No_Pull;
-  // initValue.GPIO_Mode = GPIO_Mode_Out_PP;
-  // GPIO_InitPeripheral(GPIOB, &initValue);
-
-  // Setup GPIOC
-  // PC10 for HighSide_Row_2
-  // initValue.Pin = GPIO_PIN_10;
-  // initValue.GPIO_Pull = GPIO_No_Pull;
-  // initValue.GPIO_Mode = GPIO_Mode_Out_PP;
-  // GPIO_InitPeripheral(GPIOC, &initValue);
-
 
   // PB4/5 for EVB testing
   initValue.Pin = GPIO_PIN_4 | GPIO_PIN_5;
@@ -218,7 +114,6 @@ static void GPIO_IO_Config() {
 
 static void GPIO_Config() {
 
-  GPIO_PWM_Config();
   GPIO_SPI_Config();
   GPIO_I2C_Config();
 
@@ -248,58 +143,300 @@ static void DMA_Config() {
 }
 
 /*
- * LowSide_B_Col_1 -> TIM3_CH1                        -------     -------     -------
- * LowSide_R_Col_1 -> TIM3_CH2                        |     |    /     /      | D10 |
- * LowSide_G_Col_1 -> TIM3_CH3                        | D2  |   / D6  /       |_____|
- * HighSide_Row_1  -> TIM9_CH4 -> D2                  |     |  /     /        
- * HighSide_Row_2  -> PC10     -> D3                  |     | /     /         
- * HighSide_Row_3  -> TIM5_CH4 -> D4                  |     |/     /           _____          ______       ______          _______
- * HighSide_Row_4  -> TIM5_CH3 -> D5                  | D3     D5 |           |     |        /      |     /      \        |  D12  |
- * HighSide_Row_5  -> TIM9_CH3 -> D6                  |     |\     \          | D9  |       /      /     /        \       |   _   |
- * HighSide_Row_6  -> TIM2_CH2 -> D7                  |     | \     \         |     |      /  _ _ /     /          \      |  | |  |
- * HighSide_Row_7  -> TIM9_CH1 -> D10                 |     |  \     \        |     |     /   | D11    |    D13     |     |  | |  |
- * HighSide_Row_8  -> TIM9_CH2 -> D9                  |     |   \     \       |     |     \   |        |            |     |  | |  |
- * HighSide_Row_9  -> TIM2_CH1 -> D8                  |     |    \     \      |     |      \  ----      \          /      |  | |  |
- * HighSide_Row_10 -> TIM2_CH4 -> D11                 | D4  |     \ D7  \     | D8  |       \     \      \        /       |  | |  |
- * HighSide_Row_11 -> TIM2_CH3 -> D13                 |     |      \     \    |     |        \_____\__    \______/        |__| |__|
- * HighSide_Row_12 -> TIM3_CH4 -> D12                 -------       -------   -------
+ * LowSide_B_Col_1 -> TIM3_CH1(PA6)                         -------     -------     -------
+ * LowSide_R_Col_1 -> TIM3_CH2(PA7)                         |     |    /     /      | D10 |
+ * LowSide_G_Col_1 -> TIM3_CH3(PB0)                         | D2  |   / D6  /       |_____|
+ * HighSide_Row_1  -> TIM9_CH4(PB15) -> D2                  |     |  /     /        
+ * HighSide_Row_2  -> PC10           -> D3                  |     | /     /         
+ * HighSide_Row_3  -> TIM5_CH4(PA3) -> D4                   |     |/     /           _____          ______       ______          _______
+ * HighSide_Row_4  -> TIM5_CH3(PA2) -> D5                   | D3     D5 |           |     |        /      |     /      \        |  D12  |
+ * HighSide_Row_5  -> TIM9_CH3(PB14) -> D6                  |     |\     \          | D9  |       /      /     /        \       |   _   |
+ * HighSide_Row_6  -> TIM2_CH2(PA1)  -> D7                  |     | \     \         |     |      /  _ _ /     /          \      |  | |  |
+ * HighSide_Row_7  -> TIM9_CH1(PB12) -> D10                 |     |  \     \        |     |     /   | D11    |    D13     |     |  | |  |
+ * HighSide_Row_8  -> TIM9_CH2(PB13) -> D9                  |     |   \     \       |     |     \   |        |            |     |  | |  |
+ * HighSide_Row_9  -> TIM2_CH1(PA0)  -> D8                  |     |    \     \      |     |      \  ----      \          /      |  | |  |
+ * HighSide_Row_10 -> TIM2_CH4(PB11) -> D11                 | D4  |     \ D7  \     | D8  |       \     \      \        /       |  | |  |
+ * HighSide_Row_11 -> TIM2_CH3(PB10) -> D13                 |     |      \     \    |     |        \_____\__    \______/        |__| |__|
+ * HighSide_Row_12 -> TIM3_CH4(PB1)  -> D12                 -------       -------   -------
+ * SAO_1_GPIO1 -> TIM1_CH1(PA8)
+ * SAO_1_GPIO2 -> TIM8_CH1(PC6)
+ * SAO_2_GPIO1 -> TIM1_CH3(PA10)
+ * SAO_2_GPIO2 -> TIM1_CH2(PA9)
  */
-static void TIM_Config() {
-  TIM_TimeBaseInitType timInit;
-  TIM_InitTimBaseStruct(&timInit);
 
+/*
+ * For 30fps, 33.33 ms/frame, use 33ms/frame
+ * There are 12 LEDs, so each LED need to work for 2.75ms in each frame
+ * If using 20Khz PWM, it needs 55 cycles ( to complete 2.75ms )
+ * TIM1 as master, all other are slaves
+ * due to TIM5 cannot be salve of TIM1, so TIM5 is slave of TIM8
+ */
+typedef enum TIM_OCChannels {
+  CH1 = 0x01,
+  CH2 = 0x02,
+  CH3 = 0x04,
+  CH4 = 0x08,
+} TIM_OCChannels;
+
+static uint32_t TIM_Clk(TIM_Module *TIMx, const uint16_t prescaler) {
+
+  uint32_t TIMClk = 0;
+
+  if (IsTimList1Module(TIMx)) {
+    uint32_t APB2Clk = 0;
+    uint32_t APB2Cfg = RCC->CFG & RCC_CFG_APB2PRES;
+    // TIM1, TIM8 clk from APB2 (
+    if (0 == (APB2Cfg & RCC_CFG_APB2PRES_2)) {
+      APB2Clk = SystemCoreClock;
+    } else {
+      switch (APB2Cfg) {
+      case RCC_CFG_APB2PRES_DIV2:
+        APB2Clk = SystemCoreClock / 2;
+        break;
+      case RCC_CFG_APB2PRES_DIV4:
+        APB2Clk = SystemCoreClock / 4;
+        break;
+      case RCC_CFG_APB2PRES_DIV8:
+        APB2Clk = SystemCoreClock / 8;
+        break;
+      case RCC_CFG_APB2PRES_DIV16:
+        APB2Clk = SystemCoreClock / 16;
+        break;
+      }
+    }
+
+    if (0 == prescaler) {
+      TIMClk = APB2Clk;
+    } else {
+      TIMClk = APB2Clk * 2 / (prescaler + 1);
+    }
+
+  } else if (IsTimList3Module(TIMx) && !IsTimList1Module(TIMx)) {
+    // TIM 2, 3, 4, 5, 9 clk from APB1
+    uint32_t APB1Clk = 0;
+    uint32_t APB1Cfg = RCC->CFG & RCC_CFG_APB1PRES;
+    if (0 == (APB1Cfg & RCC_CFG_APB1PRES_2)) {
+      APB1Clk = SystemCoreClock;
+    } else {
+      switch (APB1Cfg) {
+      case RCC_CFG_APB1PRES_DIV2:
+        APB1Clk = SystemCoreClock / 2;
+        break;
+      case RCC_CFG_APB1PRES_DIV4:
+        APB1Clk = SystemCoreClock / 4;
+        break;
+      case RCC_CFG_APB1PRES_DIV8:
+        APB1Clk = SystemCoreClock / 8;
+        break;
+      case RCC_CFG_APB1PRES_DIV16:
+        APB1Clk = SystemCoreClock / 16;
+        break;
+      }
+    }
+    if (0 == prescaler) {
+      TIMClk = APB1Clk;
+    } else {
+      TIMClk = APB1Clk * 2 / (prescaler + 1);
+    }
+  }
+
+  return TIMClk;
+}
+
+static void TIMx_PWM_Config(TIM_Module *TIMx, uint8_t channels) {
+  TIM_TimeBaseInitType timInit;
   OCInitType ocInit;
+
+  TIM_InitTimBaseStruct(&timInit);
   TIM_InitOcStruct(&ocInit);
 
-  const uint16_t prescaler = 1;
-  uint16_t period = SystemCoreClock / prescaler / LED_PWM_CLOCK - 1;
+  uint16_t prescaler = IsTimList1Module(TIMx) ?
+    TIM_ADVANCED_PRESCALER : TIM_GENERIC_PRESCALER;
+
+  uint32_t TIMClk = TIM_Clk(TIMx, prescaler);
+
+  uint16_t period = TIMClk / LED_PWM_CLOCK - 1;
   timInit.Period = period;
-  timInit.Prescaler = prescaler - 1;
+  timInit.Prescaler = prescaler;
   timInit.CntMode = TIM_CNT_MODE_UP;
-  timInit.RepetCnt = 0xff;
-  TIM_InitTimeBase(TIM1, &timInit);
+  TIM_InitTimeBase(TIMx, &timInit);
 
   ocInit.OcMode = TIM_OCMODE_PWM1;
   ocInit.OutputState = TIM_OUTPUT_STATE_ENABLE;
   ocInit.Pulse = period / 2;
 
-  // TIM3_CH1 for LowSide_B_Col_1
-  TIM_InitOc1(TIM1, &ocInit);
+  if (channels & CH1) {
+    TIM_InitOc1(TIMx, &ocInit);
+    TIM_ConfigOc1Fast(TIMx, TIM_OC_FAST_ENABLE);
+  }
+  if (channels & CH2) {
+    TIM_InitOc2(TIMx, &ocInit);
+    TIM_ConfigOc2Fast(TIMx, TIM_OC_FAST_ENABLE);
+  }
+  if (channels & CH3) {
+    TIM_InitOc3(TIMx, &ocInit);
+    TIM_ConfigOc3Fast(TIMx, TIM_OC_FAST_ENABLE);
+  }
+  if (channels & CH4) {
+    TIM_InitOc4(TIMx, &ocInit);
+    TIM_ConfigOc4Fast(TIMx, TIM_OC_FAST_ENABLE);
+  }
 
-  // TIM3_CH2 for LowSide_R_Col_1
-  TIM_InitOc2(TIM1, &ocInit);
+  TIM_ConfigArPreload(TIMx, DISABLE);
+  // TIM_ConfigDma(TIMx, TIM_DMABASE_CAPCMPDAT1, TIM_DMABURST_LENGTH_4TRANSFERS);
+  // TIM_EnableDma(TIMx, TIM_DMA_UPDATE, ENABLE);
 
-  // TIM3_CH3 for LowSide_G_Col_1
-  TIM_InitOc3(TIM1, &ocInit);
-
-  TIM_ConfigArPreload(TIM1, DISABLE);
-  TIM_ConfigDma(TIM1, TIM_DMABASE_CAPCMPDAT1, TIM_DMABURST_LENGTH_1TRANSFER);
-  TIM_EnableDma(TIM1, TIM_DMA_UPDATE, ENABLE);
-
-  TIM_ConfigInt(TIM1, TIM_INT_UPDATE|TIM_INT_CC1, ENABLE);
+  TIM_ConfigInt(TIMx, TIM_INT_UPDATE|TIM_INT_CC1, ENABLE);
   // TIM_EnableUpdateEvt_r(TIM1, ENABLE);
+}
 
 
+static void TIMx_GPIO_InitConfig(GPIO_InitType *initGPIO) {
+  GPIO_InitStruct(initGPIO);
+  initGPIO->GPIO_Mode = GPIO_Mode_AF_PP;
+  initGPIO->GPIO_Current = GPIO_DC_12mA;
+}
+
+static void TIM1_Config() {
+  // TIM1_CH1(PA8) for SAO_1_GPIO1
+  // TIM1_CH2(PA9) for SAO_2_GPIO2
+  // TIM1_CH3(PA10) for SAO_2_GPIO1
+
+  // Setup GPIO for TIM1
+  GPIO_InitType initGPIO;
+  TIMx_GPIO_InitConfig(&initGPIO);
+  // Setup PA8/9/10 for TIM1_CH1/2/3
+  initGPIO.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10;
+  initGPIO.GPIO_Alternate = GPIO_AF2_TIM1;
+  GPIO_InitPeripheral(GPIOA, &initGPIO);
+
+  TIMx_PWM_Config(TIM1, (uint8_t)(CH1|CH2|CH3));
+
+  // Master Trigger
+  TIM_SelectOutputTrig(TIM1, TIM_TRGO_SRC_ENABLE);
+  TIM_SelectMasterSlaveMode(TIM1, TIM_MASTER_SLAVE_MODE_ENABLE);
+}
+
+static void TIM8_Config() {
+  // TIM8_CH1(PC6) for SAO_1_GPIO2
+
+  // Setup GPIO for TIM8
+
+  GPIO_InitType initGPIO;
+  TIMx_GPIO_InitConfig(&initGPIO);
+  // Setup PC6 for TIM8_CH1
+  initGPIO.Pin = GPIO_PIN_6;
+  initGPIO.GPIO_Alternate = GPIO_AF6_TIM8;
+  GPIO_InitPeripheral(GPIOC, &initGPIO);
+
+  TIMx_PWM_Config(TIM8, (uint8_t)(CH1));
+
+  TIM_SelectSlaveMode(TIM8, TIM_SELECTED_SLAVE_MODE);
+  TIM_SelectInputTrig(TIM8, TIM_TRIG_SEL_IN_TR0); // triggered from TIM1
+}
+
+static void TIM2_Config() {
+  
+  // TIM2_CH1(PA0)  -> HighRow_Row_9
+  // TIM2_CH2(PA1)  -> HighRow_Row_6
+  // TIM2_CH3(PB10) -> HighRow_Row_11
+  // TIM2_CH4(PB11) -> HighRow_Row_10
+
+  // Setup GPIO for TIM2
+  GPIO_InitType initGPIO;
+  TIMx_GPIO_InitConfig(&initGPIO);
+  // Setup PA0/1 for TIM2_CH1/2
+  initGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1;
+  initGPIO.GPIO_Alternate = GPIO_AF2_TIM2;
+  GPIO_InitPeripheral(GPIOA, &initGPIO);
+  // Setup PB10/11 for TIM2_CH3/4
+  initGPIO.Pin = GPIO_PIN_10 | GPIO_PIN_11;
+  initGPIO.GPIO_Alternate = GPIO_AF2_TIM2;
+  GPIO_InitPeripheral(GPIOB, &initGPIO);
+
+  TIMx_PWM_Config(TIM2, (uint8_t)(CH1|CH2|CH3|CH4));
+
+  TIM_SelectSlaveMode(TIM2, TIM_SELECTED_SLAVE_MODE);
+  TIM_SelectInputTrig(TIM2, TIM_TRIG_SEL_IN_TR0); // triggered from TIM1
+}
+
+static void TIM3_Config() {
+  
+  // TIM3_CH1(PA6) -> LowSide_B_Col_1
+  // TIM3_CH2(PA7) -> LowSide_R_Col_1
+  // TIM3_CH3(PB0) -> LowSide_G_Col_1
+  // TIM3_CH4(PB1) -> HighSide_Row_12
+
+  // Setup GPIO for TIM3
+
+  GPIO_InitType initGPIO;
+  TIMx_GPIO_InitConfig(&initGPIO);
+  // Setup PA6/7 for TIM3_CH1/2
+  initGPIO.Pin = GPIO_PIN_6 | GPIO_PIN_7;
+  initGPIO.GPIO_Alternate = GPIO_AF2_TIM3;
+  GPIO_InitPeripheral(GPIOA, &initGPIO);
+  // Setup PB0/1 for TIM3_CH3/4
+  initGPIO.Pin = GPIO_PIN_0| GPIO_PIN_1;
+  initGPIO.GPIO_Alternate = GPIO_AF2_TIM3;
+  GPIO_InitPeripheral(GPIOB, &initGPIO);
+
+  TIMx_PWM_Config(TIM3, (uint8_t)(CH1|CH2|CH3));
+
+  TIM_SelectSlaveMode(TIM3, TIM_SELECTED_SLAVE_MODE);
+  TIM_SelectInputTrig(TIM3, TIM_TRIG_SEL_IN_TR0); // triggered from TIM1
+}
+
+static void TIM5_Config() {
+  
+  // TIM5_CH3(PA2) -> HighRow_Row_4
+  // TIM5_CH4(PA3) -> HighRow_Row_3
+
+  // Setup GPIO for TIM5
+  GPIO_InitType initGPIO;
+  TIMx_GPIO_InitConfig(&initGPIO);
+  // Setup PA2 for TIM5_CH3
+  initGPIO.Pin = GPIO_PIN_2;
+  initGPIO.GPIO_Alternate = GPIO_AF6_TIM5;
+  GPIO_InitPeripheral(GPIOA, &initGPIO);
+  // Setup PA3 for TIM5_CH4
+  initGPIO.Pin =  GPIO_PIN_3;
+  initGPIO.GPIO_Alternate = GPIO_AF7_TIM5;
+  GPIO_InitPeripheral(GPIOA, &initGPIO);
+
+  TIMx_PWM_Config(TIM5, (uint8_t)(CH3|CH4));
+
+  TIM_SelectSlaveMode(TIM5, TIM_SELECTED_SLAVE_MODE);
+  TIM_SelectInputTrig(TIM5, TIM_TRIG_SEL_IN_TR3); // triggered from TIM8
+}
+
+static void TIM9_Config() {
+  
+  // TIM9_CH1(PB12) -> HighRow_Row_7
+  // TIM9_CH2(PB13) -> HighRow_Row_8
+  // TIM9_CH3(PB14) -> HighRow_Row_5
+  // TIM9_CH4(PB15) -> HighRow_Row_1
+
+  // Setup GPIO for TIM9
+  GPIO_InitType initGPIO;
+  TIMx_GPIO_InitConfig(&initGPIO);
+
+  // Setup PB12/13/14/15 for TIM9_CH1/2/3/4
+  initGPIO.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+  initGPIO.GPIO_Alternate = GPIO_AF1_TIM9;
+  GPIO_InitPeripheral(GPIOB, &initGPIO);
+
+  TIMx_PWM_Config(TIM9, (uint8_t)(CH1|CH2|CH3|CH4));
+  TIM_SelectSlaveMode(TIM9, TIM_SELECTED_SLAVE_MODE);
+  TIM_SelectInputTrig(TIM9, TIM_TRIG_SEL_IN_TR0); // triggered from TIM1
+}
+
+static void TIM_Config() {
+  TIM1_Config();
+  TIM2_Config();
+  TIM3_Config();
+  TIM5_Config();
+  TIM8_Config();
+  TIM9_Config();
 }
 
 static void NVIC_Config() {
@@ -334,10 +471,69 @@ void Setup() {
   TIM_GenerateEvent(TIM1, TIM_EVTGEN_UDGN);
 
   DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
-  DMA_EnableChannel(DMA_CH1, ENABLE);
+  // DMA_EnableChannel(DMA_CH1, ENABLE);
 
-  TIM_ClrIntPendingBit(TIM1, TIM_INT_UPDATE|TIM_INT_CC1|TIM_INT_CC2|TIM_INT_CC3|TIM_INT_CC4);
-  TIM_Enable(TIM1, ENABLE);
+  TIM_ClrIntPendingBit(TIM1,
+                       TIM_INT_UPDATE
+                       |TIM_INT_CC1
+                       |TIM_INT_CC2
+                       |TIM_INT_CC3
+                       |TIM_INT_CC4);
+  TIM_ClrIntPendingBit(TIM2,
+                       TIM_INT_UPDATE
+                       |TIM_INT_CC1
+                       |TIM_INT_CC2
+                       |TIM_INT_CC3
+                       |TIM_INT_CC4);
+  TIM_ClrIntPendingBit(TIM3,
+                       TIM_INT_UPDATE
+                       |TIM_INT_CC1
+                       |TIM_INT_CC2
+                       |TIM_INT_CC3
+                       |TIM_INT_CC4);
+  TIM_ClrIntPendingBit(TIM5,
+                       TIM_INT_UPDATE
+                       |TIM_INT_CC1
+                       |TIM_INT_CC2
+                       |TIM_INT_CC3
+                       |TIM_INT_CC4);
+  TIM_ClrIntPendingBit(TIM8,
+                       TIM_INT_UPDATE
+                       |TIM_INT_CC1
+                       |TIM_INT_CC2
+                       |TIM_INT_CC3
+                       |TIM_INT_CC4);
+  TIM_ClrIntPendingBit(TIM9,
+                       TIM_INT_UPDATE
+                       |TIM_INT_CC1
+                       |TIM_INT_CC2
+                       |TIM_INT_CC3
+                       |TIM_INT_CC4);
   TIM_EnableCtrlPwmOutputs(TIM1, ENABLE);
+  TIM_EnableCtrlPwmOutputs(TIM8, ENABLE);
+
+  {
+    const uint32_t TIMClk = TIM_Clk(TIM1, TIM_ADVANCED_PRESCALER);
+    const uint16_t period = TIMClk / LED_PWM_CLOCK - 1;
+    TIM_SetCmp1(TIM1, period / 4);
+    TIM_SetCmp1(TIM8, period / 4);
+  }
+  {
+    const uint32_t TIMClk = TIM_Clk(TIM2, TIM_GENERIC_PRESCALER);
+    const uint16_t period = TIMClk / LED_PWM_CLOCK - 1;
+    TIM_SetCmp1(TIM2, period / 4);
+    TIM_SetCmp1(TIM3, period / 4);
+    TIM_SetCmp3(TIM5, period / 4);
+    TIM_SetCmp1(TIM9, period / 4);
+  }
+  
+  TIM_Enable(TIM2, ENABLE);
+  TIM_Enable(TIM3, ENABLE);
+  TIM_Enable(TIM5, ENABLE);
+  TIM_Enable(TIM8, ENABLE);
+  TIM_Enable(TIM9, ENABLE);
+
+  // Use TIM1 as Master TIM, so it is enabled last
+  TIM_Enable(TIM1, ENABLE);
 
 }

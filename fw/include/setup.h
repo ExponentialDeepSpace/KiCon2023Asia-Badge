@@ -20,5 +20,8 @@
 #define SETUP_H
 
 #define LED_PWM_CLOCK 20000 // 20Khz
+#define TIM_ADVANCED_PRESCALER 0
+#define TIM_GENERIC_PRESCALER 0
+
 void Setup();
 #endif // SETUP_H
