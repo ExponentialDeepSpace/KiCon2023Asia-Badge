@@ -100,15 +100,57 @@ static void GPIO_I2C_Config() {
 }
 
 static void GPIO_IO_Config() {
-  GPIO_InitType initValue;
-  GPIO_InitStruct(&initValue);
-  initValue.GPIO_Current = GPIO_DC_12mA;
+  GPIO_InitType initGPIO;
+  GPIO_InitStruct(&initGPIO);
+  initGPIO.GPIO_Mode = GPIO_Mode_Out_PP;
+  initGPIO.GPIO_Current = GPIO_DC_8mA;
 
   // PB4/5 for EVB testing
-  initValue.Pin = GPIO_PIN_4 | GPIO_PIN_5;
-  initValue.GPIO_Pull = GPIO_No_Pull;
-  initValue.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitPeripheral(GPIOB, &initValue);
+  initGPIO.Pin = GPIO_PIN_4 | GPIO_PIN_5;
+  initGPIO.GPIO_Pull = GPIO_No_Pull;
+  initGPIO.GPIO_Mode = GPIO_Mode_Out_PP;
+  initGPIO.GPIO_Current = GPIO_DC_8mA;
+  GPIO_InitPeripheral(GPIOB, &initGPIO);
+}
+
+static void GPIO_HighSide_Config() {
+  GPIO_InitType initGPIO;
+  GPIO_InitStruct(&initGPIO);
+  initGPIO.GPIO_Mode = GPIO_Mode_Out_PP;
+  initGPIO.GPIO_Current = GPIO_DC_8mA;
+
+  // (PA0)  -> HighRow_Row_9
+  // (PA1)  -> HighRow_Row_6
+  initGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1;
+  GPIO_InitPeripheral(GPIOA, &initGPIO);
+
+  // (PB10) -> HighRow_Row_11
+  // (PB11) -> HighRow_Row_10
+  initGPIO.Pin = GPIO_PIN_10 | GPIO_PIN_11;
+  GPIO_InitPeripheral(GPIOB, &initGPIO);
+
+  // (PB1) -> HighSide_Row_12
+  initGPIO.Pin = GPIO_PIN_1;
+  GPIO_InitPeripheral(GPIOB, &initGPIO);
+
+  // (PA2) -> HighRow_Row_4
+  initGPIO.Pin = GPIO_PIN_2;
+  GPIO_InitPeripheral(GPIOA, &initGPIO);
+  // (PA3) -> HighRow_Row_3
+  initGPIO.Pin =  GPIO_PIN_3;
+  GPIO_InitPeripheral(GPIOA, &initGPIO);
+
+  // (PB12) -> HighRow_Row_7
+  // (PB13) -> HighRow_Row_8
+  // (PB14) -> HighRow_Row_5
+  // (PB15) -> HighRow_Row_1
+
+  initGPIO.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+  GPIO_InitPeripheral(GPIOB, &initGPIO);
+
+  // (PC10) -> HighRow_Row_2
+  initGPIO.Pin =  GPIO_PIN_10;
+  GPIO_InitPeripheral(GPIOC, &initGPIO);
 
 }
 
@@ -118,6 +160,7 @@ static void GPIO_Config() {
   GPIO_I2C_Config();
 
   GPIO_IO_Config();
+  GPIO_HighSide_Config();
 }
 
 static void DMA_Config() {
@@ -315,6 +358,8 @@ static void TIM1_Config() {
   // Master Trigger
   TIM_SelectOutputTrig(TIM1, TIM_TRGO_SRC_ENABLE);
   TIM_SelectMasterSlaveMode(TIM1, TIM_MASTER_SLAVE_MODE_ENABLE);
+
+  TIM1->REPCNT = 55;
 }
 
 static void TIM8_Config() {
@@ -375,8 +420,8 @@ static void TIM3_Config() {
   initGPIO.Pin = GPIO_PIN_6 | GPIO_PIN_7;
   initGPIO.GPIO_Alternate = GPIO_AF2_TIM3;
   GPIO_InitPeripheral(GPIOA, &initGPIO);
-  // Setup PB0/1 for TIM3_CH3/4
-  initGPIO.Pin = GPIO_PIN_0| GPIO_PIN_1;
+  // Setup PB0 for TIM3_CH3
+  initGPIO.Pin = GPIO_PIN_0;
   initGPIO.GPIO_Alternate = GPIO_AF2_TIM3;
   GPIO_InitPeripheral(GPIOB, &initGPIO);
 
@@ -432,11 +477,11 @@ static void TIM9_Config() {
 
 static void TIM_Config() {
   TIM1_Config();
-  TIM2_Config();
+  // TIM2_Config();
   TIM3_Config();
-  TIM5_Config();
+  // TIM5_Config();
   TIM8_Config();
-  TIM9_Config();
+  // TIM9_Config();
 }
 
 static void NVIC_Config() {
@@ -526,12 +571,13 @@ void Setup() {
     TIM_SetCmp3(TIM5, period / 4);
     TIM_SetCmp1(TIM9, period / 4);
   }
+
   
-  TIM_Enable(TIM2, ENABLE);
+  // TIM_Enable(TIM2, ENABLE);
   TIM_Enable(TIM3, ENABLE);
-  TIM_Enable(TIM5, ENABLE);
+  // TIM_Enable(TIM5, ENABLE);
   TIM_Enable(TIM8, ENABLE);
-  TIM_Enable(TIM9, ENABLE);
+  // TIM_Enable(TIM9, ENABLE);
 
   // Use TIM1 as Master TIM, so it is enabled last
   TIM_Enable(TIM1, ENABLE);
