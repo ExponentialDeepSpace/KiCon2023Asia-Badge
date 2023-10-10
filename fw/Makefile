@@ -59,7 +59,7 @@ CROSS_COMPILE = arm-none-eabi-
 ######################################
 # C sources
 ######################################
-C_DIRS += src
+C_DIRS += src src/setup
 C_DIRS += freertos
 C_DIRS += freertos/portable/GCC/ARM_CM4F
 # C_DIRS += freertos/portable/GCC/MemMang
