@@ -188,7 +188,4 @@ void Setup() {
   GPIO_Config();
 
   TIM_Config();
-
-
-
 }
