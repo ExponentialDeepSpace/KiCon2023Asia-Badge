@@ -21,6 +21,7 @@
 #include "setup.h"
 #include <FreeRTOS.h>
 #include <task.h>
+#include "memory_in_pixel_display.h"
 
 typedef struct GPIO_HighSide_Def {
   GPIO_Module *gpio;
@@ -53,6 +54,7 @@ StackType_t xStack[ STACK_SIZE ];
 int main(void)
 {
   Setup();
+  DisplayBuferInit();
   
   volatile unsigned long long i = 0;
 
