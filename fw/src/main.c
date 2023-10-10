@@ -19,6 +19,8 @@
 #include <n32l40x.h>
 #include <assert.h>
 #include "setup.h"
+#include <FreeRTOS.h>
+#include <task.h>
 
 typedef struct GPIO_HighSide_Def {
   GPIO_Module *gpio;
@@ -40,6 +42,14 @@ static GPIO_HighSide_Def GPIOs_HighSide_Rows[12] = {
   {GPIOB, GPIO_PIN_1},  // Row 12
 };
 
+static void prvTestTask( void *pvParameters );
+
+#define STACK_SIZE 200
+
+StaticTask_t xTaskBuffer;
+StackType_t xStack[ STACK_SIZE ];
+
+
 int main(void)
 {
   Setup();
@@ -49,20 +59,22 @@ int main(void)
   GPIO_ResetBits(GPIOB, GPIO_PIN_4);
   GPIO_ResetBits(GPIOB, GPIO_PIN_5);
 
-  while (1) {
-    PWR_EnterSLEEPMode(1, PWR_SLEEPENTRY_WFI);
-    // GPIO_SetBits(GPIOB, GPIO_PIN_4);
-    // GPIO_ResetBits(GPIOB, GPIO_PIN_5);
-    // i = 0;
-    // while (i < 1000000) i ++;
-    // i = 0;
-    // GPIO_SetBits(GPIOB, GPIO_PIN_5);
-    // GPIO_ResetBits(GPIOB, GPIO_PIN_4);
-    // while (i < 1000000) i ++;
-  }
+  xTaskCreateStatic(prvTestTask,
+                    "TestTask",
+                    configMINIMAL_STACK_SIZE,
+                    (void *)NULL,
+                    tskIDLE_PRIORITY,
+                    xStack,
+                    &xTaskBuffer);
+  vTaskStartScheduler();
+  
   return 0;
 }
 
+static void prvTestTask(void *pvParameters) {
+
+  while(1);
+}
 void DMA_Channel1_IRQHandler(void) {
   int i = 0;
   i++;
@@ -94,3 +106,39 @@ void TIM1_CC_IRQHandler(void) {
   TIM_ClrIntPendingBit(TIM1, TIM_INT_CC1);
 }
 
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
+{
+	( void ) pcTaskName;
+	( void ) pxTask;
+
+	/* Run time stack overflow checking is performed if
+	configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
+	function is called if a stack overflow is detected. */
+	taskDISABLE_INTERRUPTS();
+	for( ;; );
+}
+
+#if (configSUPPORT_STATIC_ALLOCATION == 1)
+void vApplicationGetIdleTaskMemory( StaticTask_t **ppxIdleTaskTCBBuffer,
+                                    StackType_t **ppxIdleTaskStackBuffer,
+                                    uint32_t *pulIdleTaskStackSize )
+{
+/* If the buffers to be provided to the Idle task are declared inside this
+function then they must be declared static - otherwise they will be allocated on
+the stack and so not exists after this function exits. */
+static StaticTask_t xIdleTaskTCB;
+static StackType_t uxIdleTaskStack[ configMINIMAL_STACK_SIZE ];
+
+    /* Pass out a pointer to the StaticTask_t structure in which the Idle task's
+    state will be stored. */
+    *ppxIdleTaskTCBBuffer = &xIdleTaskTCB;
+
+    /* Pass out the array that will be used as the Idle task's stack. */
+    *ppxIdleTaskStackBuffer = uxIdleTaskStack;
+
+    /* Pass out the size of the array pointed to by *ppxIdleTaskStackBuffer.
+    Note that, as the array is necessarily of type StackType_t,
+    configMINIMAL_STACK_SIZE is specified in words, not bytes. */
+    *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+}
+#endif

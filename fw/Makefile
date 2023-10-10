@@ -60,11 +60,14 @@ CROSS_COMPILE = arm-none-eabi-
 # C sources
 ######################################
 C_DIRS += src
+C_DIRS += freertos
+C_DIRS += freertos/portable/GCC/ARM_CM4F
+# C_DIRS += freertos/portable/GCC/MemMang
 C_DIRS += bsp/firmware/CMSIS/device
 C_DIRS += bsp/firmware/$(TARGET_PLATFORM)_std_periph_driver/src
 #C_DIRS += ../../../../../../firmware/$(TARGET_PLATFORM)_usbfs_driver/src
 SRC_OBJS_DIRS += $(foreach DIR, $(C_DIRS), $(wildcard $(DIR)/*.c))
-C_SOURCES = $(SRC_OBJS_DIRS)
+C_SOURCES = $(SRC_OBJS_DIRS) 
 
 ######################################
 # ASM sources
@@ -75,6 +78,8 @@ ASM_SOURCES = bsp/firmware/CMSIS/device/startup/startup_$(TARGET_PLATFORM)_gcc.s
 # C includes
 ######################################
 C_INCS += include
+C_INCS += freertos/include
+C_INCS += freertos/portable/GCC/ARM_CM4F
 C_INCS += bsp/firmware/CMSIS/core
 C_INCS += bsp/firmware/CMSIS/device
 C_INCS += bsp/firmware/$(TARGET_PLATFORM)_std_periph_driver/inc
