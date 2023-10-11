@@ -94,8 +94,8 @@ static void prvTestTask(void *pvParameters) {
 }
 
 static void prvDisplayTask(void *pvParameters) {
+  DisplayTransferLines(DISP_FIRST_LINE, DISP_HEIGHT);
   while (1) {
-    DisplayTransferLines(DISP_FIRST_LINE, DISP_HEIGHT);
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
   }
 }
@@ -115,6 +115,11 @@ void SPI2_IRQHandler(void) {
 void DMA_Channel2_IRQHandler(void) {
 
   if (DMA_GetIntStatus(DISPLAY_SPI_INT_TXC, DMA)) {
+
+    DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, DISABLE);
+
+    // SPI TE flag is set by default
+    SPI_Enable(DISPLAY_SPI, DISABLE);
 
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 
