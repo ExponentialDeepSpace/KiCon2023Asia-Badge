@@ -164,18 +164,24 @@ static void GPIO_Config() {
 
 
 static void NVIC_Config() {
+  // as required in https://www.freertos.org/RTOS-Cortex-M3-M4.html
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+
   NVIC_InitType nvicInit = {0};
   nvicInit.NVIC_IRQChannel = DMA_Channel1_IRQn;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_DMA_INTERRUPT_PRIORITY_LEVEL;
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
   
   NVIC_Init(&nvicInit);
 
   nvicInit.NVIC_IRQChannel = TIM1_UP_IRQn;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_INTERRUPT_PRIORITY_LEVEL;
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
   
   NVIC_Init(&nvicInit);
 
   nvicInit.NVIC_IRQChannel = TIM1_CC_IRQn;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_INTERRUPT_PRIORITY_LEVEL;
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
   
   NVIC_Init(&nvicInit);
