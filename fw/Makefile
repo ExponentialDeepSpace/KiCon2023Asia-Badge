@@ -45,6 +45,9 @@ DEFS += -DUSE_STDPERIPH_DRIVER
 DEFS += -DSYSCLK_FREQ=48000000 # for using USB
 DEFS += -DSYSCLK_SRC=SYSCLK_USE_HSI_PLL
 
+ifeq ($(DEBUG), 1)
+DEFS += -DUSE_FULL_ASSERT
+endif
 
 ######################################
 # Algo libs
