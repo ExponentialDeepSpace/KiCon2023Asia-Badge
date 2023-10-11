@@ -97,6 +97,8 @@ static void prvDisplayTask(void *pvParameters) {
   DisplayTransferLines(DISP_FIRST_LINE, DISP_HEIGHT);
   while (1) {
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    DisplayTransferLines(DISP_FIRST_LINE, DISP_HEIGHT);
   }
 }
 
@@ -114,7 +116,7 @@ void SPI2_IRQHandler(void) {
 
 void DMA_Channel2_IRQHandler(void) {
 
-  if (DMA_GetIntStatus(DISPLAY_SPI_INT_TXC, DMA)) {
+  if (DMA_GetIntStatus(DISPLAY_DMA_INT_TXC, DMA)) {
 
     DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, DISABLE);
 
@@ -129,10 +131,10 @@ void DMA_Channel2_IRQHandler(void) {
   }
   
   DMA_ClrIntPendingBit(
-                       DISPLAY_SPI_INT_GLB
-                       |DISPLAY_SPI_INT_TXC
-                       |DISPLAY_SPI_INT_HTX
-                       |DISPLAY_SPI_INT_ERR,
+                       DISPLAY_DMA_INT_GLB
+                       |DISPLAY_DMA_INT_TXC
+                       |DISPLAY_DMA_INT_HTX
+                       |DISPLAY_DMA_INT_ERR,
                        DMA);
 
 }

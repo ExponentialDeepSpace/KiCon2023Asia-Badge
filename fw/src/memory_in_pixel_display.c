@@ -40,10 +40,10 @@ void DisplayTransferLines(uint8_t first_line, uint8_t lines) {
   assert(lines >= 1);
 
   DMA_ClrIntPendingBit(
-                       DISPLAY_SPI_INT_GLB
-                       |DISPLAY_SPI_INT_TXC
-                       |DISPLAY_SPI_INT_HTX
-                       |DISPLAY_SPI_INT_ERR,
+                       DISPLAY_DMA_INT_GLB
+                       |DISPLAY_DMA_INT_TXC
+                       |DISPLAY_DMA_INT_HTX
+                       |DISPLAY_DMA_INT_ERR,
                        DMA);
   uint16_t *buf = DisplayBuffer + (first_line - 1) * LINE_WIDTH_BYTES;
   DISPLAY_SPI_DMA_CHANNEL->MADDR = (uint32_t)buf;
@@ -125,10 +125,10 @@ static void Display_DMA_Config() {
   DMA_ConfigInt(DISPLAY_SPI_DMA_CHANNEL, DMA_INT_HTX|DMA_INT_TXC|DMA_INT_ERR, ENABLE);
   DMA_RequestRemap(DISPLAY_SPI_DMA_CHANNEL_REMAP, DMA, DISPLAY_SPI_DMA_CHANNEL, ENABLE);
   DMA_ClrIntPendingBit(
-                       DISPLAY_SPI_INT_GLB
-                       |DISPLAY_SPI_INT_TXC
-                       |DISPLAY_SPI_INT_HTX
-                       |DISPLAY_SPI_INT_ERR,
+                       DISPLAY_DMA_INT_GLB
+                       |DISPLAY_DMA_INT_TXC
+                       |DISPLAY_DMA_INT_HTX
+                       |DISPLAY_DMA_INT_ERR,
                        DMA);
 }
 
