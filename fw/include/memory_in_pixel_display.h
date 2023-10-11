@@ -23,28 +23,11 @@
 
 #define DISP_WIDTH (72)
 #define DISP_HEIGHT (144)
-
-#define LINE_PREFIX_BYTES (2)
-#define PIXEL_SIZE_BITS (4) // use 4-bit mode
-#define LINE_WIDTH_BYTES (LINE_PREFIX_BYTES + DISP_WIDTH * PIXEL_SIZE_BITS / 8)
-#define LINE_WIDTH_HALFWORDS (LINE_WIDTH_BYTES / 2)
-
-#define M0_MASK 0x8000
-#define M1_MASK 0x4000
-#define M2_MASK 0x2000
-#define M3_MASK 0x1000
-#define M4_MASK 0x0800
-#define M5_MASK 0x0400
-#define AG_MASK 0x03ff
-
-#define CMD_UPDATE_MULTIPLE_LINES_4BIT (M0_MASK|M3_MASK)
-#define CMD_NO_UPDATE (M0_MASK|M2_MASK)
-#define CMD_ALL_CLEAR (M2_MASK)
-
-// each line has following format
-// M0-M5 AG9-AG0 DATA(D1R D1G D1B ...)
-extern uint16_t DisplayBuffer[ LINE_WIDTH_HALFWORDS * DISP_HEIGHT ];
+#define DISP_FIRST_LINE (1)
 
 void DisplayBuferInit();
+void DisplayTransferLines(uint8_t start, uint8_t end);
+
+void Display_Config();
 
 #endif // MEMORY_IN_PIXEL_DISPLAY_H

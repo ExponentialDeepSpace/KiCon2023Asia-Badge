@@ -19,6 +19,7 @@
 #include <n32l40x.h>
 #include "setup.h"
 #include "tim.h"
+#include "memory_in_pixel_display.h"
 
 // Default Clock (defined in system_n32l40x.c:SetSysClock())
 // SystemCoreclock = 48Mhz (for USB)
@@ -45,11 +46,6 @@ RCC_Config() {
   DBG_ConfigPeriph(DBG_TIM1_STOP | DBG_TIM8_STOP, ENABLE);
 }
 static void GPIO_SPI_Config() {
-  GPIO_InitType initValue;
-  GPIO_InitStruct(&initValue);
-  initValue.GPIO_Current = GPIO_DC_8mA;
-  initValue.GPIO_Mode = GPIO_Mode_AF_OD;
-  initValue.GPIO_Pull = GPIO_Pull_Up;
 
   // Setup SPI1
 
@@ -68,17 +64,6 @@ static void GPIO_SPI_Config() {
   // initValue.GPIO_Alternate = GPIO_AF0_SPI1;
   // GPIO_InitPeripheral(GPIOB, &initValue);
   
-  // Setup SPI2
-
-  // Setup PC7/9 for SPI2_SCK/MOSI
-  initValue.Pin = GPIO_PIN_7 | GPIO_PIN_9;
-  initValue.GPIO_Alternate = GPIO_AF5_SPI2;
-  GPIO_InitPeripheral(GPIOC, &initValue);
-
-  // Setup PA15 for SPI2_nSS
-  initValue.Pin = GPIO_PIN_15;
-  initValue.GPIO_Alternate = GPIO_AF1_SPI2;
-  GPIO_InitPeripheral(GPIOA, &initValue);
 
 }
 
@@ -194,4 +179,6 @@ void Setup() {
   GPIO_Config();
 
   TIM_Config();
+
+  Display_Config();
 }

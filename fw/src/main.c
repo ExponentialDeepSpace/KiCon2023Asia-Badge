@@ -44,16 +44,23 @@ static GPIO_HighSide_Def GPIOs_HighSide_Rows[12] = {
 };
 
 static void prvTestTask( void *pvParameters );
+static void prvDisplayTask( void *pvParameters );
 
 #define STACK_SIZE 200
+#define tskDisplay_PRIORITY 1
 
 StaticTask_t xTaskBuffer;
 StackType_t xStack[ STACK_SIZE ];
+
+static volatile TaskHandle_t DisplayTaskHandle = NULL;
+StaticTask_t xDisplayTaskBuffer;
+StackType_t xDisplayStack[ STACK_SIZE ];
 
 
 int main(void)
 {
   Setup();
+  
   DisplayBuferInit();
   
   volatile unsigned long long i = 0;
@@ -68,6 +75,14 @@ int main(void)
                     tskIDLE_PRIORITY,
                     xStack,
                     &xTaskBuffer);
+  DisplayTaskHandle = xTaskCreateStatic(prvDisplayTask,
+                    "Display",
+                    configMINIMAL_STACK_SIZE,
+                    (void *)NULL,
+                    tskDisplay_PRIORITY,
+                    xDisplayStack,
+                    &xDisplayTaskBuffer);
+
   vTaskStartScheduler();
   
   return 0;
@@ -77,11 +92,44 @@ static void prvTestTask(void *pvParameters) {
 
   while(1);
 }
+
+static void prvDisplayTask(void *pvParameters) {
+  while (1) {
+    DisplayTransferLines(DISP_FIRST_LINE, DISP_HEIGHT);
+    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+  }
+}
+
 void DMA_Channel1_IRQHandler(void) {
   int i = 0;
   i++;
 
   DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
+}
+
+void SPI2_IRQHandler(void) {
+  int i = 0;
+  i++;
+}
+
+void DMA_Channel2_IRQHandler(void) {
+
+  if (DMA_GetIntStatus(DISPLAY_SPI_INT_TXC, DMA)) {
+
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+    vTaskNotifyGiveFromISR(DisplayTaskHandle, &xHigherPriorityTaskWoken);
+
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+  }
+  
+  DMA_ClrIntPendingBit(
+                       DISPLAY_SPI_INT_GLB
+                       |DISPLAY_SPI_INT_TXC
+                       |DISPLAY_SPI_INT_HTX
+                       |DISPLAY_SPI_INT_ERR,
+                       DMA);
+
 }
 
 void TIM1_UP_IRQHandler(void) {
@@ -142,5 +190,12 @@ static StackType_t uxIdleTaskStack[ configMINIMAL_STACK_SIZE ];
     Note that, as the array is necessarily of type StackType_t,
     configMINIMAL_STACK_SIZE is specified in words, not bytes. */
     *pulIdleTaskStackSize = configMINIMAL_STACK_SIZE;
+}
+#endif
+
+#ifdef USE_FULL_ASSERT
+void assert_failed(const uint8_t *expr, const uint8_t *file, uint32_t line) {
+  while (1)
+    ;
 }
 #endif
