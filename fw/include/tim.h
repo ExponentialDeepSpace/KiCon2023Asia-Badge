@@ -5,4 +5,4 @@
 
 void TIM_Config();
 
-#endif TIM_H
+#endif // TIM_H
