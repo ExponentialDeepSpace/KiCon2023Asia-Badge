@@ -53,10 +53,13 @@ DEFS += -DSYSCLK_FREQ=48000000 # for using USB
 
 # HSI
 DEFS += -DSYSCLK_SRC=$(SYSCLK_USE_HSI_PLL)
+DEFS += -DXTALLESS=1
+
 # HSE
 # DEFS += -DHSE_VALUE=8000000
 # DEFS += -DSYSCLK_SRC=SYSCLK_USE_HSE_PLL
 
+DEFS += -DPMA_ACCESS=1
 
 ifeq ($(DEBUG), 1)
 DEFS += -DUSE_FULL_ASSERT
@@ -75,13 +78,17 @@ CROSS_COMPILE = arm-none-eabi-
 ######################################
 # C sources
 ######################################
-C_DIRS += src src/setup
+C_DIRS += src src/setup src/usb
 C_DIRS += freertos
 C_DIRS += freertos/portable/GCC/ARM_CM4F
+C_DIRS += freertos/portable/MemMang
 # C_DIRS += freertos/portable/GCC/MemMang
+C_DIRS += CherryUSB/core
+C_DIRS += CherryUSB/class/cdc
+C_DIRS += CherryUSB/port/fsdev
 C_DIRS += bsp/firmware/CMSIS/device
 C_DIRS += bsp/firmware/$(TARGET_PLATFORM)_std_periph_driver/src
-#C_DIRS += ../../../../../../firmware/$(TARGET_PLATFORM)_usbfs_driver/src
+# C_DIRS += bsp/firmware/$(TARGET_PLATFORM)_usbfs_driver/src
 SRC_OBJS_DIRS += $(foreach DIR, $(C_DIRS), $(wildcard $(DIR)/*.c))
 C_SOURCES = $(SRC_OBJS_DIRS) 
 
@@ -96,10 +103,15 @@ ASM_SOURCES = bsp/firmware/CMSIS/device/startup/startup_$(TARGET_PLATFORM)_gcc.s
 C_INCS += include
 C_INCS += freertos/include
 C_INCS += freertos/portable/GCC/ARM_CM4F
+C_INCS += CherryUSB/common
+C_INCS += CherryUSB/core
+C_INCS += CherryUSB/class/cdc
+C_INCS += CherryUSB/port/fsdev
 C_INCS += bsp/firmware/CMSIS/core
 C_INCS += bsp/firmware/CMSIS/device
 C_INCS += bsp/firmware/$(TARGET_PLATFORM)_std_periph_driver/inc
-#C_INCS += ../../../../../../firmware/$(TARGET_PLATFORM)_usbfs_driver/inc
+# C_INCS += bsp/firmware/$(TARGET_PLATFORM)_usbfs_driver/inc
+
 INCS_OBJS_DIR = $(foreach DIR2, $(C_INCS), $(wildcard $(DIR2)/*.h))
 INCS_OBJS_PATH = $(sort $(dir $(INCS_OBJS_DIR)))
 C_INCLUDES = $(addprefix -I,$(INCS_OBJS_PATH))

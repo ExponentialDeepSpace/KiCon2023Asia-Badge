@@ -63,12 +63,17 @@ int main(void)
   Setup();
   
   DisplayBufferInit();
-  
+
+  cdc_acm_init();
+  // usb_dc_low_level_init();
+
   volatile unsigned long long i = 0;
 
   GPIO_ResetBits(GPIOB, GPIO_PIN_4);
   GPIO_ResetBits(GPIOB, GPIO_PIN_5);
 
+  while(1);
+  
   xTaskCreateStatic(prvTestTask,
                     "TestTask",
                     configMINIMAL_STACK_SIZE,

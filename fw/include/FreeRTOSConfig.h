@@ -53,10 +53,10 @@ extern uint32_t SystemCoreClock;
 
 /* Memory allocation related definitions. */
 #define configSUPPORT_STATIC_ALLOCATION             1
-#define configSUPPORT_DYNAMIC_ALLOCATION            0
+#define configSUPPORT_DYNAMIC_ALLOCATION            1
 #define configTOTAL_HEAP_SIZE                       10240
 #define configAPPLICATION_ALLOCATED_HEAP            1
-#define configSTACK_ALLOCATION_FROM_SEPARATE_HEAP   1
+#define configSTACK_ALLOCATION_FROM_SEPARATE_HEAP   0
 
 /* Hook function related definitions. */
 #define configUSE_IDLE_HOOK                     0

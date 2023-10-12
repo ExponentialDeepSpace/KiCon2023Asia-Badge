@@ -20,6 +20,7 @@
 #include "setup.h"
 #include "tim.h"
 #include "memory_in_pixel_display.h"
+#include "usb.h"
 
 // Default Clock (defined in system_n32l40x.c:SetSysClock())
 // SystemCoreclock = 48Mhz (for USB)
