@@ -84,7 +84,7 @@ static void Display_SPI_Config() {
 
   // PCLK1 is 12Mhz
   // Display has max 2Mhz frequency
-  // set PCLK1 / 8 = 15Mhz
+  // set PCLK1 / 8 = 1.5Mhz
   initSPI.SpiMode = SPI_MODE_MASTER;
   initSPI.DataDirection = SPI_DIR_SINGLELINE_TX;
   initSPI.BaudRatePres = SPI_BR_PRESCALER_8;
