@@ -173,12 +173,13 @@ static void NVIC_Config() {
 }
 
 void Setup() {
+  RCC_Config();
   NVIC_Config();
   
-  RCC_Config();
   GPIO_Config();
 
   TIM_Config();
 
   Display_Config();
+
 }
