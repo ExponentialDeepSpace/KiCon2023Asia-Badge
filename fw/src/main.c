@@ -46,7 +46,8 @@ static GPIO_HighSide_Def GPIOs_HighSide_Rows[12] = {
 static void prvTestTask( void *pvParameters );
 static void prvDisplayTask( void *pvParameters );
 
-#define STACK_SIZE 200
+#define STACK_SIZE 400
+#define DISPLAY_STACK_SIZE 400
 #define tskDisplay_PRIORITY 1
 
 StaticTask_t xTaskBuffer;
@@ -54,7 +55,7 @@ StackType_t xStack[ STACK_SIZE ];
 
 static volatile TaskHandle_t DisplayTaskHandle = NULL;
 StaticTask_t xDisplayTaskBuffer;
-StackType_t xDisplayStack[ STACK_SIZE ];
+StackType_t xDisplayStack[ DISPLAY_STACK_SIZE ];
 
 
 int main(void)
@@ -89,8 +90,9 @@ int main(void)
 }
 
 static void prvTestTask(void *pvParameters) {
-
-  while(1);
+  while (1) {
+    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+  }
 }
 
 static void prvDisplayTask(void *pvParameters) {
