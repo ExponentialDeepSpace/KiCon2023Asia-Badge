@@ -25,7 +25,7 @@
 #define DISP_HEIGHT (144)
 #define DISP_FIRST_LINE (1)
 
-void DisplayBuferInit();
+void DisplayBufferInit();
 void DisplayTransferLines(uint8_t start, uint8_t end);
 
 void Display_Config();

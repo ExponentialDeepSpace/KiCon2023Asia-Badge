@@ -61,7 +61,7 @@ int main(void)
 {
   Setup();
   
-  DisplayBuferInit();
+  DisplayBufferInit();
   
   volatile unsigned long long i = 0;
 
