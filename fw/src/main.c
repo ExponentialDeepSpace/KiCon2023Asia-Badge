@@ -98,8 +98,9 @@ static void prvTestTask(void *pvParameters) {
 static void prvDisplayTask(void *pvParameters) {
   DisplayTransferLines(DISP_FIRST_LINE, DISP_HEIGHT);
   while (1) {
+    TickType_t last = xTaskGetTickCount();
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    vTaskDelayUntil(&last, 1000 / portTICK_PERIOD_MS);
     DisplayTransferLines(DISP_FIRST_LINE, DISP_HEIGHT);
   }
 }
