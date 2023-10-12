@@ -45,7 +45,7 @@ void DisplayTransferLines(uint8_t first_line, uint8_t lines) {
                        |DISPLAY_DMA_INT_HTX
                        |DISPLAY_DMA_INT_ERR,
                        DMA);
-  uint16_t *buf = DisplayBuffer + (first_line - 1) * LINE_WIDTH_BYTES;
+  uint16_t *buf = DisplayBuffer + (first_line - 1) * LINE_WIDTH_HALFWORDS;
   DISPLAY_SPI_DMA_CHANNEL->MADDR = (uint32_t)buf;
   // need to initiate SPI transfer first
   DISPLAY_SPI_DMA_CHANNEL->TXNUM = lines * LINE_WIDTH_HALFWORDS - 1;
