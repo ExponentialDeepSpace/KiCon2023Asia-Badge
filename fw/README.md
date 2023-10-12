@@ -18,6 +18,8 @@ git clone --recursive git@github.com:ExponentialDeepSpace/KiCon2023Asia-Badge.gi
 ### Comments
 I cannot get gdb from ARM GNU Toolchain arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi works with PyCortexMDebug (failed to load math extension from custom built Python3.8.11, like [this issue](https://github.com/clearlinux/distribution/issues/2234)). I installed gdb-multiarch shipped with Debian 11.
 
+N32L406_with_core.svd is combined with N32L406.svd with materials supplied in this [issue](https://github.com/ARM-software/CMSIS_5/issues/844)
+
 ## License
 KiCon 2023 Asia Badge Firmware is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
