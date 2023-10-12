@@ -62,7 +62,7 @@ static void Display_GPIO_Config() {
   GPIO_InitType initValue;
   GPIO_InitStruct(&initValue);
   initValue.GPIO_Current = GPIO_DC_8mA;
-  initValue.GPIO_Mode = GPIO_Mode_AF_OD;
+  initValue.GPIO_Mode = GPIO_Mode_AF_PP;
   initValue.GPIO_Pull = GPIO_Pull_Up;
 
   // Setup PC7/9 for SPI2_SCK/MOSI
