@@ -111,12 +111,20 @@ void DMA_Channel1_IRQHandler(void) {
 
   DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
 }
-
+/*
 void SPI2_IRQHandler(void) {
-  int i = 0;
-  i++;
-}
+  if (SPI_I2S_GetStatus(SPI2, SPI_I2S_TE_FLAG) != 0) {
+    // SPI TE flag is set by default
+    SPI_Enable(DISPLAY_SPI, DISABLE);
 
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+    vTaskNotifyGiveFromISR(DisplayTaskHandle, &xHigherPriorityTaskWoken);
+
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+  }
+}
+*/
 void DMA_Channel2_IRQHandler(void) {
 
   if (DMA_GetIntStatus(DISPLAY_DMA_INT_TXC, DMA)) {

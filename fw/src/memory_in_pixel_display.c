@@ -53,8 +53,10 @@ void DisplayTransferLines(uint8_t first_line, uint8_t lines) {
   DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, ENABLE);
 
   // SPI TE flag is set by default
-  SPI_Enable(DISPLAY_SPI, ENABLE);
   SPI_I2S_TransmitData(DISPLAY_SPI, DisplayBuffer[0 + first_line * LINE_WIDTH_HALFWORDS]);
+  SPI_Enable(DISPLAY_SPI, ENABLE);
+
+  // while(SPI_I2S_GetStatus(DISPLAY_SPI, SPI_I2S_TE_FLAG) == 0);
 }
 
 static void Display_GPIO_Config() {
@@ -96,10 +98,14 @@ static void Display_SPI_Config() {
 
   SPI_Init(DISPLAY_SPI, &initSPI);
 
+  /* SPI_I2S_EnableInt(DISPLAY_SPI, */
+  /*                  SPI_I2S_INT_TE, */
+  /*                  ENABLE); */
   SPI_I2S_EnableInt(DISPLAY_SPI,
-                    SPI_I2S_INT_TE
-                    |SPI_I2S_INT_RNE
-                    |SPI_I2S_INT_ERR,
+                    SPI_I2S_INT_RNE,
+                    ENABLE);
+  SPI_I2S_EnableInt(DISPLAY_SPI,
+                    SPI_I2S_INT_ERR,
                     ENABLE);
 }
 
@@ -153,6 +159,6 @@ void Display_Config() {
   Display_DMA_Config();
   Display_NVIC_Config();
 
-  // DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, ENABLE);
+  DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, ENABLE);
   SPI_I2S_EnableDma(DISPLAY_SPI, SPI_I2S_DMA_TX, ENABLE);
 }
