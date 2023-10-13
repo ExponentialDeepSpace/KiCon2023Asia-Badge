@@ -334,6 +334,8 @@
     (uuid 08bb11eb-82df-4eaa-b1d5-e1f9eac9510b)
   )
 
+  (no_connect (at 162.56 38.1) (uuid b90d7838-9427-4d83-9e4f-3e67291a3d0d))
+
   (wire (pts (xy 158.75 38.1) (xy 162.56 38.1))
     (stroke (width 0) (type default))
     (uuid 049abafc-43ed-45a5-9679-16c89ff80141)
@@ -564,31 +566,6 @@
         )
         (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
           (reference "Q17") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:GND") (at 162.56 38.1 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid b4df4565-9f52-479c-90be-51f53a9a8d01)
-    (property "Reference" "#PWR09" (at 162.56 44.45 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "GND" (at 162.56 43.18 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 162.56 38.1 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 162.56 38.1 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid f6e47d0d-64b6-4b8a-9e66-e9eb9ed04c04))
-    (instances
-      (project "KiConSZ2023"
-        (path "/8659c260-f029-4e72-8b9a-85fff45eea40/f453823a-a381-482a-9343-94fafcdcaf18"
-          (reference "#PWR09") (unit 1)
         )
       )
     )
