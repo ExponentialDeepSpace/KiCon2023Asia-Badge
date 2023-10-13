@@ -3471,6 +3471,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 4339b224-aed7-4e1a-94fb-cb1ebee86bb8)
   )
+  (text "MCU USB DFU requires an HSE" (at 116.84 30.48 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid dd03c9e1-8cac-45f6-94f6-ad059e825e6a)
+  )
 
   (label "HighSide_Row_1" (at 53.34 30.48 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
