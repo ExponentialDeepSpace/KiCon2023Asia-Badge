@@ -521,7 +521,7 @@ void LED_TIM_UP_IRQHandler(void) {
   if (i >= MAX_ROWS) {
     i = 0;
     speed ++;
-    if(speed > 5) {
+    if(speed > LED_SPEED) {
       speed = 0;
       cycles ++;
       if (cycles >= MAX_ROWS + trail) {

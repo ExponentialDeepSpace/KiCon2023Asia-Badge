@@ -21,7 +21,7 @@
 
 #include <FreeRTOS.h>
 
-#define LED_PWM_CLOCK 200 // 20Khz
+#define LED_PWM_CLOCK 2000 // Hz
 #define TIM_ADVANCED_PRESCALER (1)
 #define TIM_GENERIC_PRESCALER (0)
 
