@@ -6,9 +6,11 @@
 
   (title_block
     (title "KiCad 2023 Asia Badge")
-    (date "2023-10-07")
-    (rev "2")
+    (date "2023-10-15")
+    (rev "2.1")
     (company "Beijing Exponential Deep Space")
+    (comment 1 "Licensed under CC By 4.0 http://creativecommons.org/licenses/by/4.0/")
+    (comment 2 "Designed by Yang Hongbo")
   )
 
   (lib_symbols
