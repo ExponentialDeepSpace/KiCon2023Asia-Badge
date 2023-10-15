@@ -1,34 +1,66 @@
 #include <n32l40x.h>
 
 #include "setup.h"
-#include "tim.h"
+#include "led.h"
 
 #define TIM_SELECTED_SLAVE_MODE TIM_SLAVE_MODE_GATED
 
-static uint16_t periods[] = {2400, 1800, 1200, 600, 0, 600, 1200, 1800};
+typedef struct GPIO_HighSide_Def {
+  GPIO_Module *gpio;
+  uint16_t pin;
+}GPIO_HighSide_Def;
 
-static void TIM_DMA_Config() {
-  DMA_InitType dmaInit;
-  DMA_StructInit(&dmaInit);
+static const GPIO_HighSide_Def GPIOs_HighSide_Rows[12] = {
+  {GPIOB, GPIO_PIN_15}, // Row 1
+  {GPIOC, GPIO_PIN_10}, // Row 2
+  {GPIOA, GPIO_PIN_3},  // Row 3
+  {GPIOA, GPIO_PIN_2},  // Row 4
+  {GPIOB, GPIO_PIN_14}, // Row 5
+  {GPIOA, GPIO_PIN_1},  // Row 6
+  {GPIOB, GPIO_PIN_12}, // Row 7
+  {GPIOB, GPIO_PIN_13}, // Row 8
+  {GPIOA, GPIO_PIN_0},  // Row 9
+  {GPIOB, GPIO_PIN_11}, // Row 10
+  {GPIOB, GPIO_PIN_10}, // Row 11
+  {GPIOB, GPIO_PIN_1},  // Row 12
+};
 
-  DMA_DeInit(DMA_CH1);
-  dmaInit.PeriphAddr = (uint32_t)&TIM1->DADDR;
-  dmaInit.PeriphInc = DMA_PERIPH_INC_DISABLE;
-  dmaInit.PeriphDataSize = DMA_PERIPH_DATA_SIZE_HALFWORD;
-  dmaInit.Direction = DMA_DIR_PERIPH_DST;
-  dmaInit.MemAddr = (uint32_t)&periods;
-  dmaInit.Mem2Mem = DMA_M2M_DISABLE;
-  dmaInit.BufSize = sizeof(periods) / sizeof(periods[0]);
-  dmaInit.MemDataSize = DMA_MemoryDataSize_HalfWord;
-  dmaInit.DMA_MemoryInc = DMA_MEM_INC_ENABLE;
-  dmaInit.CircularMode = DMA_MODE_CIRCULAR;
-  dmaInit.Priority = DMA_PRIORITY_HIGH;
+#define MAX_ROWS (sizeof(GPIOs_HighSide_Rows) / sizeof(GPIOs_HighSide_Rows[0]))
 
-  DMA_Init(DMA_CH1, &dmaInit);
-  DMA_ConfigInt(DMA_CH1, DMA_INT_HTX1|DMA_INT_TXC1|DMA_INT_ERR1, ENABLE);
-  DMA_RequestRemap(DMA_REMAP_TIM1_UP, DMA, DMA_CH1, ENABLE);
+typedef enum RGB {
+  B = 0,
+  R = 1,
+  G = 2,
+} RGB;
+
+uint16_t periods[MAX_ROWS][3] = {0};
+
+static void LED_NVIC_Config() {
+  NVIC_InitType nvicInit = {0};
+  nvicInit.NVIC_IRQChannel = DMA_Channel1_IRQn;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_DMA_INTERRUPT_PRIORITY_LEVEL;
+  nvicInit.NVIC_IRQChannelCmd = ENABLE;
+
+  NVIC_Init(&nvicInit);
+
+  nvicInit.NVIC_IRQChannel = TIM1_UP_IRQn;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_INTERRUPT_PRIORITY_LEVEL;
+  nvicInit.NVIC_IRQChannelCmd = ENABLE;
+
+  NVIC_Init(&nvicInit);
+
+  nvicInit.NVIC_IRQChannel = TIM1_CC_IRQn;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_INTERRUPT_PRIORITY_LEVEL;
+  nvicInit.NVIC_IRQChannelCmd = ENABLE;
+
+  NVIC_Init(&nvicInit);
+
+  nvicInit.NVIC_IRQChannel = TIM3_IRQn;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_INTERRUPT_PRIORITY_LEVEL;
+  nvicInit.NVIC_IRQChannelCmd = ENABLE;
+
+  NVIC_Init(&nvicInit);
 }
-
 /*
  * LowSide_B_Col_1 -> TIM3_CH1(PA6)                         -------     -------     -------
  * LowSide_R_Col_1 -> TIM3_CH2(PA7)                         |     |    /     /      | D10 |
@@ -65,7 +97,7 @@ typedef enum TIM_OCChannels {
   CH4 = 0x08,
 } TIM_OCChannels;
 
-static uint32_t TIM_Clk(TIM_Module *TIMx, const uint16_t prescaler) {
+static uint32_t TIM_Clk(TIM_Module *TIMx) {
 
   uint32_t TIMClk = 0;
 
@@ -75,6 +107,7 @@ static uint32_t TIM_Clk(TIM_Module *TIMx, const uint16_t prescaler) {
     // TIM1, TIM8 clk from APB2 (
     if (0 == (APB2Cfg & RCC_CFG_APB2PRES_2)) {
       APB2Clk = SystemCoreClock;
+      TIMClk = APB2Clk;
     } else {
       switch (APB2Cfg) {
       case RCC_CFG_APB2PRES_DIV2:
@@ -90,20 +123,15 @@ static uint32_t TIM_Clk(TIM_Module *TIMx, const uint16_t prescaler) {
         APB2Clk = SystemCoreClock / 16;
         break;
       }
+      TIMClk = APB2Clk * 2;
     }
-
-    if (0 == prescaler) {
-      TIMClk = APB2Clk;
-    } else {
-      TIMClk = APB2Clk * 2 / (prescaler + 1);
-    }
-
   } else if (IsTimList3Module(TIMx) && !IsTimList1Module(TIMx)) {
     // TIM 2, 3, 4, 5, 9 clk from APB1
     uint32_t APB1Clk = 0;
     uint32_t APB1Cfg = RCC->CFG & RCC_CFG_APB1PRES;
     if (0 == (APB1Cfg & RCC_CFG_APB1PRES_2)) {
       APB1Clk = SystemCoreClock;
+      TIMClk = APB1Clk;
     } else {
       switch (APB1Cfg) {
       case RCC_CFG_APB1PRES_DIV2:
@@ -119,16 +147,19 @@ static uint32_t TIM_Clk(TIM_Module *TIMx, const uint16_t prescaler) {
         APB1Clk = SystemCoreClock / 16;
         break;
       }
-    }
-    if (0 == prescaler) {
-      TIMClk = APB1Clk;
-    } else {
-      TIMClk = APB1Clk * 2 / (prescaler + 1);
+      TIMClk = APB1Clk * 2;
     }
   }
 
   return TIMClk;
 }
+
+// in default configuration (system_n32l40x)
+// HCLK = SYSCLK = 48Mhz (for USB)
+// PCLK2 = HCLK / 2 = 24Mhz
+// PCLK1 = HCLK / 4 = 12Mhz
+// TIM1,8 CLK = PCLK2 * 2 = 48Mhz
+// TIM2,3,4,5,6,7,9 CLK = PCLK1 * 2 = 24Mhz
 
 static void TIMx_PWM_Config(TIM_Module *TIMx, uint8_t channels) {
   TIM_TimeBaseInitType timInit;
@@ -136,13 +167,13 @@ static void TIMx_PWM_Config(TIM_Module *TIMx, uint8_t channels) {
 
   TIM_InitTimBaseStruct(&timInit);
   TIM_InitOcStruct(&ocInit);
+  uint32_t TIMClk = TIM_Clk(TIMx);
 
+  // set prescaler for both TIM1 and TIM3 to be same TIMClk (24Mhz)
   uint16_t prescaler = IsTimList1Module(TIMx) ?
     TIM_ADVANCED_PRESCALER : TIM_GENERIC_PRESCALER;
 
-  uint32_t TIMClk = TIM_Clk(TIMx, prescaler);
-
-  uint16_t period = TIMClk / LED_PWM_CLOCK - 1;
+  uint16_t period = TIMClk / (prescaler + 1) / LED_PWM_CLOCK - 1;
   timInit.Period = period;
   timInit.Prescaler = prescaler;
   timInit.CntMode = TIM_CNT_MODE_UP;
@@ -150,7 +181,7 @@ static void TIMx_PWM_Config(TIM_Module *TIMx, uint8_t channels) {
 
   ocInit.OcMode = TIM_OCMODE_PWM1;
   ocInit.OutputState = TIM_OUTPUT_STATE_ENABLE;
-  ocInit.Pulse = period / 2;
+  ocInit.Pulse = 0;
 
   if (channels & CH1) {
     TIM_InitOc1(TIMx, &ocInit);
@@ -173,10 +204,8 @@ static void TIMx_PWM_Config(TIM_Module *TIMx, uint8_t channels) {
   // TIM_ConfigDma(TIMx, TIM_DMABASE_CAPCMPDAT1, TIM_DMABURST_LENGTH_4TRANSFERS);
   // TIM_EnableDma(TIMx, TIM_DMA_UPDATE, ENABLE);
 
-  TIM_ConfigInt(TIMx, TIM_INT_UPDATE|TIM_INT_CC1, ENABLE);
   // TIM_EnableUpdateEvt_r(TIM1, ENABLE);
 }
-
 
 static void TIMx_GPIO_InitConfig(GPIO_InitType *initGPIO) {
   GPIO_InitStruct(initGPIO);
@@ -198,12 +227,13 @@ static void TIM1_Config() {
   GPIO_InitPeripheral(GPIOA, &initGPIO);
 
   TIMx_PWM_Config(TIM1, (uint8_t)(CH1|CH2|CH3));
+  TIM_ConfigInt(TIM1, TIM_INT_UPDATE|TIM_INT_CC1, ENABLE);
 
   // Master Trigger
   TIM_SelectOutputTrig(TIM1, TIM_TRGO_SRC_ENABLE);
   TIM_SelectMasterSlaveMode(TIM1, TIM_MASTER_SLAVE_MODE_ENABLE);
 
-  TIM1->REPCNT = 55;
+  TIM1->REPCNT = 0;
 }
 
 static void TIM8_Config() {
@@ -270,6 +300,7 @@ static void TIM3_Config() {
   GPIO_InitPeripheral(GPIOB, &initGPIO);
 
   TIMx_PWM_Config(TIM3, (uint8_t)(CH1|CH2|CH3));
+  TIM_ConfigInt(TIM1, TIM_INT_UPDATE|TIM_INT_CC1, ENABLE);
 
   TIM_SelectSlaveMode(TIM3, TIM_SELECTED_SLAVE_MODE);
   TIM_SelectInputTrig(TIM3, TIM_TRIG_SEL_IN_TR0); // triggered from TIM1
@@ -319,7 +350,44 @@ static void TIM9_Config() {
   TIM_SelectInputTrig(TIM9, TIM_TRIG_SEL_IN_TR0); // triggered from TIM1
 }
 
+// Cannot reload TIM3 from DMA by TIM1 triggering
+// for 2.0 revision, just load TIM3 by CPU
+#if 0
+static void
+TIM_DMA_Config() {
+  DMA_InitType dmaInit;
+  DMA_StructInit(&dmaInit);
+
+  DMA_DeInit(DMA_CH1);
+  dmaInit.PeriphAddr = (uint32_t)&TIM3->DADDR;
+  dmaInit.PeriphInc = DMA_PERIPH_INC_DISABLE;
+  dmaInit.PeriphDataSize = DMA_PERIPH_DATA_SIZE_HALFWORD;
+  dmaInit.Direction = DMA_DIR_PERIPH_DST;
+  dmaInit.MemAddr = (uint32_t)&periods;
+  dmaInit.Mem2Mem = DMA_M2M_DISABLE;
+  dmaInit.BufSize = sizeof(periods) / sizeof(periods[0][0]);
+  dmaInit.MemDataSize = DMA_MemoryDataSize_HalfWord;
+  dmaInit.DMA_MemoryInc = DMA_MEM_INC_ENABLE;
+  dmaInit.CircularMode = DMA_MODE_CIRCULAR;
+  dmaInit.Priority = DMA_PRIORITY_HIGH;
+
+  DMA_Init(DMA_CH1, &dmaInit);
+
+  DMA_ConfigInt(DMA_CH1, DMA_INT_HTX1|DMA_INT_TXC1|DMA_INT_ERR1, ENABLE);
+  DMA_RequestRemap(DMA_REMAP_TIM1_UP, DMA, DMA_CH1, ENABLE);
+  TIM_ConfigDma(TIM3, TIM_DMABASE_CAPCMPDAT1, TIM_DMABURST_LENGTH_3TRANSFERS);
+  DMA_EnableChannel(DMA_CH1, ENABLE);
+  TIM_EnableDma(TIM1, TIM_DMA_UPDATE, ENABLE);
+}
+#endif
+
 void TIM_Config() {
+  for (int i = 0;
+       i < sizeof(GPIOs_HighSide_Rows) / sizeof(GPIOs_HighSide_Rows[0]);
+       i++) {
+    GPIO_ResetBits(GPIOs_HighSide_Rows[i].gpio, GPIOs_HighSide_Rows[i].pin);
+  }
+
   TIM1_Config();
   // TIM2_Config();
   TIM3_Config();
@@ -327,13 +395,10 @@ void TIM_Config() {
   TIM8_Config();
   // TIM9_Config();
 
-  TIM_DMA_Config();
+  // TIM_DMA_Config();
+  LED_NVIC_Config();
   
-  TIM_SetCnt(TIM1, periods[0] + 1);
-  TIM_GenerateEvent(TIM1, TIM_EVTGEN_UDGN);
-
-  DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
-  // DMA_EnableChannel(DMA_CH1, ENABLE);
+  // DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
 
   TIM_ClrIntPendingBit(TIM1,
                        TIM_INT_UPDATE
@@ -374,21 +439,23 @@ void TIM_Config() {
   TIM_EnableCtrlPwmOutputs(TIM1, ENABLE);
   TIM_EnableCtrlPwmOutputs(TIM8, ENABLE);
 
-  {
-    const uint32_t TIMClk = TIM_Clk(TIM1, TIM_ADVANCED_PRESCALER);
-    const uint16_t period = TIMClk / LED_PWM_CLOCK - 1;
-    TIM_SetCmp1(TIM1, period / 4);
-    TIM_SetCmp1(TIM8, period / 4);
-  }
-  {
-    const uint32_t TIMClk = TIM_Clk(TIM2, TIM_GENERIC_PRESCALER);
-    const uint16_t period = TIMClk / LED_PWM_CLOCK - 1;
-    TIM_SetCmp1(TIM2, period / 4);
-    TIM_SetCmp1(TIM3, period / 4);
-    TIM_SetCmp3(TIM5, period / 4);
-    TIM_SetCmp1(TIM9, period / 4);
+  const uint16_t period = TIM_GetAutoReload(TIM1);
+
+  /*
+  for (int i = 0; i < sizeof(periods) / sizeof(periods[0]); i++) {
+    periods[i][B] = period / ((i % 2) ? (1) : (8));
+    periods[i][R] = period / ((i % 2) ? (8) : (1));
+    periods[i][G] = 0;
   }
 
+  TIM_SetCmp1(TIM3, periods[0][B]); // B
+  TIM_SetCmp2(TIM3, periods[0][R]); // R
+  TIM_SetCmp3(TIM3, periods[0][G]); // G
+  */
+
+  TIM_SetCmp1(TIM3, 0); // B
+  TIM_SetCmp2(TIM3, 0); // R
+  TIM_SetCmp3(TIM3, 0); // G
   
   // TIM_Enable(TIM2, ENABLE);
   TIM_Enable(TIM3, ENABLE);
@@ -396,7 +463,81 @@ void TIM_Config() {
   TIM_Enable(TIM8, ENABLE);
   // TIM_Enable(TIM9, ENABLE);
 
+  TIM_SetCnt(TIM1, period + 1);
+  TIM_GenerateEvent(TIM1, TIM_EVTGEN_UDGN);
   // Use TIM1 as Master TIM, so it is enabled last
   TIM_Enable(TIM1, ENABLE);
-
 }
+
+#if 0
+void DMA_Channel1_IRQHandler(void) {
+  int i = 0;
+  i++;
+
+  DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
+}
+#endif
+
+void TIM1_UP_IRQHandler(void) {
+  TIM_ClrIntPendingBit(TIM1, TIM_INT_UPDATE);
+
+  static uint32_t speed = 0;
+  // counting for cycles, MAX_ROWS per cycle
+  static int cycles = 0;
+  
+  static int i = 0; // current
+  static int j = MAX_ROWS-1; // prev
+  GPIO_ResetBits(GPIOs_HighSide_Rows[j].gpio, GPIOs_HighSide_Rows[j].pin);
+  GPIO_SetBits(GPIOs_HighSide_Rows[i].gpio, GPIOs_HighSide_Rows[i].pin);
+
+  const uint16_t period = TIM_GetAutoReload(TIM1);
+
+  const uint16_t trail = 5;
+    
+  if ( 7 - 1 == i ) {
+
+    TIM_SetCmp1(TIM3, 0); // B
+    TIM_SetCmp2(TIM3, period); // R
+    TIM_SetCmp3(TIM3, period); // G
+  }
+  else {
+    uint16_t r = 0, g = 0, b = 0;
+    uint16_t m = cycles - i;
+    if (m > trail && cycles > MAX_ROWS) {
+      m = cycles - MAX_ROWS - i;
+    }
+    if (m < trail) {
+      r = period / (1 << m);
+    }
+
+    TIM_SetCmp1(TIM3, r); // B
+    TIM_SetCmp2(TIM3, r); // R
+    TIM_SetCmp3(TIM3, r); // G
+  }
+  
+  i++; j++;
+
+  if (i >= MAX_ROWS) {
+    i = 0;
+    speed ++;
+    if(speed > 5) {
+      speed = 0;
+      cycles ++;
+      if (cycles >= MAX_ROWS + trail) {
+        cycles = trail;
+      }
+    }
+  }
+
+  if (j > MAX_ROWS - 1) {
+    j = 0;
+  }
+}
+
+void TIM1_CC_IRQHandler(void) {
+  int i = 0;
+  i++;
+  TIM_ClrIntPendingBit(TIM1, TIM_INT_CC1);
+}
+
+void TIM3_CC_IRQHandler(void) {}
