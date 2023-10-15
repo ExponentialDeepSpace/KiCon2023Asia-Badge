@@ -37,14 +37,14 @@ uint16_t periods[MAX_ROWS][3] = {0};
 
 static void LED_NVIC_Config() {
   NVIC_InitType nvicInit = {0};
-  nvicInit.NVIC_IRQChannel = DMA_Channel1_IRQn;
-  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_DMA_INTERRUPT_PRIORITY_LEVEL;
-  nvicInit.NVIC_IRQChannelCmd = ENABLE;
-
-  NVIC_Init(&nvicInit);
-
   nvicInit.NVIC_IRQChannel = TIM1_UP_IRQn;
   nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_INTERRUPT_PRIORITY_LEVEL;
+  nvicInit.NVIC_IRQChannelCmd = ENABLE;
+  NVIC_Init(&nvicInit);
+
+#if 0
+  nvicInit.NVIC_IRQChannel = DMA_Channel1_IRQn;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = TIM_DMA_INTERRUPT_PRIORITY_LEVEL;
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
 
   NVIC_Init(&nvicInit);
@@ -60,6 +60,7 @@ static void LED_NVIC_Config() {
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
 
   NVIC_Init(&nvicInit);
+#endif
 }
 /*
  * LowSide_B_Col_1 -> TIM3_CH1(PA6)                         -------     -------     -------
@@ -439,7 +440,7 @@ void TIM_Config() {
   TIM_EnableCtrlPwmOutputs(TIM1, ENABLE);
   TIM_EnableCtrlPwmOutputs(TIM8, ENABLE);
 
-  const uint16_t period = TIM_GetAutoReload(TIM1);
+  const uint16_t period = TIM_GetAutoReload(LED_Main_TIM);
 
   /*
   for (int i = 0; i < sizeof(periods) / sizeof(periods[0]); i++) {
@@ -453,20 +454,20 @@ void TIM_Config() {
   TIM_SetCmp3(TIM3, periods[0][G]); // G
   */
 
-  TIM_SetCmp1(TIM3, 0); // B
-  TIM_SetCmp2(TIM3, 0); // R
-  TIM_SetCmp3(TIM3, 0); // G
+  TIM_SetCmp1(LED_LowSide_TIM, 0); // B
+  TIM_SetCmp2(LED_LowSide_TIM, 0); // R
+  TIM_SetCmp3(LED_LowSide_TIM, 0); // G
   
   // TIM_Enable(TIM2, ENABLE);
-  TIM_Enable(TIM3, ENABLE);
+  TIM_Enable(LED_LowSide_TIM, ENABLE);
   // TIM_Enable(TIM5, ENABLE);
   TIM_Enable(TIM8, ENABLE);
   // TIM_Enable(TIM9, ENABLE);
 
-  TIM_SetCnt(TIM1, period + 1);
-  TIM_GenerateEvent(TIM1, TIM_EVTGEN_UDGN);
+  TIM_SetCnt(LED_Main_TIM, period + 1);
+  TIM_GenerateEvent(LED_Main_TIM, TIM_EVTGEN_UDGN);
   // Use TIM1 as Master TIM, so it is enabled last
-  TIM_Enable(TIM1, ENABLE);
+  TIM_Enable(LED_Main_TIM, ENABLE);
 }
 
 #if 0
@@ -478,8 +479,8 @@ void DMA_Channel1_IRQHandler(void) {
 }
 #endif
 
-void TIM1_UP_IRQHandler(void) {
-  TIM_ClrIntPendingBit(TIM1, TIM_INT_UPDATE);
+void LED_TIM_UP_IRQHandler(void) {
+  TIM_ClrIntPendingBit(LED_Main_TIM, TIM_INT_UPDATE);
 
   static uint32_t speed = 0;
   // counting for cycles, MAX_ROWS per cycle
@@ -490,15 +491,15 @@ void TIM1_UP_IRQHandler(void) {
   GPIO_ResetBits(GPIOs_HighSide_Rows[j].gpio, GPIOs_HighSide_Rows[j].pin);
   GPIO_SetBits(GPIOs_HighSide_Rows[i].gpio, GPIOs_HighSide_Rows[i].pin);
 
-  const uint16_t period = TIM_GetAutoReload(TIM1);
+  const uint16_t period = TIM_GetAutoReload(LED_Main_TIM);
 
   const uint16_t trail = 5;
     
   if ( 7 - 1 == i ) {
 
-    TIM_SetCmp1(TIM3, 0); // B
-    TIM_SetCmp2(TIM3, period); // R
-    TIM_SetCmp3(TIM3, period); // G
+    TIM_SetCmp1(LED_LowSide_TIM, 0); // B
+    TIM_SetCmp2(LED_LowSide_TIM, period); // R
+    TIM_SetCmp3(LED_LowSide_TIM, period); // G
   }
   else {
     uint16_t r = 0, g = 0, b = 0;
@@ -510,9 +511,9 @@ void TIM1_UP_IRQHandler(void) {
       r = period / (1 << m);
     }
 
-    TIM_SetCmp1(TIM3, r); // B
-    TIM_SetCmp2(TIM3, r); // R
-    TIM_SetCmp3(TIM3, r); // G
+    TIM_SetCmp1(LED_LowSide_TIM, r); // B
+    TIM_SetCmp2(LED_LowSide_TIM, r); // R
+    TIM_SetCmp3(LED_LowSide_TIM, r); // G
   }
   
   i++; j++;
@@ -534,10 +535,3 @@ void TIM1_UP_IRQHandler(void) {
   }
 }
 
-void TIM1_CC_IRQHandler(void) {
-  int i = 0;
-  i++;
-  TIM_ClrIntPendingBit(TIM1, TIM_INT_CC1);
-}
-
-void TIM3_CC_IRQHandler(void) {}
