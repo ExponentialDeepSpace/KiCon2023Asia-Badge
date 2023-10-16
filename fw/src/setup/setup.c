@@ -97,54 +97,12 @@ static void GPIO_IO_Config() {
   GPIO_InitPeripheral(GPIOB, &initGPIO);
 }
 
-static void GPIO_HighSide_Config() {
-  GPIO_InitType initGPIO;
-  GPIO_InitStruct(&initGPIO);
-  initGPIO.GPIO_Mode = GPIO_Mode_Out_PP;
-  initGPIO.GPIO_Current = GPIO_DC_8mA;
-
-  // (PA0)  -> HighRow_Row_9
-  // (PA1)  -> HighRow_Row_6
-  initGPIO.Pin = GPIO_PIN_0 | GPIO_PIN_1;
-  GPIO_InitPeripheral(GPIOA, &initGPIO);
-
-  // (PB10) -> HighRow_Row_11
-  // (PB11) -> HighRow_Row_10
-  initGPIO.Pin = GPIO_PIN_10 | GPIO_PIN_11;
-  GPIO_InitPeripheral(GPIOB, &initGPIO);
-
-  // (PB1) -> HighSide_Row_12
-  initGPIO.Pin = GPIO_PIN_1;
-  GPIO_InitPeripheral(GPIOB, &initGPIO);
-
-  // (PA2) -> HighRow_Row_4
-  initGPIO.Pin = GPIO_PIN_2;
-  GPIO_InitPeripheral(GPIOA, &initGPIO);
-  // (PA3) -> HighRow_Row_3
-  initGPIO.Pin =  GPIO_PIN_3;
-  GPIO_InitPeripheral(GPIOA, &initGPIO);
-
-  // (PB12) -> HighRow_Row_7
-  // (PB13) -> HighRow_Row_8
-  // (PB14) -> HighRow_Row_5
-  // (PB15) -> HighRow_Row_1
-
-  initGPIO.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-  GPIO_InitPeripheral(GPIOB, &initGPIO);
-
-  // (PC10) -> HighRow_Row_2
-  initGPIO.Pin =  GPIO_PIN_10;
-  GPIO_InitPeripheral(GPIOC, &initGPIO);
-
-}
-
 static void GPIO_Config() {
 
   GPIO_SPI_Config();
   GPIO_I2C_Config();
 
   GPIO_IO_Config();
-  GPIO_HighSide_Config();
 }
 
 

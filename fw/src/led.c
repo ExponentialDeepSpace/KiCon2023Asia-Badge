@@ -6,23 +6,23 @@
 #define TIM_SELECTED_SLAVE_MODE TIM_SLAVE_MODE_GATED
 
 typedef struct GPIO_HighSide_Def {
-  GPIO_Module *gpio;
+  GPIO_Module *port;
   uint16_t pin;
 }GPIO_HighSide_Def;
 
 static const GPIO_HighSide_Def GPIOs_HighSide_Rows[12] = {
-  {GPIOB, GPIO_PIN_15}, // Row 1
-  {GPIOC, GPIO_PIN_10}, // Row 2
-  {GPIOA, GPIO_PIN_3},  // Row 3
-  {GPIOA, GPIO_PIN_2},  // Row 4
-  {GPIOB, GPIO_PIN_14}, // Row 5
-  {GPIOA, GPIO_PIN_1},  // Row 6
-  {GPIOB, GPIO_PIN_12}, // Row 7
-  {GPIOB, GPIO_PIN_13}, // Row 8
-  {GPIOA, GPIO_PIN_0},  // Row 9
-  {GPIOB, GPIO_PIN_11}, // Row 10
-  {GPIOB, GPIO_PIN_10}, // Row 11
-  {GPIOB, GPIO_PIN_1},  // Row 12
+  {LED_ROW_1_PORT, LED_ROW_1_PIN}, // Row 1
+  {LED_ROW_2_PORT, LED_ROW_2_PIN}, // Row 2
+  {LED_ROW_3_PORT, LED_ROW_3_PIN}, // Row 3
+  {LED_ROW_4_PORT, LED_ROW_4_PIN}, // Row 4
+  {LED_ROW_5_PORT, LED_ROW_5_PIN}, // Row 5
+  {LED_ROW_6_PORT, LED_ROW_6_PIN}, // Row 6
+  {LED_ROW_7_PORT, LED_ROW_7_PIN}, // Row 7
+  {LED_ROW_8_PORT, LED_ROW_8_PIN}, // Row 8
+  {LED_ROW_9_PORT, LED_ROW_9_PIN}, // Row 9
+  {LED_ROW_10_PORT, LED_ROW_10_PIN}, // Row 10
+  {LED_ROW_11_PORT, LED_ROW_11_PIN}, // Row 11
+  {LED_ROW_12_PORT, LED_ROW_12_PIN}, // Row 12
 };
 
 #define MAX_ROWS (sizeof(GPIOs_HighSide_Rows) / sizeof(GPIOs_HighSide_Rows[0]))
@@ -382,11 +382,29 @@ TIM_DMA_Config() {
 }
 #endif
 
+static void LED_GPIO_Config() {
+  GPIO_InitType initGPIO;
+  GPIO_InitStruct(&initGPIO);
+  initGPIO.GPIO_Mode = GPIO_Mode_Out_PP;
+  initGPIO.GPIO_Current = GPIO_DC_8mA;
+
+  for (int i = 0;
+       i < sizeof(GPIOs_HighSide_Rows) / sizeof(GPIOs_HighSide_Rows[0]); i++) {
+
+    GPIO_HighSide_Def gpio = GPIOs_HighSide_Rows[i];
+    initGPIO.Pin = gpio.pin;
+
+    GPIO_InitPeripheral(gpio.port, &initGPIO);
+  }
+}
+
 void TIM_Config() {
+  LED_GPIO_Config();
+
   for (int i = 0;
        i < sizeof(GPIOs_HighSide_Rows) / sizeof(GPIOs_HighSide_Rows[0]);
        i++) {
-    GPIO_ResetBits(GPIOs_HighSide_Rows[i].gpio, GPIOs_HighSide_Rows[i].pin);
+    GPIO_ResetBits(GPIOs_HighSide_Rows[i].port, GPIOs_HighSide_Rows[i].pin);
   }
 
   TIM1_Config();
@@ -488,8 +506,8 @@ void LED_TIM_UP_IRQHandler(void) {
   
   static int i = 0; // current
   static int j = MAX_ROWS-1; // prev
-  GPIO_ResetBits(GPIOs_HighSide_Rows[j].gpio, GPIOs_HighSide_Rows[j].pin);
-  GPIO_SetBits(GPIOs_HighSide_Rows[i].gpio, GPIOs_HighSide_Rows[i].pin);
+  GPIO_ResetBits(GPIOs_HighSide_Rows[j].port, GPIOs_HighSide_Rows[j].pin);
+  GPIO_SetBits(GPIOs_HighSide_Rows[i].port, GPIOs_HighSide_Rows[i].pin);
 
   const uint16_t period = TIM_GetAutoReload(LED_Main_TIM);
 
