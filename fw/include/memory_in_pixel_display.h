@@ -20,14 +20,28 @@
 #define MEMORY_IN_PIXEL_DISPLAY_H
 
 #include <stdint.h>
+#include <FreeRTOS.h>
+#include <task.h>
 
 #define DISP_WIDTH (72)
 #define DISP_HEIGHT (144)
 #define DISP_FIRST_LINE (1)
 
+#define Display_DMA_IRQHandler DMA_Channel2_IRQHandler
+#define Display_SPI_IRQHandler SPI2_IRQHandler
+#define DISPLAY_STACK_SIZE 400
+#define tskDisplay_PRIORITY 1
+
+extern TaskHandle_t DisplayTaskHandle;
+extern StaticTask_t xDisplayTaskBuffer;
+extern StackType_t xDisplayStack[ DISPLAY_STACK_SIZE ];
+
+extern const uint16_t cmd_no_update;
+extern const uint16_t cmd_all_clear;
+
 void DisplayBufferInit();
 void DisplayTransferLines(uint8_t start, uint8_t end);
-
+void prvDisplayTask(void *pvParameters);
 void Display_Config();
 
 #endif // MEMORY_IN_PIXEL_DISPLAY_H
