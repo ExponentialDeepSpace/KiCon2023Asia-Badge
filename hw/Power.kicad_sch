@@ -543,6 +543,9 @@
     (property "Datasheet" "~" (at 143.51 44.196 90)
       (effects (font (size 1.27 1.27)) hide)
     )
+    (property "Vendor Model" "BH-AA-A1AJ020" (at 143.51 45.72 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
     (pin "1" (uuid 14b9a655-5d09-4cac-a140-cfcc9de62b91))
     (pin "2" (uuid 98f4f7bc-d83b-4dc4-937c-ea33a87fd7fb))
     (instances
