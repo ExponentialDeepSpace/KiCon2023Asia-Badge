@@ -501,19 +501,26 @@ void LED_TIM_UP_IRQHandler(void) {
   TIM_ClrIntPendingBit(LED_Main_TIM, TIM_INT_UPDATE);
 
   static uint32_t speed = 0;
-  // counting for cycles, MAX_ROWS per cycle
+
+  // counting for current first (brightest) LED
   static int cycles = 0;
-  
-  static int i = 0; // current
-  static int j = MAX_ROWS-1; // prev
-  GPIO_ResetBits(GPIOs_HighSide_Rows[j].port, GPIOs_HighSide_Rows[j].pin);
-  GPIO_SetBits(GPIOs_HighSide_Rows[i].port, GPIOs_HighSide_Rows[i].pin);
+
+  // current/prev _row is recording the all ROWS running during TIM PWM cycles
+  // running from 0 (row 1) to MAX_ROWS-1 (row 12) as one cycle
+  static int current_row = 0; // current
+  static int prev_row = MAX_ROWS-1; // prev
+
+  // set prev index GPIO to low level
+  GPIO_ResetBits(GPIOs_HighSide_Rows[prev_row].port, GPIOs_HighSide_Rows[prev_row].pin);
+  GPIO_SetBits(GPIOs_HighSide_Rows[current_row].port, GPIOs_HighSide_Rows[current_row].pin);
 
   const uint16_t period = TIM_GetAutoReload(LED_Main_TIM);
 
+  // how many led behid current_index LED will be dimming
   const uint16_t trail = 5;
     
-  if ( 7 - 1 == i ) {
+  // D10 Row 7 is always lit
+  if ( 7 - 1 == current_row ) {
 
     TIM_SetCmp1(LED_LowSide_TIM, 0); // B
     TIM_SetCmp2(LED_LowSide_TIM, period); // R
@@ -521,35 +528,37 @@ void LED_TIM_UP_IRQHandler(void) {
   }
   else {
     uint16_t r = 0, g = 0, b = 0;
-    uint16_t m = cycles - i;
-    if (m > trail && cycles > MAX_ROWS) {
-      m = cycles - MAX_ROWS - i;
+    int16_t m = cycles - current_row;
+    if (m > trail && cycles >= MAX_ROWS) {
+      m = cycles - MAX_ROWS - current_row;
     }
-    if (m < trail) {
+    if (0 <= m && m < trail) {
       r = period / (1 << m);
+      g = r;
+      b = r;
     }
 
-    TIM_SetCmp1(LED_LowSide_TIM, r); // B
+    TIM_SetCmp1(LED_LowSide_TIM, b); // B
     TIM_SetCmp2(LED_LowSide_TIM, r); // R
-    TIM_SetCmp3(LED_LowSide_TIM, r); // G
+    TIM_SetCmp3(LED_LowSide_TIM, g); // G
   }
   
-  i++; j++;
+  current_row++; prev_row++;
 
-  if (i >= MAX_ROWS) {
-    i = 0;
+  if (current_row >= MAX_ROWS) {
+    current_row = 0;
     speed ++;
     if(speed > LED_SPEED) {
       speed = 0;
       cycles ++;
       if (cycles >= MAX_ROWS + trail) {
-        cycles = trail;
+        cycles = trail - 1;
       }
     }
   }
 
-  if (j > MAX_ROWS - 1) {
-    j = 0;
+  if (prev_row > MAX_ROWS - 1) {
+    prev_row = 0;
   }
 }
 
