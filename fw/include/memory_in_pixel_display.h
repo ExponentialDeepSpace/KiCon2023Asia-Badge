@@ -40,7 +40,8 @@ extern const uint16_t cmd_no_update;
 extern const uint16_t cmd_all_clear;
 
 void DisplayBufferInit();
-void DisplayTransferLines(uint8_t start, uint8_t end);
+void DisplayTransferLines_DMA(uint8_t start, uint8_t end);
+void DisplayTransferLines_Poll(uint8_t start, uint8_t end);
 void prvDisplayTask(void *pvParameters);
 void Display_Config();
 
