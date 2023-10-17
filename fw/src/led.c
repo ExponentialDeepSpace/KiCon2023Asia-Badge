@@ -18,8 +18,8 @@ static const GPIO_HighSide_Def GPIOs_HighSide_Rows[12] = {
   {LED_ROW_5_PORT, LED_ROW_5_PIN}, // Row 5
   {LED_ROW_6_PORT, LED_ROW_6_PIN}, // Row 6
   {LED_ROW_7_PORT, LED_ROW_7_PIN}, // Row 7
-  {LED_ROW_8_PORT, LED_ROW_8_PIN}, // Row 8
   {LED_ROW_9_PORT, LED_ROW_9_PIN}, // Row 9
+  {LED_ROW_8_PORT, LED_ROW_8_PIN}, // Row 8
   {LED_ROW_10_PORT, LED_ROW_10_PIN}, // Row 10
   {LED_ROW_11_PORT, LED_ROW_11_PIN}, // Row 11
   {LED_ROW_12_PORT, LED_ROW_12_PIN}, // Row 12
@@ -551,8 +551,11 @@ void LED_TIM_UP_IRQHandler(void) {
     if(speed > LED_SPEED) {
       speed = 0;
       head ++;
+      if (7 - 1 == head) {
+        head++;
+      }
       if (head >= MAX_ROWS + trail) {
-        head = trail - 1;
+        head = trail;
       }
     }
   }
