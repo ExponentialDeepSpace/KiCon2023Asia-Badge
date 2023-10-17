@@ -503,7 +503,7 @@ void LED_TIM_UP_IRQHandler(void) {
   static uint32_t speed = 0;
 
   // counting for current first (brightest) LED
-  static int cycles = 0;
+  static int head = 0;
 
   // current/prev _row is recording the all ROWS running during TIM PWM cycles
   // running from 0 (row 1) to MAX_ROWS-1 (row 12) as one cycle
@@ -528,9 +528,9 @@ void LED_TIM_UP_IRQHandler(void) {
   }
   else {
     uint16_t r = 0, g = 0, b = 0;
-    int16_t m = cycles - current_row;
-    if (m > trail && cycles >= MAX_ROWS) {
-      m = cycles - MAX_ROWS - current_row;
+    int16_t m = head - current_row;
+    if (m > trail && head >= MAX_ROWS) {
+      m = head - MAX_ROWS - current_row;
     }
     if (0 <= m && m < trail) {
       r = period / (1 << m);
@@ -550,9 +550,9 @@ void LED_TIM_UP_IRQHandler(void) {
     speed ++;
     if(speed > LED_SPEED) {
       speed = 0;
-      cycles ++;
-      if (cycles >= MAX_ROWS + trail) {
-        cycles = trail - 1;
+      head ++;
+      if (head >= MAX_ROWS + trail) {
+        head = trail - 1;
       }
     }
   }
