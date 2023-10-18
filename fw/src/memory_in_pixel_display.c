@@ -3,8 +3,12 @@
 #include <n32l40x.h>
 
 #include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include <assert.h>
+
 #include "setup.h"
+#include "generated_image.h"
 
 #define LINE_PREFIX_BYTES (2)
 #define PIXEL_SIZE_BITS (4) // use 4-bit mode
@@ -28,9 +32,6 @@
 uint16_t DisplayBuffer[ LINE_WIDTH_HALFWORDS * DISP_HEIGHT
                         + DISP_BUFFER_PADDING_HALFWORD ];
 
-uint16_t DisplayBuffer2[ LINE_WIDTH_HALFWORDS * DISP_HEIGHT
-                        + DISP_BUFFER_PADDING_HALFWORD ];
-
 const uint16_t cmd_no_update = CMD_NO_UPDATE;
 const uint16_t cmd_all_clear = CMD_ALL_CLEAR;
 const uint16_t cmd_color_blink_white = M3_MASK|M4_MASK;
@@ -38,17 +39,14 @@ TaskHandle_t DisplayTaskHandle = NULL;
 StaticTask_t xDisplayTaskBuffer;
 StackType_t xDisplayStack[ DISPLAY_STACK_SIZE ];
 
-
 void DisplayBufferInit() {
   memset(DisplayBuffer, 0x0000, sizeof(DisplayBuffer));
-  for (uint8_t row = 1; row <= DISP_HEIGHT; row++) {
-    DisplayBuffer[(row - 1) * LINE_WIDTH_HALFWORDS] = row;
+
+  assert(LINE_WIDTH_HALFWORDS == IMAGE_ROW_LENGTH);
+  memcpy(DisplayBuffer, image + 0 * IMAGE_ROW_LENGTH, sizeof(uint16_t) * DISP_HEIGHT * IMAGE_ROW_LENGTH);
+  for (int row = 1; row <= DISP_HEIGHT; row++) {
+    DisplayBuffer[(row-1) * LINE_WIDTH_HALFWORDS] = row;
   }
-
-  DisplayBuffer[DISP_HEIGHT * LINE_WIDTH_HALFWORDS] = 0; // last dummy data
-
-
-  memset(DisplayBuffer2, 0xaaaa, sizeof(DisplayBuffer2));
 }
 
 void DisplayStartupSequence() {
@@ -166,11 +164,9 @@ void DisplayTransferLines_Poll(uint8_t first_row, uint8_t rows) {
   const uint16_t last_row = first_row + rows;
   DisplayBuffer[(last_row - 1) * LINE_WIDTH_HALFWORDS] = 0; // Dummy Data
 
-  uint16_t *buf = DisplayBuffer + (first_row - 1) * LINE_WIDTH_HALFWORDS;
-
   uint32_t first = (first_row - 1) * LINE_WIDTH_HALFWORDS;
   SPI_Enable(DISPLAY_SPI, ENABLE);
-  for (uint16_t i = 0; i < rows * LINE_WIDTH_BYTES + 1; i++) {
+  for (uint16_t i = 0; i < rows * LINE_WIDTH_HALFWORDS + 1; i++) {
     SPI_I2S_TransmitData(DISPLAY_SPI, DisplayBuffer[first + i]);
     while (0 != SPI_I2S_GetStatus(DISPLAY_SPI, SPI_I2S_BUSY_FLAG))
       ;
@@ -192,10 +188,12 @@ void prvDisplayTask(void *pvParameters) {
   
   DisplayStartupSequence();
   
-  uint32_t line = 1;
+  uint32_t line = DISP_HEIGHT;
+  uint32_t direction = -1;
   while (1) {
     TickType_t last = xTaskGetTickCount();
 
+    /*
     for (int j = line-1; j < line + 1; j ++) {
       for (int i = 1; i <= 18; i++) {
         const uint16_t d = DisplayBuffer[j * LINE_WIDTH_HALFWORDS + i];
@@ -206,14 +204,28 @@ void prvDisplayTask(void *pvParameters) {
         }
       }
     }
-    DisplayTransferLines_DMA(line, 2);
+    */
+    // DisplayTransferLines_Poll(line, 2);
+    DisplayTransferLines_Poll(DISP_FIRST_LINE, DISP_HEIGHT);
 
-    line += 2;
-    if (line >= DISP_HEIGHT - 1) {
-      line = 1;
+    assert(line > 0 && line <= DISP_HEIGHT);
+    const uint16_t * imagep = image;
+    memcpy(DisplayBuffer, imagep + (line - 1) * IMAGE_ROW_LENGTH, sizeof(uint16_t) * DISP_HEIGHT * IMAGE_ROW_LENGTH);
+    for (int i = 0 * LINE_WIDTH_HALFWORDS + 1; i < LINE_WIDTH_HALFWORDS; i++) {
+      DisplayBuffer[i] = 0x0;
+    }
+    for (int row = 1; row <= DISP_HEIGHT; row++) {
+      DisplayBuffer[(row-1) * LINE_WIDTH_HALFWORDS] = row;
     }
 
-    vTaskDelayUntil(&last, 100 / portTICK_PERIOD_MS);
+    line += direction;
+
+    if (line == DISP_HEIGHT || 1 == line) {
+      direction = -direction;
+    }
+    
+
+    vTaskDelayUntil(&last, 2);
   }
 }
 
