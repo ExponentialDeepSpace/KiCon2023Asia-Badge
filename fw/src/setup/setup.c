@@ -39,7 +39,7 @@ RCC_Config() {
                           |RCC_APB2_PERIPH_GPIOB
                           |RCC_APB2_PERIPH_GPIOC
                           |RCC_APB2_PERIPH_AFIO
-                          |RCC_APB2_PERIPH_SPI2
+                          |RCC_APB2_PERIPH_SPI1
                           |RCC_APB2_PERIPH_TIM1
                           |RCC_APB2_PERIPH_TIM8
                           , ENABLE);

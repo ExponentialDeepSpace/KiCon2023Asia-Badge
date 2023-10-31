@@ -89,7 +89,7 @@ static void send_cmd(uint16_t cmd) {
   // All Clear
   set_display_ss();
 
-#if 0
+#ifdef DISPLAY_USE_DMA
   DMA_DeInit(DISPLAY_SPI_DMA_CHANNEL);
 
   DMA_InitType dmaInit;
@@ -194,7 +194,9 @@ void DisplayTransferLines_DMA(uint8_t first_row, uint8_t rows) {
   DMA_RequestRemap(DISPLAY_SPI_DMA_CHANNEL_REMAP, DMA, DISPLAY_SPI_DMA_CHANNEL, ENABLE);
   DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, ENABLE);
 
+#ifdef DISPLAY_USE_DMA
   wait_for_transmission_completion();
+#endif
   clear_display_ss();
 
   GPIO_ResetBits(DISP_SS_PORT, DISP_SS_PIN);
@@ -253,7 +255,7 @@ void prvDisplayTask(void *pvParameters) {
       }
     }
     */
-#if 0
+#ifdef DISPLAY_USE_DMA
     DisplayTransferLines_DMA(DISP_FIRST_LINE, DISP_HEIGHT);
 #else
     DisplayTransferLines_Poll(DISP_FIRST_LINE, DISP_HEIGHT);
@@ -300,10 +302,10 @@ void prvDisplayTask(void *pvParameters) {
 }
 
 void Display_SPI_IRQHandler(void) {
-  if (SPI_I2S_GetStatus(SPI2, SPI_MODERR_FLAG) != 0) {
+  if (SPI_I2S_GetStatus(DISPLAY_SPI, SPI_MODERR_FLAG) != 0) {
     while (1)
       ;
-  } else if( SPI_I2S_GetStatus(SPI2, SPI_I2S_TE_FLAG) != 0) {
+  } else if( SPI_I2S_GetStatus(DISPLAY_SPI, SPI_I2S_TE_FLAG) != 0) {
     int i = 0;
     i ++;
   } else {
@@ -366,12 +368,12 @@ static void Display_GPIO_Config() {
   GPIO_InitPeripheral(DISP_DISP_PORT, &initValue);
 
   // Setup PB1 for EXT COM IN
-  initValue.Pin = DISP_COM_PIN;
-  initValue.GPIO_Current = GPIO_DC_4mA;
-  initValue.GPIO_Mode = GPIO_Mode_AF_PP;
-  initValue.GPIO_Pull = GPIO_Pull_Up;
-  initValue.GPIO_Alternate = DISP_COM_AF;
-  GPIO_InitPeripheral(DISP_COM_PORT, &initValue);
+  // initValue.Pin = DISP_COM_PIN;
+  // initValue.GPIO_Current = GPIO_DC_4mA;
+  // initValue.GPIO_Mode = GPIO_Mode_AF_PP;
+  // initValue.GPIO_Pull = GPIO_Pull_Up;
+  // initValue.GPIO_Alternate = DISP_COM_AF;
+  // GPIO_InitPeripheral(DISP_COM_PORT, &initValue);
 }
 
 static void Display_SPI_Config() {

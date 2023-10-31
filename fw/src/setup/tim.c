@@ -313,7 +313,7 @@ static void TIM_NVIC_Config() {
 void TIM_Config() {
   TIM1_Config();
   // TIM2_Config();
-  TIM3_Config();
+  // TIM3_Config();
   // TIM5_Config();
   TIM8_Config();
   // TIM9_Config();
@@ -382,6 +382,7 @@ void TIM_Config() {
   
   // TIM_Enable(TIM2, ENABLE);
   TIM_Enable(LED_LowSide_TIM, ENABLE);
+  // TIM_Enable(TIM3, ENABLE); // for DISP COM IN
   // TIM_Enable(TIM5, ENABLE);
   // TIM_Enable(TIM8, ENABLE);
   // TIM_Enable(TIM9, ENABLE);
