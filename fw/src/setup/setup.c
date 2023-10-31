@@ -20,6 +20,7 @@
 #include "setup.h"
 #include "memory_in_pixel_display.h"
 #include "usb.h"
+#include "tim.h"
 
 // Default Clock (defined in system_n32l40x.c:SetSysClock())
 // SystemCoreclock = 48Mhz (for USB)
@@ -32,7 +33,7 @@ RCC_Config() {
   RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_DMA, ENABLE);
   RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_USB
                           |RCC_APB1_PERIPH_I2C1
-                          |RCC_APB1_PERIPH_TIM3
+                          |RCC_APB1_PERIPH_TIM4
                           , ENABLE);
   RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA
                           |RCC_APB2_PERIPH_GPIOB
@@ -119,4 +120,5 @@ void Setup() {
   GPIO_Config();
 
   TIM_Config();
+  LED_Config();
 }
