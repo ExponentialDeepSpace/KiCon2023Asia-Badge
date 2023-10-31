@@ -9,7 +9,7 @@ typedef enum TIM_OCChannels {
   CH4 = 0x08,
 } TIM_OCChannels;
 
-static uint32_t TIM_Clk(TIM_Module *TIMx) {
+uint32_t TIM_Clk(TIM_Module *TIMx) {
 
   uint32_t TIMClk = 0;
 
@@ -232,7 +232,7 @@ static void TIM3_Config() {
   TIM_ConfigOc4Fast(TIM3, TIM_OC_FAST_ENABLE);
 
   TIM_ConfigArPreload(TIM3, DISABLE);
-  TIM_SetCmp4(TIM3, period / 2);
+  TIM_SetCmp4(TIM3, 0);
 
   // TIM_SelectSlaveMode(TIM3, TIM_SELECTED_SLAVE_MODE);
   // TIM_SelectInputTrig(TIM3, TIM_TRIG_SEL_IN_TR0); // triggered from TIM1
@@ -313,7 +313,7 @@ static void TIM_NVIC_Config() {
 void TIM_Config() {
   TIM1_Config();
   // TIM2_Config();
-  // TIM3_Config();
+  TIM3_Config();
   // TIM5_Config();
   TIM8_Config();
   // TIM9_Config();
@@ -382,7 +382,7 @@ void TIM_Config() {
   
   // TIM_Enable(TIM2, ENABLE);
   TIM_Enable(LED_LowSide_TIM, ENABLE);
-  // TIM_Enable(TIM3, ENABLE); // for DISP COM IN
+  TIM_Enable(TIM3, ENABLE); // for DISP COM IN
   // TIM_Enable(TIM5, ENABLE);
   // TIM_Enable(TIM8, ENABLE);
   // TIM_Enable(TIM9, ENABLE);

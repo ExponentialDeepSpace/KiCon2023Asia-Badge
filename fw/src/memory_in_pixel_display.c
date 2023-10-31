@@ -140,6 +140,15 @@ void DisplayStartupSequence() {
   // DISP
   GPIO_SetBits(DISP_DISP_PORT, DISP_DISP_PIN);
   vTaskDelay(1);
+
+  uint32_t TIMClk = TIM_Clk(TIM3);
+  // set prescaler for both TIM1 and TIM3 to be same TIMClk (24Mhz)
+  uint16_t prescaler = IsTimList1Module(TIM3) ?
+    TIM_ADVANCED_PRESCALER : TIM_GENERIC_PRESCALER;
+
+#define DISP_COM_FREQ (30) // Hz
+  uint16_t period = TIMClk / (prescaler + 1) / DISP_COM_FREQ - 1;
+  TIM_SetCmp4(TIM3, period / 2);
 }
 
 void DisplayTransferLines_DMA(uint8_t first_row, uint8_t rows) {
