@@ -32,9 +32,6 @@ int main(void)
 
   volatile unsigned long long i = 0;
 
-  GPIO_ResetBits(GPIOB, GPIO_PIN_4);
-  GPIO_ResetBits(GPIOB, GPIO_PIN_5);
-
   DisplayTaskHandle = xTaskCreateStatic(
                                         prvDisplayTask,
                                         "Display",
