@@ -220,14 +220,13 @@ static void USB_NVIC_Config() {
   EXTI_InitType extiInit = {0};
 
   nvicInit.NVIC_IRQChannel = USB_LP_IRQn;
-  nvicInit.NVIC_IRQChannelPreemptionPriority =
-      configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = 1;
+  nvicInit.NVIC_IRQChannelSubPriority = 0;
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&nvicInit);
 
   nvicInit.NVIC_IRQChannel = USBWakeUp_IRQn;
-  nvicInit.NVIC_IRQChannelPreemptionPriority =
-      configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY;
+  nvicInit.NVIC_IRQChannelPreemptionPriority = 0;
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&nvicInit);
 
@@ -237,6 +236,11 @@ static void USB_NVIC_Config() {
   extiInit.EXTI_Trigger = EXTI_Trigger_Rising;
   extiInit.EXTI_LineCmd = ENABLE;
   EXTI_InitPeripheral(&extiInit);
+}
+
+void USBWakeUp_IRQHandler(void)
+{
+    EXTI_ClrITPendBit(EXTI_LINE17);
 }
 
 #define OSC300_CTRL         ((__IO unsigned*)(0x40001824))

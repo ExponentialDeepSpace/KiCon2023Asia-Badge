@@ -40,13 +40,13 @@
 // #define CONFIG_USBDEV_SETUP_LOG_PRINT
 
 /* Check if the input descriptor is correct */
-// #define CONFIG_USBDEV_DESC_CHECK
+#define CONFIG_USBDEV_DESC_CHECK
 
 /* Enable test mode */
 // #define CONFIG_USBDEV_TEST_MODE
 
 #ifndef CONFIG_USBDEV_MSC_BLOCK_SIZE
-#define CONFIG_USBDEV_MSC_BLOCK_SIZE 512
+#define CONFIG_USBDEV_MSC_BLOCK_SIZE 16
 #endif
 
 #ifndef CONFIG_USBDEV_MSC_MANUFACTURER_STRING
@@ -117,7 +117,7 @@
 //#define CONFIG_USBHOST_GET_STRING_DESC
 
 /* Ep0 max transfer buffer */
-#define CONFIG_USBHOST_REQUEST_BUFFER_LEN 512
+#define CONFIG_USBHOST_REQUEST_BUFFER_LEN 256
 
 #ifndef CONFIG_USBHOST_CONTROL_TRANSFER_TIMEOUT
 #define CONFIG_USBHOST_CONTROL_TRANSFER_TIMEOUT 500
@@ -130,8 +130,8 @@
 /* ================ USB Device Port Configuration ================*/
 
 #define USBD_IRQHandler USB_LP_IRQHandler
-//#define USB_BASE (0x40080000UL)
-//#define USB_NUM_BIDIR_ENDPOINTS 4
+#define USB_BASE (0x40005C00UL)
+#define USB_NUM_BIDIR_ENDPOINTS 8
 
 /* ================ USB Host Port Configuration ==================*/
 

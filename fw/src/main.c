@@ -27,9 +27,7 @@ int main(void)
 {
   Setup();
   
-  // cdc_acm_init();
-  // usb_dc_low_level_init();
-
+  cdc_acm_init();
   volatile unsigned long long i = 0;
 
   DisplayTaskHandle = xTaskCreateStatic(

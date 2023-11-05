@@ -31,8 +31,7 @@
 static void
 RCC_Config() {
   RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_DMA, ENABLE);
-  RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_USB
-                          |RCC_APB1_PERIPH_I2C1
+  RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_I2C1
                           |RCC_APB1_PERIPH_TIM4
                           , ENABLE);
   RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA

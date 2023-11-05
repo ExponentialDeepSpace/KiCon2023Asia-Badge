@@ -85,7 +85,7 @@ int usb_dc_init(void)
     USB->CNTR = (uint16_t)winterruptmask;
 
     /* Enabling DP Pull-UP bit to Connect internal PU resistor on USB DP line */
-    USB->BCDR |= (uint16_t)USB_BCDR_DPPU;
+    // USB->BCDR |= (uint16_t)USB_BCDR_DPPU;
 
     return 0;
 }

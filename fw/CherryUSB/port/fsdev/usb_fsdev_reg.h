@@ -34,10 +34,10 @@ typedef struct
   __IO uint16_t RESERVEDB;            /*!< Reserved */
   __IO uint16_t BTABLE;               /*!< Buffer Table address register,             Address offset: 0x50 */
   __IO uint16_t RESERVEDC;            /*!< Reserved */
-  __IO uint16_t LPMCSR;               /*!< LPM Control and Status register,           Address offset: 0x54 */
-  __IO uint16_t RESERVEDD;            /*!< Reserved */
-  __IO uint16_t BCDR;                 /*!< Battery Charging detector register,        Address offset: 0x58 */
-  __IO uint16_t RESERVEDE;            /*!< Reserved */
+  // __IO uint16_t LPMCSR;               /*!< LPM Control and Status register,           Address offset: 0x54 */
+  // __IO uint16_t RESERVEDD;            /*!< Reserved */
+  // __IO uint16_t BCDR;                 /*!< Battery Charging detector register,        Address offset: 0x58 */
+  // __IO uint16_t RESERVEDE;            /*!< Reserved */
 } USB_TypeDef;
 
 /******************************************************************************/
