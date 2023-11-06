@@ -27,7 +27,8 @@ int main(void)
 {
   Setup();
   
-  cdc_acm_init();
+  cdc_acm_msc_init();
+
   volatile unsigned long long i = 0;
 
   DisplayTaskHandle = xTaskCreateStatic(
