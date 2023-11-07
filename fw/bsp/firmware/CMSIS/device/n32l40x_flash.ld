@@ -33,6 +33,41 @@ ENTRY(Reset_Handler)
 /* Highest address of the user mode stack */
 _estack = 0x20008000;    /* end of RAM */
 
+/*
+    Sector Size: 512 Byte
+    Cluster Size: 4 sectors = 2KB = one Flash Page
+
+    screen data size is 72 * 144 / 2
+
+    KiCon Background image:
+    size is 72(H) * 288(W) / 2 = 10368 bytes
+    sectors: (10368 + 511) / 512 = 21 sectors
+    clusters: (21 + 3) / 4 = 6 clusters
+    Flash: 6 clusters * 4 (sectors per cluster) * 512 (bytes per sector) = 12288 bytes = 12K
+
+    Name image:
+    size is 72(H) * 144(W) / 2 = 5184 bytes
+    sectors: (5184 + 511) / 512 = 11 sectors
+    clusters: (11 + 3) / 4 = 3 clusters
+    Flash: 3 clusters * 4 (sectors per cluster) * 512 (bytes per sector) = 6144 Bytes = 6K
+*/
+
+_Sector_Size = 512;
+_Sector_Per_Cluster = 4;
+_Flash_Page_Size = _Sector_Size * _Sector_Per_Cluster;
+
+_Bg_Image_Size = 72 * 288 / 2;
+_Bg_Image_Sectors = (_Bg_Image_Size + _Sector_Size - 1) / _Sector_Size;
+_Bg_Image_Clusters = (_Bg_Image_Sectors + _Sector_Per_Cluster - 1) / _Sector_Per_Cluster;
+_Bg_Image_Flash_Size = _Bg_Image_Clusters * _Flash_Page_Size;
+
+_Name_Image_Size = 72 * 144 / 2;
+_Name_Image_Sectors = (_Name_Image_Size + _Sector_Size - 1) / _Sector_Size;
+_Name_Image_Clusters = (_Name_Image_Sectors + _Sector_Per_Cluster - 1) / _Sector_Per_Cluster;
+_Name_Image_Flash_Size = _Name_Image_Clusters * _Flash_Page_Size;
+
+_Usb_Disk_Size = _Bg_Image_Flash_Size + _Name_Image_Flash_Size;
+
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0x200;      /* required amount of heap  */
 _Min_Stack_Size = 0x800; /* required amount of stack */
@@ -168,7 +203,20 @@ SECTIONS
     . = ALIGN(4);
   } >RAM
 
-  
+  ._user_usb_disk_space :
+  {
+    . = ORIGIN(FLASH) + LENGTH(FLASH) - _Usb_Disk_Size;
+    . = ALIGN(4);
+    __disk_start = .;
+    __bg_image_start = .;
+    . = __bg_image_start + _Bg_Image_Flash_Size;
+    __bg_image_end = .;
+    __name_image_start = .;
+    . = __name_image_start + _Name_Image_Flash_Size;
+    __name_image_end = .;
+    __disk_end = .;
+  } >FLASH
+    
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
