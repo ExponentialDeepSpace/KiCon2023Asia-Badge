@@ -19,7 +19,9 @@
 #ifndef SETUP_H
 #define SETUP_H
 
-#include <FreeRTOS.h>
+// Do not include <FreeRTOS.h>
+// To make setup.h independent to all components
+// CherryUSB has macro definitions conflicted with <n32l40x.h>
 
 #define LED_PWM_CLOCK 2000 // Hz
 #define TIM_ADVANCED_PRESCALER (1)

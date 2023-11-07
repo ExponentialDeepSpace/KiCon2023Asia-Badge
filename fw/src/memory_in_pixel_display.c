@@ -105,7 +105,7 @@ static void send_cmd(uint16_t cmd) {
   dmaInit.MemDataSize = DMA_MemoryDataSize_HalfWord;
   dmaInit.DMA_MemoryInc = DMA_MEM_INC_ENABLE;
   dmaInit.CircularMode = DMA_MODE_NORMAL;
-  dmaInit.Priority = DMA_PRIORITY_HIGH;
+  dmaInit.Priority = DMA_PRIORITY_LOW;
 
   DMA_Init(DISPLAY_SPI_DMA_CHANNEL, &dmaInit);
 

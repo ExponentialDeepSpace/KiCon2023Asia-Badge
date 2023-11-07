@@ -1,6 +1,7 @@
 #include <n32l40x.h>
 #include "setup.h"
 #include "led.h"
+#include <FreeRTOS.h>
 
 typedef enum TIM_OCChannels {
   CH1 = 0x01,

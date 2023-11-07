@@ -2,6 +2,7 @@
 
 #include "setup.h"
 #include "usb.h"
+#include <FreeRTOS.h>
 
 static void USB_NVIC_Config() {
   NVIC_InitType nvicInit = {0};
