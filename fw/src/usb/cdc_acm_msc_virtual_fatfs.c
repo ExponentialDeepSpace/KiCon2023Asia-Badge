@@ -449,6 +449,22 @@ typedef enum usbd_transfer_inc_t {
   usbd_transfer_no_inc,
 } usbd_transfer_inc_t;
 
+
+void DISK_DMA_IRQHandler(void) {
+  if (DMA_GetIntStatus(DISK_DMA_INT_TXC, DMA)) {
+
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+    usb_osal_sem_give(usb_dma_sem);
+  }
+  
+  DMA_ClrIntPendingBit(DISK_DMA_INT_GLB
+                       |DISK_DMA_INT_TXC
+                       |DISK_DMA_INT_HTX
+                       |DISK_DMA_INT_ERR,
+                       DMA);
+}
+
 static void
 usbd_transfer_op(const uint32_t memory_addr,
                  const uint32_t disk_addr,
@@ -807,21 +823,6 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
         } // if sector is inside a virtual entry
     } // if START_SECTOR_OF_DATAAREA
     return 0;
-}
-
-void DISK_DMA_IRQHandler(void) {
-  if (DMA_GetIntStatus(DISK_DMA_INT_TXC, DMA)) {
-
-    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-
-    usb_osal_sem_give(usb_dma_sem);
-  }
-  
-  DMA_ClrIntPendingBit(DISK_DMA_INT_GLB
-                       |DISK_DMA_INT_TXC
-                       |DISK_DMA_INT_HTX
-                       |DISK_DMA_INT_ERR,
-                       DMA);
 }
 
 int usbd_msc_sector_write(uint32_t sector, uint8_t *buffer, uint32_t length)
