@@ -371,8 +371,8 @@ static void Display_GPIO_Config() {
 
   // Setup PC8 for DISP
   initValue.Pin = DISP_DISP_PIN;
-  initValue.GPIO_Current = GPIO_DC_4mA;
-  initValue.GPIO_Mode = GPIO_Mode_Out_OD;
+  initValue.GPIO_Current = GPIO_DC_12mA;
+  initValue.GPIO_Mode = GPIO_Mode_Out_PP;
   initValue.GPIO_Pull = GPIO_Pull_Up;
   GPIO_InitPeripheral(DISP_DISP_PORT, &initValue);
 
