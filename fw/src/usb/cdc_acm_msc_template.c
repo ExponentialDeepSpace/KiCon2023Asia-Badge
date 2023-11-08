@@ -251,7 +251,9 @@ void cdc_acm_data_send_with_dtr_test(void)
 
 // Ghost Fat code is referenced from
 // blupill-bootloader(https://github.com/lupyuen/bluepill-bootloader)
+// Microsoft FAT specification
 // and http://elm-chan.org/docs/fat_e.html
+// check virtual filesystem: `fsck.fat -n -v /dev/sda`
 
 typedef struct {
     uint8_t JumpInstruction[3];
@@ -304,7 +306,7 @@ extern char __name_image_start;
  // N32L40x Flash has 2K Page size
 #define FAT_VOLUME_SECTORS_PER_CLUSTER  4
 // virtual / fake; clusters >= 4086 and <= 65525 is FAT16
-#define FAT_VOLUME_SECTOR_COUNT 10000
+#define FAT16_MINIMUM_CLUSTERS (4086)
 
 #define RESERVED_SECTORS 1 // boot sector
 
@@ -317,13 +319,15 @@ extern char __name_image_start;
 #define FAT_ENTRIES_PER_SECTOR (FAT_VOLUME_SECTOR_SIZE / sizeof(uint16_t)) // FAT16
 // FAT_TABLE_SECTORS should be ((10000 / 4 + 512 / 2 - 1) / (512 / 2)) = 10
 #define NUMBER_OF_FAT_TABLE 2
-#define FAT_TABLE_SECTORS (((FAT_VOLUME_SECTOR_COUNT - RESERVED_SECTORS - ROOT_DIR_SECTORS - 621 * NUMBER_OF_FAT_TABLE) / FAT_VOLUME_SECTORS_PER_CLUSTER + FAT_ENTRIES_PER_SECTOR - 1) / FAT_ENTRIES_PER_SECTOR)
+#define FAT_TABLE_SECTORS ((FAT16_MINIMUM_CLUSTERS * FAT_VOLUME_SECTORS_PER_CLUSTER + FAT_ENTRIES_PER_SECTOR - 1) / FAT_ENTRIES_PER_SECTOR)
 #define FAT_TABLE_AREA_SECTORS (FAT_TABLE_SECTORS * NUMBER_OF_FAT_TABLE)
 
 #define START_SECTOR_OF_FAT0 RESERVED_SECTORS
 #define START_SECTOR_OF_FAT1 (START_SECTOR_OF_FAT0 + FAT_TABLE_SECTORS)
 #define START_SECTOR_OF_ROOTDIR (START_SECTOR_OF_FAT1 + FAT_TABLE_SECTORS)
 #define START_SECTOR_OF_DATAAREA (START_SECTOR_OF_ROOTDIR + ROOT_DIR_SECTORS)
+
+#define FAT_VOLUME_SECTOR_COUNT (FAT16_MINIMUM_CLUSTERS * FAT_VOLUME_SECTORS_PER_CLUSTER + START_SECTOR_OF_DATAAREA)
 
 #define FIRST_CLUSTER (0x0002)
 #define EMPTY_CLUSTER (0x0000)
@@ -378,7 +382,7 @@ static const FAT_BootBlock BootBlock = {
 static const dir_entry_t root_entry = {
     // Root Entry
     .name = VOLUME_LABEL,
-    .attrs = 0x18, // VOLUME_ID | Directory
+    .attrs = 0x28, // VOLUME_ID | Directory
     .createTimeFine = 0,
     .createDate = TODAY,
     .createTime = NOW,
