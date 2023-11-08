@@ -3,6 +3,6 @@
 #define IMAGE_WIDTH (288)
 #define IMAGE_ROW IMAGE_WIDTH
 #define IMAGE_HEIGHT (72)
-#define IMAGE_ROW_LENGTH (IMAGE_HEIGHT / 4 + 1)
+#define IMAGE_ROW_LENGTH (IMAGE_HEIGHT / 4 + 1/* ROW number */)
 extern const uint16_t image[IMAGE_ROW][IMAGE_ROW_LENGTH];
 #endif // GENERATED_IMAGE
