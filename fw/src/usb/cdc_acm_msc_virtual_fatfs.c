@@ -826,46 +826,7 @@ void DISK_DMA_IRQHandler(void) {
 
 int usbd_msc_sector_write(uint32_t sector, uint8_t *buffer, uint32_t length)
 {
-    uint8_t * start_addr =(uint8_t *) __disk_start + sector * FAT_VOLUME_SECTOR_SIZE;
+  uint8_t * start_addr =(uint8_t *) __disk_start + sector * FAT_VOLUME_SECTOR_SIZE;
     
-  if (sector * FAT_VOLUME_SECTOR_SIZE + length < &__disk_start) {
-#ifdef CONFIG_USBDEV_MSC_THREAD
-    uint32_t len = length;
-    uint32_t transferred_len = 0;
-
-    if (len > 10 * 4) {
-      DMA_InitType dmaInit;
-      DMA_StructInit(&dmaInit);
-
-      const uint32_t dma_len = len / 4;
-      dmaInit.PeriphAddr = (uint32_t)start_addr;
-      dmaInit.PeriphInc = DMA_PERIPH_INC_ENABLE;
-      dmaInit.PeriphDataSize = DMA_PERIPH_DATA_SIZE_WORD;
-      dmaInit.Direction = DMA_DIR_PERIPH_DST;
-      dmaInit.MemAddr = (uint32_t)buffer;
-      dmaInit.BufSize = dma_len;
-      dmaInit.Mem2Mem = DMA_M2M_ENABLE;
-      dmaInit.MemDataSize = DMA_MemoryDataSize_Word;
-      dmaInit.DMA_MemoryInc = DMA_MEM_INC_ENABLE;
-      dmaInit.CircularMode = DMA_MODE_NORMAL;
-      dmaInit.Priority = DMA_PRIORITY_HIGH;
-
-      DMA_Init(DISK_DMA_CHANNEL, &dmaInit);
-      DMA_ClearFlag( DISK_DMA_FLG_TXC, DMA);
-      DMA_EnableChannel(DISK_DMA_CHANNEL, ENABLE);
-
-      transferred_len = dma_len * 4;
-      len -= transferred_len;
-      start_addr += transferred_len;
-      int ret = usb_osal_sem_take(usb_dma_sem, 1); // 1 ms
-      if (!ret) {                                  // timeout
-        return -1;
-      }
-    }
-    memcpy(start_addr, buffer + transferred_len, len);
-#else
-    memcpy(start_addr, buffer, length);
-#endif
-  }
   return 0;
 }
