@@ -303,9 +303,9 @@ extern char __name_image_start;
 extern char _Sector_Size;
 extern char _Sectors_Per_Cluster;
 
-#define FAT_VOLUME_SECTOR_SIZE  512
+#define FAT_VOLUME_SECTOR_SIZE  (2048)
  // N32L40x Flash has 2K Page size
-#define FAT_VOLUME_SECTORS_PER_CLUSTER  4
+#define FAT_VOLUME_SECTORS_PER_CLUSTER  (1)
 // virtual / fake; clusters >= 4086 and <= 65525 is FAT16
 #define FAT16_MINIMUM_CLUSTERS (4086)
 

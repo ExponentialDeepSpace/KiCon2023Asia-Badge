@@ -52,8 +52,9 @@ _estack = 0x20008000;    /* end of RAM */
     Flash: 3 clusters * 4 (sectors per cluster) * 512 (bytes per sector) = 6144 Bytes = 6K
 */
 
-_Sector_Size = 512;
-_Sectors_Per_Cluster = 4;
+/* N32L40x has 2KB as one Page */
+_Sector_Size = 2048;
+_Sectors_Per_Cluster = 1;
 _Flash_Page_Size = _Sector_Size * _Sectors_Per_Cluster;
 
 _Bg_Image_Size = 72 * 288 / 2;
