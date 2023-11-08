@@ -611,9 +611,10 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
                           sector_size_sum % FAT_VOLUME_SECTOR_SIZE;
                     }
                 }
-                const uint16_t fat = END_OF_CLUSTER;
-                uint32_t transferring_len = MIN(sizeof(fat), length);
-                usbd_transfer_op(buffer_access_addr, (uint32_t)&fat,
+                cluster_id++;
+                const uint16_t eoc = END_OF_CLUSTER;
+                uint32_t transferring_len = MIN(sizeof(eoc), length);
+                usbd_transfer_op(buffer_access_addr, (uint32_t)&eoc,
                                  transferring_len, usbd_transfer_read,
                                  usbd_transfer_inc);
                 assert_param(length >= transferring_len);
