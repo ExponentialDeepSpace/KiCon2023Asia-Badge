@@ -300,7 +300,8 @@ extern char __disk_start;
 extern char __disk_end;
 extern char __bg_image_start;
 extern char __name_image_start;
-
+extern char _Sector_Size;
+extern char _Sectors_Per_Cluster;
 
 #define FAT_VOLUME_SECTOR_SIZE  512
  // N32L40x Flash has 2K Page size
@@ -336,6 +337,8 @@ extern char __name_image_start;
 #define VOLUME_LABEL "KiCon2023  "
 #define USB_FLASH_START (uint32_t)(&__disk_start)
 #define USB_FLASH_END (uint32_t)(&__disk_end)
+#define LD_DEFINED_SECTOR_SIZE (uint32_t)(&_Sector_Size)
+#define LD_DEFINED_SECTORS_PER_CLUSTER (uint32_t)(&_Sectors_Per_Cluster)
 
 #define STR0(x) #x
 #define STR(x) STR0(x)
@@ -435,6 +438,9 @@ static const uint16_t first_fat[] = {0xFF00 | BootBlock.MediaDescriptor, 0xFFFF,
 
 void usbd_msc_get_cap(uint8_t lun, uint32_t *block_num,
                         uint16_t *block_size) {
+  assert_param(FAT_VOLUME_SECTOR_SIZE == LD_DEFINED_SECTOR_SIZE);
+  assert_param(FAT_VOLUME_SECTORS_PER_CLUSTER == LD_DEFINED_SECTORS_PER_CLUSTER);
+
   *block_num = FAT_VOLUME_SECTOR_COUNT;
   *block_size = FAT_VOLUME_SECTOR_SIZE;
 }

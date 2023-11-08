@@ -53,17 +53,17 @@ _estack = 0x20008000;    /* end of RAM */
 */
 
 _Sector_Size = 512;
-_Sector_Per_Cluster = 4;
-_Flash_Page_Size = _Sector_Size * _Sector_Per_Cluster;
+_Sectors_Per_Cluster = 4;
+_Flash_Page_Size = _Sector_Size * _Sectors_Per_Cluster;
 
 _Bg_Image_Size = 72 * 288 / 2;
 _Bg_Image_Sectors = (_Bg_Image_Size + _Sector_Size - 1) / _Sector_Size;
-_Bg_Image_Clusters = (_Bg_Image_Sectors + _Sector_Per_Cluster - 1) / _Sector_Per_Cluster;
+_Bg_Image_Clusters = (_Bg_Image_Sectors + _Sectors_Per_Cluster - 1) / _Sectors_Per_Cluster;
 _Bg_Image_Flash_Size = _Bg_Image_Clusters * _Flash_Page_Size;
 
 _Name_Image_Size = 72 * 144 / 2;
 _Name_Image_Sectors = (_Name_Image_Size + _Sector_Size - 1) / _Sector_Size;
-_Name_Image_Clusters = (_Name_Image_Sectors + _Sector_Per_Cluster - 1) / _Sector_Per_Cluster;
+_Name_Image_Clusters = (_Name_Image_Sectors + _Sectors_Per_Cluster - 1) / _Sectors_Per_Cluster;
 _Name_Image_Flash_Size = _Name_Image_Clusters * _Flash_Page_Size;
 
 _Usb_Disk_Size = _Bg_Image_Flash_Size + _Name_Image_Flash_Size;
