@@ -340,6 +340,7 @@ extern char _Sectors_Per_Cluster;
 #define LD_DEFINED_SECTOR_SIZE (uint32_t)(&_Sector_Size)
 #define LD_DEFINED_SECTORS_PER_CLUSTER (uint32_t)(&_Sectors_Per_Cluster)
 
+
 #define STR0(x) #x
 #define STR(x) STR0(x)
 
@@ -367,7 +368,9 @@ static const FAT_BootBlock BootBlock = {
 #define NOW ((20 << 11) | (56 << 5) | (0))
 
 #define README_FILE_START_CLUSTER (FIRST_CLUSTER)
-#define README_FILE_CLUSTERS (1) // max 512 bytes
+#define README_FILE_SIZE (sizeof(readme_file_contents) - 1)
+#define README_FILE_SECTORS ((README_FILE_SIZE + FAT_VOLUME_SECTOR_SIZE - 1) / FAT_VOLUME_SECTOR_SIZE)
+#define README_FILE_CLUSTERS ((README_FILE_SECTORS + FAT_VOLUME_SECTORS_PER_CLUSTER - 1) / FAT_VOLUME_SECTORS_PER_CLUSTER)
 
 #define BG_IMAGE_BIN_FILE_SIZE (72*288/2)
 #define BG_IMAGE_BIN_FILE_SECTORS ((BG_IMAGE_BIN_FILE_SIZE + FAT_VOLUME_SECTOR_SIZE - 1) / FAT_VOLUME_SECTOR_SIZE)
@@ -395,7 +398,11 @@ static const dir_entry_t root_entry = {
     .startCluster = 0,
 };
 
-static const char readme_file_contents[] = "Welcome to KiCon2023 Asia!";
+static const char readme_file_contents[] = \
+  "Welcome to KiCon2023 Asia!\r\n"         \
+  "BG.BIN is the KiCon logo bitmap file, the dimension is 72 x 288 (pixels), the size is (72 / 4 + 1) x 288 x 2 = 10944 bytes \r\n" \
+  "NAME.BIN is your name bitmap file, the dimension is 72 x 144 (pixels), the size is (72 / 4 + 1) x 144 x 2 = 5472 bytes";
+
 typedef struct virtual_file_entry_t {
     char *name;
     uint8_t attrs;
@@ -409,7 +416,7 @@ static const virtual_file_entry_t virtual_file_entries[] = {
   {
       .name = "README  TXT",
       .attrs = 0x01, // Read Only
-      .size = sizeof(readme_file_contents) - 1,
+      .size = README_FILE_SIZE,
       .start_of_cluster = README_FILE_START_CLUSTER,
       .clusters = README_FILE_CLUSTERS,
       .physical_addr = (uint32_t)readme_file_contents,
