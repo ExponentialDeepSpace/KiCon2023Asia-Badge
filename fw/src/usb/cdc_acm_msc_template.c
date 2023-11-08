@@ -308,28 +308,28 @@ extern char __name_image_start;
 
 #define RESERVED_SECTORS 1 // boot sector
 
-// FAT Entries
-#define FAT_ENTRIES_PER_SECTOR (FAT_VOLUME_SECTOR_SIZE / sizeof(uint16_t)) // FAT16
-// FAT_TABLE_SECTORS should be ((10000 / 4 + 512 / 2 - 1) / (512 / 2)) = 10
-#define FAT_TABLE_SECTORS ((FAT_VOLUME_SECTOR_COUNT / FAT_VOLUME_SECTORS_PER_CLUSTER + FAT_ENTRIES_PER_SECTOR - 1) / FAT_ENTRIES_PER_SECTOR)
-#define NUMBER_OF_FAT_TABLE 2
-#define FAT_TABLE_AREA_SECTORS (FAT_TABLE_SECTORS * NUMBER_OF_FAT_TABLE)
-
 // FAT Directory
-#define ROOT_DIR_ENTRIES 10
+#define ROOT_DIR_ENTRIES (512)
 #define DIR_ENTRY_SIZE (sizeof(dir_entry_t))
 #define ROOT_DIR_SECTORS ((ROOT_DIR_ENTRIES * DIR_ENTRY_SIZE + FAT_VOLUME_SECTOR_SIZE - 1) / FAT_VOLUME_SECTOR_SIZE)
 
+// FAT Entries
+#define FAT_ENTRIES_PER_SECTOR (FAT_VOLUME_SECTOR_SIZE / sizeof(uint16_t)) // FAT16
+// FAT_TABLE_SECTORS should be ((10000 / 4 + 512 / 2 - 1) / (512 / 2)) = 10
+#define NUMBER_OF_FAT_TABLE 2
+#define FAT_TABLE_SECTORS (((FAT_VOLUME_SECTOR_COUNT - RESERVED_SECTORS - ROOT_DIR_SECTORS - 621 * NUMBER_OF_FAT_TABLE) / FAT_VOLUME_SECTORS_PER_CLUSTER + FAT_ENTRIES_PER_SECTOR - 1) / FAT_ENTRIES_PER_SECTOR)
+#define FAT_TABLE_AREA_SECTORS (FAT_TABLE_SECTORS * NUMBER_OF_FAT_TABLE)
+
 #define START_SECTOR_OF_FAT0 RESERVED_SECTORS
-#define START_SECTOR_OF_FAT1 (START_SECTOR_OF_FAT0 + FAT_TABLE_AREA_SECTORS)
-#define START_SECTOR_OF_ROOTDIR (START_SECTOR_OF_FAT0 + FAT_TABLE_AREA_SECTORS)
+#define START_SECTOR_OF_FAT1 (START_SECTOR_OF_FAT0 + FAT_TABLE_SECTORS)
+#define START_SECTOR_OF_ROOTDIR (START_SECTOR_OF_FAT1 + FAT_TABLE_SECTORS)
 #define START_SECTOR_OF_DATAAREA (START_SECTOR_OF_ROOTDIR + ROOT_DIR_SECTORS)
 
 #define FIRST_CLUSTER (0x0002)
 #define EMPTY_CLUSTER (0x0000)
 #define END_OF_CLUSTER (0xFFFF) // EOC Mark
 
-#define VOLUME_LABEL "KiCon2023"
+#define VOLUME_LABEL "KiCon2023  "
 #define USB_FLASH_START (uint32_t)(&__disk_start)
 #define USB_FLASH_END (uint32_t)(&__disk_end)
 
@@ -343,7 +343,7 @@ static const FAT_BootBlock BootBlock = {
     .SectorsPerCluster = FAT_VOLUME_SECTORS_PER_CLUSTER, // N32L40x Flash has 2K Page size
     .ReservedSectors = RESERVED_SECTORS,
     .FATCopies = 2,
-    .RootDirectoryEntries = (512),
+    .RootDirectoryEntries = ROOT_DIR_ENTRIES,
     .TotalSectors16 = FAT_VOLUME_SECTOR_COUNT,
     .MediaDescriptor = 0xF8,
     .FATSz16 = FAT_TABLE_SECTORS,
@@ -402,7 +402,7 @@ static const virtual_file_entry_t virtual_file_entries[] = {
   {
       .name = "README  TXT",
       .attrs = 0x01, // Read Only
-      .size = sizeof(readme_file_contents),
+      .size = sizeof(readme_file_contents) - 1,
       .start_of_cluster = README_FILE_START_CLUSTER,
       .clusters = README_FILE_CLUSTERS,
       .physical_addr = (uint32_t)readme_file_contents,
@@ -634,27 +634,25 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
             } // for: construct FAT for virtual files
             // use zero to fill the remaining sector in the buffer
             // restrict the filling within a size of sector
-            if (sector_size_sum > 0) {
-                uint32_t transferring_len =
-                    MIN(FAT_VOLUME_SECTOR_SIZE - sector_size_sum,
-                        length);
-                const uint32_t zero = 0;
-                usbd_transfer_op(buffer_access_addr,
-                                 (uint32_t)(&zero),
-                                 transferring_len, usbd_transfer_read,
-                                 usbd_transfer_no_inc);
+            uint32_t transferring_len =
+              MIN((FAT_TABLE_SECTORS - (sector - fat_start_sectors[fat_idx])) * FAT_VOLUME_SECTOR_SIZE - sector_size_sum,
+                  length);
+            const uint32_t zero = 0;
+            usbd_transfer_op(buffer_access_addr,
+                             (uint32_t)(&zero),
+                             transferring_len, usbd_transfer_read,
+                             usbd_transfer_no_inc);
 
-                assert_param(length >= transferring_len);
-                if (length > transferring_len) {
-                    length -= transferring_len;
-                } else {
-                    return 0;
-                }
-                disk_access_addr += transferring_len;
-                buffer_access_addr += transferring_len;
-                sector ++;
-                sector_size_sum = 0;
+            assert_param(length >= transferring_len);
+            if (length > transferring_len) {
+              length -= transferring_len;
+            } else {
+              return 0;
             }
+            disk_access_addr += transferring_len;
+            buffer_access_addr += transferring_len;
+            sector ++;
+            sector_size_sum = 0;
         } // if check start of sector
     } // for
 
@@ -688,10 +686,9 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
             dir_entry_idx ++;
         }
         static const max_dir_entries = MIN(ROOT_DIR_ENTRIES, sizeof(virtual_file_entries) / sizeof(virtual_file_entries[0]));
-        while (length > 0 && dir_entry_idx < max_dir_entries) {
-            virtual_file_entry_t vfile = virtual_file_entries[dir_entry_idx];
+        while (length > 0 && dir_entry_idx <= max_dir_entries) {
+            virtual_file_entry_t vfile = virtual_file_entries[dir_entry_idx - 1];
             dir_entry_t dir_entry = {
-                .name = vfile.name,
                 .attrs = vfile.attrs,
                 .highStartCluster = 0,
                 .startCluster = vfile.start_of_cluster,
@@ -700,7 +697,9 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
                 .updateTime = NOW,
                 .updateDate = TODAY,
                 .lastAccessDate = TODAY,
+                .size = vfile.size,
             };
+            memcpy(dir_entry.name, vfile.name, sizeof(dir_entry.name));
             const uint32_t transferring_len = MIN(sizeof(dir_entry), length);
             usbd_transfer_op(buffer_access_addr,
                              (uint32_t)&dir_entry,
@@ -726,10 +725,8 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
             // use zero to fill the remaining sector in the buffer
             // restrict the filling within a size of sector
             const uint32_t transferring_len =
-                MIN(START_SECTOR_OF_DATAAREA
-                    * FAT_VOLUME_SECTOR_SIZE
-                    - disk_access_addr,
-                    length);
+              MIN((START_SECTOR_OF_DATAAREA - sector) * FAT_VOLUME_SECTOR_SIZE,
+                  length);
             const uint32_t zero = 0;
             usbd_transfer_op(buffer_access_addr, (uint32_t)(&zero),
                              transferring_len, usbd_transfer_read,
@@ -760,13 +757,14 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
                  sizeof(virtual_file_entries) / sizeof(virtual_file_entries[0]);
              entry_idx++) {
             virtual_file_entry_t ventry = virtual_file_entries[entry_idx];
-            if ((ventry.start_of_cluster - FIRST_CLUSTER) * FAT_VOLUME_SECTORS_PER_CLUSTER <= sector
-                && sector < (ventry.start_of_cluster - FIRST_CLUSTER + ventry.clusters) * FAT_VOLUME_SECTORS_PER_CLUSTER) {
-                const uint32_t transferring_len =
-                    MIN(ventry.size - (sector - (ventry.start_of_cluster - FIRST_CLUSTER) * FAT_VOLUME_SECTORS_PER_CLUSTER),
-                        length);
+            const uint32_t ventry_offset_sector = (ventry.start_of_cluster - FIRST_CLUSTER) * FAT_VOLUME_SECTORS_PER_CLUSTER;
+            if (ventry_offset_sector <= sector
+                && sector < ventry_offset_sector + ventry.clusters * FAT_VOLUME_SECTORS_PER_CLUSTER) {
+              const uint32_t transferring_len =
+                MIN(ventry.size - (sector - ventry_offset_sector) * FAT_VOLUME_SECTOR_SIZE,
+                    length);
                 usbd_transfer_op(buffer_access_addr,
-                                 (uint32_t)ventry.physical_addr + sector * FAT_VOLUME_SECTOR_SIZE,
+                                 (uint32_t)ventry.physical_addr + (sector - ventry_offset_sector) * FAT_VOLUME_SECTOR_SIZE,
                                  transferring_len,
                                  usbd_transfer_read,
                                  usbd_transfer_inc);
@@ -785,17 +783,11 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
                 }
                 // finish transferring actual data
 
+                // just leave grabage data here
                 if (sector_size_sum > 0) {
-                    // use zero to fill the remaining sector in the buffer
-                    // restrict the filling within a size of sector
                     const uint32_t transferring_len =
                         MIN(FAT_VOLUME_SECTOR_SIZE - sector_size_sum,
                             length);
-                    const uint32_t zero = 0;
-                    usbd_transfer_op(buffer_access_addr, (uint32_t)(&zero),
-                                     transferring_len, usbd_transfer_read,
-                                     usbd_transfer_no_inc);
-
                     assert_param(length >= transferring_len);
                     if (length > transferring_len) {
                         length -= transferring_len;
