@@ -592,9 +592,8 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
                 virtual_file_entry_t ventry = virtual_file_entries[entry_idx];
                 for (uint32_t en_cls_idx = 0; en_cls_idx < ventry.clusters - 1; en_cls_idx++) {
                     cluster_id++;
-                    const uint16_t fat = cluster_id;
-                    const uint32_t transferring_len = MIN(sizeof(fat), length);
-                    usbd_transfer_op(buffer_access_addr, (uint32_t)&fat,
+                    const uint32_t transferring_len = MIN(sizeof(cluster_id), length);
+                    usbd_transfer_op(buffer_access_addr, (uint32_t)&cluster_id,
                                      transferring_len, usbd_transfer_read,
                                      usbd_transfer_inc);
                     assert_param(length >= transferring_len);
