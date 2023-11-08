@@ -18,3 +18,4 @@ source PyCortexMDebug/scripts/gdb.py
 svd_load svd/N32L406_with_core.svd
 
 # svd
+hb assert_failed
