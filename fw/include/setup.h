@@ -24,6 +24,8 @@
 // CherryUSB has macro definitions conflicted with <n32l40x.h>
 
 #define LED_PWM_CLOCK 2000 // Hz
+#define SK6812_PWM_CLOCK 833333 // Hz, 1.2us
+
 #define TIM_ADVANCED_PRESCALER (1)
 #define TIM_GENERIC_PRESCALER (0)
 

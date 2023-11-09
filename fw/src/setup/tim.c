@@ -2,15 +2,12 @@
 #include "setup.h"
 #include "led.h"
 #include <FreeRTOS.h>
+#include "tim.h"
+#include "sk6812.h"
 
-typedef enum TIM_OCChannels {
-  CH1 = 0x01,
-  CH2 = 0x02,
-  CH3 = 0x04,
-  CH4 = 0x08,
-} TIM_OCChannels;
 
-uint32_t TIM_Clk(TIM_Module *TIMx) {
+uint32_t
+TIM_Clk(TIM_Module *TIMx) {
 
   uint32_t TIMClk = 0;
 
@@ -120,7 +117,7 @@ static void TIMx_PWM_Config(TIM_Module *TIMx, uint8_t channels) {
   // TIM_EnableUpdateEvt_r(TIM1, ENABLE);
 }
 
-static void TIMx_GPIO_InitConfig(GPIO_InitType *initGPIO) {
+void TIMx_GPIO_InitConfig(GPIO_InitType *initGPIO) {
   GPIO_InitStruct(initGPIO);
   initGPIO->GPIO_Mode = GPIO_Mode_AF_PP;
   initGPIO->GPIO_Current = GPIO_DC_12mA;
@@ -239,6 +236,7 @@ static void TIM3_Config() {
   // TIM_SelectInputTrig(TIM3, TIM_TRIG_SEL_IN_TR0); // triggered from TIM1
 }
 
+
 static void TIM5_Config() {
   
   // TIM5_CH3(PA2) -> HighRow_Row_4
@@ -315,6 +313,7 @@ void TIM_Config() {
   TIM1_Config();
   // TIM2_Config();
   TIM3_Config();
+  TIM4_Config();
   // TIM5_Config();
   TIM8_Config();
   // TIM9_Config();
@@ -335,6 +334,12 @@ void TIM_Config() {
                        |TIM_INT_CC3
                        |TIM_INT_CC4);
   TIM_ClrIntPendingBit(TIM3,
+                       TIM_INT_UPDATE
+                       |TIM_INT_CC1
+                       |TIM_INT_CC2
+                       |TIM_INT_CC3
+                       |TIM_INT_CC4);
+  TIM_ClrIntPendingBit(TIM4,
                        TIM_INT_UPDATE
                        |TIM_INT_CC1
                        |TIM_INT_CC2
@@ -380,6 +385,11 @@ void TIM_Config() {
   TIM_SetCmp1(LED_LowSide_TIM, 0); // B
   TIM_SetCmp2(LED_LowSide_TIM, 0); // R
   TIM_SetCmp3(LED_LowSide_TIM, 0); // G
+
+  TIM_SetCmp1(LED_SAO_GPIO_TIM, 0); // SAO1 GPIO1
+  TIM_SetCmp2(LED_SAO_GPIO_TIM, 0); // SAO1 GPIO2
+  TIM_SetCmp3(LED_SAO_GPIO_TIM, 0); // SAO2 GPIO1
+  TIM_SetCmp4(LED_SAO_GPIO_TIM, 0); // SAO2 GPIO2
   
   // TIM_Enable(TIM2, ENABLE);
   TIM_Enable(LED_LowSide_TIM, ENABLE);

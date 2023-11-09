@@ -88,8 +88,9 @@ static inline void clear_display_ss(void) {
 static void send_cmd(uint16_t cmd) {
   // All Clear
   set_display_ss();
+  SPI_Enable(DISPLAY_SPI, ENABLE);
 
-#ifdef DISPLAY_USE_DMA
+#if 0 //DISPLAY_USE_DMA
   DMA_DeInit(DISPLAY_SPI_DMA_CHANNEL);
 
   DMA_InitType dmaInit;
@@ -108,8 +109,6 @@ static void send_cmd(uint16_t cmd) {
   dmaInit.Priority = DMA_PRIORITY_LOW;
 
   DMA_Init(DISPLAY_SPI_DMA_CHANNEL, &dmaInit);
-
-  SPI_Enable(DISPLAY_SPI, ENABLE);
 
   SPI_I2S_EnableDma(DISPLAY_SPI, SPI_I2S_DMA_TX, ENABLE);
   DMA_RequestRemap(DISPLAY_SPI_DMA_CHANNEL_REMAP, DMA, DISPLAY_SPI_DMA_CHANNEL, ENABLE);
