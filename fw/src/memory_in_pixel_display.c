@@ -117,7 +117,6 @@ static void send_cmd(uint16_t cmd) {
 
   wait_for_transmission_completion();
 #else
-  SPI_Enable(DISPLAY_SPI, ENABLE);
   SPI_I2S_TransmitData(
                        DISPLAY_SPI, &cmd);
   wait_for_spi_completion();
@@ -203,9 +202,8 @@ void DisplayTransferLines_DMA(uint8_t first_row, uint8_t rows) {
   DMA_RequestRemap(DISPLAY_SPI_DMA_CHANNEL_REMAP, DMA, DISPLAY_SPI_DMA_CHANNEL, ENABLE);
   DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, ENABLE);
 
-#ifdef DISPLAY_USE_DMA
   wait_for_transmission_completion();
-#endif
+
   clear_display_ss();
 
   GPIO_ResetBits(DISP_SS_PORT, DISP_SS_PIN);
