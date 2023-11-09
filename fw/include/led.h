@@ -1,5 +1,5 @@
-#ifndef TIM_H
-#define TIM_H
+#ifndef LED_H
+#define LED_H
 
 #include <stdint.h>
 
@@ -10,6 +10,8 @@
 #define LED_Main_TIM TIM1
 #define LED_SPEED 20
 
+#define LED_SAO_GPIO_TIM TIM4
+
 void LED_Config(void);
 
-#endif // TIM_H
+#endif // LED_H
