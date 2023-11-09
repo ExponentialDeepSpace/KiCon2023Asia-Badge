@@ -19,3 +19,4 @@ production
 *.pckl
 place_footprints.ini
 *~
+*.BIN
