@@ -20,15 +20,19 @@ l2 = ttk.Label(frame)
 l2.grid(column=0, row=1, columnspan=4)
 
 
-design_rpath = Path("Design/820x205_small.png")
+# design_rpath = Path("Design/820x205_small.png")
+# design_rpath = Path("Design/bg_8color.png")
+design_rpath = Path("Design/bg_8color_2.png")
 src_rpath = Path("fw/src/generated_image.c")
 header_rpath = Path("fw/include/generated_image.h")
+bin_rpath = Path("BG.BIN")
 
 py_file = Path(__file__).resolve()
 p = py_file.parent.parent.joinpath(design_rpath)
 
 header_file = py_file.parent.parent.joinpath(header_rpath)
 src_file = py_file.parent.parent.joinpath(src_rpath)
+bin_file = py_file.parent.parent.joinpath(bin_rpath)
 
 im = PImage.open(p)
 stdimg = ImageTk.PhotoImage(im)
@@ -46,7 +50,10 @@ b_val.set(128)
 im2 = None
 
 def update_image():
-    r, g, b, a = im.split()
+    if im.mode is "RGBA":
+        r, g, b, _ = im.split()
+    elif im.mode is "RGB":
+        r, g, b = im.split()
 
     # the resulting 1 bit color 
     R=250
@@ -105,6 +112,7 @@ def save_callback():
     sz = im2.size
     # 4-bit mode data
     buffer = io.StringIO()
+    binary_buffer = io.BytesIO()
     
     buffer.write("#ifndef GENERATED_IMAGE\n")
     buffer.write("#define GENERATED_IMAGE\n")
@@ -131,6 +139,8 @@ def save_callback():
     for x in range(0, width):
         buffer.write(" // row {}\n{{".format(x+1))
         buffer.write("0x{row:04x},".format(row=x+1))
+        binary_buffer.write((x+1).to_bytes(2))
+
         for y in range(0, height):
             pixels = []
             pixels.append(im2.getpixel((width - 1 - x, y * 4 + 0)))
@@ -146,12 +156,16 @@ def save_callback():
                         p = 0
                     d = d | (p << ((3-i) + 4 * (3-ip)))
             buffer.write("0x{data:04x},".format(data=d))
+            binary_buffer.write(d.to_bytes(2))
         buffer.write("},\n")
 
     buffer.write("}};\n".format(width=sz[0]/4, height=sz[1]))
 
     with open(src_file, "w", encoding="utf-8") as f:
         f.write(buffer.getvalue())
+
+    with open(bin_file, "wb") as f:
+        f.write(binary_buffer.getvalue())
 
 save_btn = ttk.Button(content, text="Save", command=save_callback)
 save_btn.grid(column=1, row=5)
