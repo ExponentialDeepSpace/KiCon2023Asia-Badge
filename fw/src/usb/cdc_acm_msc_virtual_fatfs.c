@@ -890,15 +890,15 @@ int usbd_msc_sector_write(uint32_t sector, uint8_t *buffer, uint32_t length)
         sector < fat_start_sectors[fat_idx + 1]) {
       sector += FAT_TABLE_SECTORS;
       transferring_len = FAT_TABLE_SECTORS * FAT_VOLUME_SECTOR_SIZE;
+      if (true == start_write) {
+        start_write = false;
+        first_sector = 0;
+      }
       if (length > transferring_len) {
         length -= transferring_len;
         buffer_access_addr += transferring_len;
       } else {
         return 0;
-      }
-      if (true == start_write) {
-        start_write = false;
-        first_sector = 0;
       }
     }
   }
