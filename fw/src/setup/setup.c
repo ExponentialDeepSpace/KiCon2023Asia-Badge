@@ -120,4 +120,6 @@ void Setup() {
 
   TIM_Config();
   LED_Config();
+
+  FLASH_ClockInit();
 }

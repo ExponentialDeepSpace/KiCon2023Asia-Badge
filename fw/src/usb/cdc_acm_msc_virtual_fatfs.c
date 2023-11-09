@@ -29,6 +29,8 @@
 #include "setup.h"
 #include <string.h>
 
+#define FLASH_PROGRAM_TIMEOUT ((uint32_t)0x00002000)
+
 /*!< endpoint address */
 #define CDC_IN_EP  0x81
 #define CDC_OUT_EP 0x02
@@ -299,7 +301,9 @@ typedef struct {
 extern char __disk_start;
 extern char __disk_end;
 extern char __bg_image_start;
+extern char _Bg_Image_Size;
 extern char __name_image_start;
+extern char _Name_Image_Size;
 extern char _Sector_Size;
 extern char _Sectors_Per_Cluster;
 
@@ -334,7 +338,7 @@ extern char _Sectors_Per_Cluster;
 #define EMPTY_CLUSTER (0x0000)
 #define END_OF_CLUSTER (0xFFFF) // EOC Mark
 
-#define VOLUME_LABEL "KiCon2023  "
+#define VOLUME_LABEL "KiCon 2023 "
 #define USB_FLASH_START (uint32_t)(&__disk_start)
 #define USB_FLASH_END (uint32_t)(&__disk_end)
 #define LD_DEFINED_SECTOR_SIZE (uint32_t)(&_Sector_Size)
@@ -346,7 +350,7 @@ extern char _Sectors_Per_Cluster;
 
 static const FAT_BootBlock BootBlock = {
     .JumpInstruction = {0xeb, 0x3c, 0x90},
-    .OEMInfo = "KiCon2023 ",
+    .OEMInfo = "Exp Deep",
     .SectorSize = FAT_VOLUME_SECTOR_SIZE,
     .SectorsPerCluster = FAT_VOLUME_SECTORS_PER_CLUSTER, // N32L40x Flash has 2K Page size
     .ReservedSectors = RESERVED_SECTORS,
@@ -357,6 +361,7 @@ static const FAT_BootBlock BootBlock = {
     .FATSz16 = FAT_TABLE_SECTORS,
     .SectorsPerTrack = 1,
     .Heads = 1,
+    .Reserved = 0,
     .ExtendedBootSig = 0x29,
     .VolumeLabel = VOLUME_LABEL,
     .VolumeSerialNumber = 0x00420042,
@@ -372,13 +377,14 @@ static const FAT_BootBlock BootBlock = {
 #define README_FILE_SECTORS ((README_FILE_SIZE + FAT_VOLUME_SECTOR_SIZE - 1) / FAT_VOLUME_SECTOR_SIZE)
 #define README_FILE_CLUSTERS ((README_FILE_SECTORS + FAT_VOLUME_SECTORS_PER_CLUSTER - 1) / FAT_VOLUME_SECTORS_PER_CLUSTER)
 
-#define BG_IMAGE_BIN_FILE_SIZE (72*288/2)
+#define BG_IMAGE_BIN_FILE_SIZE ((72 / 4 + 1) * 288 * 2)
 #define BG_IMAGE_BIN_FILE_SECTORS ((BG_IMAGE_BIN_FILE_SIZE + FAT_VOLUME_SECTOR_SIZE - 1) / FAT_VOLUME_SECTOR_SIZE)
 #define BG_IMAGE_BIN_FILE_CLUSTERS ((BG_IMAGE_BIN_FILE_SECTORS + FAT_VOLUME_SECTORS_PER_CLUSTER - 1) / FAT_VOLUME_SECTORS_PER_CLUSTER)
 #define BG_IMAGE_BIN_FILE_START_CLUSTER (README_FILE_START_CLUSTER + README_FILE_CLUSTERS) // First Cluster (2) is occupied by Read only Text File
 #define BG_IMAGE_BIN_FILE_PHYSICAL_ADDR (uint32_t)(&__bg_image_start)
+#define BG_IMAGE_BIN_FILE_IDX 1
 
-#define NAME_IMAGE_BIN_FILE_SIZE (72*144/2)
+#define NAME_IMAGE_BIN_FILE_SIZE ((72 / 4 + 1) * 144 * 2)
 #define NAME_IMAGE_BIN_FILE_SECTORS ((NAME_IMAGE_BIN_FILE_SIZE + FAT_VOLUME_SECTOR_SIZE - 1) / FAT_VOLUME_SECTOR_SIZE)
 #define NAME_IMAGE_BIN_FILE_CLUSTERS ((NAME_IMAGE_BIN_FILE_SECTORS + FAT_VOLUME_SECTORS_PER_CLUSTER - 1) / FAT_VOLUME_SECTORS_PER_CLUSTER)
 #define NAME_IMAGE_BIN_FILE_START_CLUSTER (BG_IMAGE_BIN_FILE_START_CLUSTER + BG_IMAGE_BIN_FILE_CLUSTERS)
@@ -399,7 +405,7 @@ static const dir_entry_t root_entry = {
 };
 
 static const char readme_file_contents[] = \
-  "Welcome to KiCon2023 Asia!\r\n"         \
+  "Welcome to KiCon 2023 Asia!\r\n"         \
   "BG.BIN is the KiCon logo bitmap file, the dimension is 72 x 288 (pixels), the size is (72 / 4 + 1) x 288 x 2 = 10944 bytes \r\n" \
   "NAME.BIN is your name bitmap file, the dimension is 72 x 144 (pixels), the size is (72 / 4 + 1) x 144 x 2 = 5472 bytes";
 
@@ -412,7 +418,7 @@ typedef struct virtual_file_entry_t {
     uint32_t physical_addr;
 } virtual_file_entry_t;
 
-static const virtual_file_entry_t virtual_file_entries[] = {
+static virtual_file_entry_t virtual_file_entries[] = {
   {
       .name = "README  TXT",
       .attrs = 0x01, // Read Only
@@ -429,6 +435,7 @@ static const virtual_file_entry_t virtual_file_entries[] = {
       .clusters = BG_IMAGE_BIN_FILE_CLUSTERS,
       .physical_addr = BG_IMAGE_BIN_FILE_PHYSICAL_ADDR,
   },
+#if 0
   {
       .name = "NAME    BIN",
       .attrs = 0x00,
@@ -437,6 +444,7 @@ static const virtual_file_entry_t virtual_file_entries[] = {
       .clusters = NAME_IMAGE_BIN_FILE_CLUSTERS,
       .physical_addr = NAME_IMAGE_BIN_FILE_PHYSICAL_ADDR,
   },
+#endif
 };
 
 // manually crafted FAT
@@ -447,6 +455,8 @@ void usbd_msc_get_cap(uint8_t lun, uint32_t *block_num,
                         uint16_t *block_size) {
   assert_param(FAT_VOLUME_SECTOR_SIZE == LD_DEFINED_SECTOR_SIZE);
   assert_param(FAT_VOLUME_SECTORS_PER_CLUSTER == LD_DEFINED_SECTORS_PER_CLUSTER);
+  assert_param(BG_IMAGE_BIN_FILE_SIZE == ((uint32_t)&_Bg_Image_Size));
+  assert_param(NAME_IMAGE_BIN_FILE_SIZE == ((uint32_t)&_Name_Image_Size));
 
   *block_num = FAT_VOLUME_SECTOR_COUNT;
   *block_size = FAT_VOLUME_SECTOR_SIZE;
@@ -503,7 +513,7 @@ usbd_transfer_op(const uint32_t memory_addr,
         dmaInit.PeriphAddr = disk_access_addr;
         dmaInit.PeriphInc = (usbd_transfer_inc == inc) ? DMA_PERIPH_INC_ENABLE : DMA_PERIPH_INC_DISABLE;
         dmaInit.PeriphDataSize = DMA_PERIPH_DATA_SIZE_WORD;
-        dmaInit.Direction = (dir == usbd_transfer_read) ? DMA_DIR_PERIPH_SRC : DMA_DIR_PERIPH_SRC;
+        dmaInit.Direction = (dir == usbd_transfer_read) ? DMA_DIR_PERIPH_SRC : DMA_DIR_PERIPH_DST;
         dmaInit.MemAddr = memory_access_addr;
         dmaInit.BufSize = word_length;
         dmaInit.Mem2Mem = DMA_M2M_ENABLE;
@@ -514,12 +524,23 @@ usbd_transfer_op(const uint32_t memory_addr,
 
         DMA_Init(DISK_DMA_CHANNEL, &dmaInit);
         DMA_ClearFlag(DISK_DMA_CHANNEL, DISK_DMA_FLG_TXC);
+
+        if (usbd_transfer_write == dir) {
+          FLASH_ClearFlag(FLASH_STS_CLRFLAG);
+          FLASH_WaitForLastOpt(FLASH_PROGRAM_TIMEOUT);
+          FLASH->CTRL |= FLASH_CTRL_PG;
+        }
+
         DMA_EnableChannel(DISK_DMA_CHANNEL, ENABLE);
 
         int ret = usb_osal_sem_take(usb_dma_sem, 1); // 1 ms
         remaining_length -= word_length * 4;
         disk_access_addr += word_length * 4;
         memory_access_addr += word_length * 4;
+
+        if (usbd_transfer_write == dir) {
+          FLASH_STS sts = FLASH_WaitForLastOpt(FLASH_PROGRAM_TIMEOUT);
+        }
     }
 
     assert_param(remaining_length < GUESSED_OPTIMUM_MIN_DMA_SIZE);
@@ -716,11 +737,10 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
                 sector += sector_size_sum / FAT_VOLUME_SECTOR_SIZE;
                 sector_size_sum = sector_size_sum % FAT_VOLUME_SECTOR_SIZE;
             }
-            dir_entry_idx ++;
         }
         static const max_dir_entries = MIN(ROOT_DIR_ENTRIES, sizeof(virtual_file_entries) / sizeof(virtual_file_entries[0]));
-        while (length > 0 && dir_entry_idx <= max_dir_entries) {
-            virtual_file_entry_t vfile = virtual_file_entries[dir_entry_idx - 1];
+        while (length > 0 && dir_entry_idx < max_dir_entries) {
+            virtual_file_entry_t vfile = virtual_file_entries[dir_entry_idx];
             dir_entry_t dir_entry = {
                 .attrs = vfile.attrs,
                 .highStartCluster = 0,
@@ -840,7 +860,156 @@ int usbd_msc_sector_read(uint32_t sector, uint8_t *buffer, uint32_t length)
 
 int usbd_msc_sector_write(uint32_t sector, uint8_t *buffer, uint32_t length)
 {
-  uint8_t * start_addr =(uint8_t *) __disk_start + sector * FAT_VOLUME_SECTOR_SIZE;
+  uint32_t buffer_access_addr = (uint32_t)buffer;
+  uint32_t sector_size_sum = 0;
+  uint32_t transferring_len = 0;
+
+  static bool start_write = false;
+  static uint32_t first_sector = 0;
+  
+  // Boot Sector
+  if (0 == sector) {
+    FAT_BootBlock *boot = (FAT_BootBlock *)buffer;
+    sector += RESERVED_SECTORS;
+    transferring_len = RESERVED_SECTORS * FAT_VOLUME_SECTOR_SIZE;
+    if (length > transferring_len) {
+      length -= transferring_len;
+      buffer_access_addr += transferring_len;
+    } else {
+      return 0;
+    }
+  }
+
+  const uint16_t fat_start_sectors[3] = {
+    START_SECTOR_OF_FAT0,
+    START_SECTOR_OF_FAT1,
+    START_SECTOR_OF_ROOTDIR,        
+  };
+  for (int fat_idx = 0; fat_idx < 2; fat_idx++) {
+    if (fat_start_sectors[fat_idx] <= sector &&
+        sector < fat_start_sectors[fat_idx + 1]) {
+      sector += FAT_TABLE_SECTORS;
+      transferring_len = FAT_TABLE_SECTORS * FAT_VOLUME_SECTOR_SIZE;
+      if (length > transferring_len) {
+        length -= transferring_len;
+        buffer_access_addr += transferring_len;
+      } else {
+        return 0;
+      }
+      if (true == start_write) {
+        start_write = false;
+        first_sector = 0;
+      }
+    }
+  }
+
+  // Directory Entries
+  if (START_SECTOR_OF_ROOTDIR <= sector && sector < START_SECTOR_OF_DATAAREA) {
+    for (uint32_t idx = 0;
+         idx < (START_SECTOR_OF_DATAAREA - START_SECTOR_OF_ROOTDIR) *
+                 FAT_VOLUME_SECTOR_SIZE / sizeof(dir_entry_t);
+         idx++) {
+      dir_entry_t * write_entry = ((dir_entry_t *)buffer) + idx;
+      if (0 == write_entry->name[0]) {
+        break;
+      }
+      for (uint32_t entry_idx = 0;
+           entry_idx <
+             sizeof(virtual_file_entries) / sizeof(virtual_file_entries[0]);
+           entry_idx++) {
+        virtual_file_entry_t ventry = virtual_file_entries[entry_idx];
+
+        if (0 == strncmp(write_entry->name, ventry.name, sizeof(ventry.name))) {
+          ventry.start_of_cluster = write_entry->startCluster;
+        }
+      }
+    }
+
+    sector += ROOT_DIR_SECTORS;
+    transferring_len = ROOT_DIR_SECTORS * FAT_VOLUME_SECTOR_SIZE;
+    if (length > transferring_len) {
+      length -= transferring_len;
+      buffer_access_addr += transferring_len;
+    } else {
+      return 0;
+    }
+  } // ROOT Dir Sector
+  
+  if (sector > FAT_VOLUME_SECTOR_COUNT ||
+      sector + FAT_VOLUME_SECTOR_SIZE + length >
+          FAT_VOLUME_SECTOR_COUNT * FAT_VOLUME_SECTOR_SIZE) {
+    return -1;
+  }
+  // the write opeartion to override an existed file, it seems
+  // system doesn't override the original data sectors, but
+  // allocate new sectors
+  sector -= START_SECTOR_OF_DATAAREA;
+#if 0
+  for (uint32_t entry_idx = 0;
+       entry_idx <
+         sizeof(virtual_file_entries) / sizeof(virtual_file_entries[0]);
+       entry_idx++) {
+    virtual_file_entry_t ventry = virtual_file_entries[entry_idx];
+    const uint32_t ventry_offset_sector = (ventry.start_of_cluster - FIRST_CLUSTER) * FAT_VOLUME_SECTORS_PER_CLUSTER;
+    if (ventry_offset_sector <= sector
+        && sector < ventry_offset_sector + ventry.clusters * FAT_VOLUME_SECTORS_PER_CLUSTER) {
+      const uint32_t transferring_len =
+        MIN(ventry.size - (sector - ventry_offset_sector) * FAT_VOLUME_SECTOR_SIZE,
+            length);
+      FLASH_Unlock();
+      usbd_transfer_op(buffer_access_addr,
+                       (uint32_t)ventry.physical_addr + (sector - ventry_offset_sector) * FAT_VOLUME_SECTOR_SIZE,
+                       transferring_len,
+                       usbd_transfer_write,
+                       usbd_transfer_inc);
+      FLASH_Lock();
+      assert_param(length >= transferring_len);
+      if (length > transferring_len) {
+        length -= transferring_len;
+      } else {
+        return 0;
+      }
+      buffer_access_addr += transferring_len;
+      sector_size_sum += transferring_len;
+      if (sector_size_sum >= FAT_VOLUME_SECTOR_SIZE) {
+        sector += sector_size_sum / FAT_VOLUME_SECTOR_SIZE;
+        sector_size_sum = sector_size_sum % FAT_VOLUME_SECTOR_SIZE;
+      }
+    }
+
+  }
+#endif
+  if (length > 0) {
+    // System will first write data then update Dir Entries
+    if (false == start_write) {
+      start_write = true;
+      first_sector = sector;
+    }
+
+    // I cannot ensure what file the system is writing
+    virtual_file_entry_t ventry = virtual_file_entries[BG_IMAGE_BIN_FILE_IDX];
+    const uint32_t transferring_len =
+      MIN(ventry.size - (sector - first_sector) * FAT_VOLUME_SECTOR_SIZE,
+          length);
+
+#if 0
+    const uint32_t ventry_offset_sector = (ventry.start_of_cluster - FIRST_CLUSTER) * FAT_VOLUME_SECTORS_PER_CLUSTER;
+    const uint32_t transferring_len =
+      MIN(ventry.size - (sector - ventry_offset_sector) * FAT_VOLUME_SECTOR_SIZE,
+          length);
+    const uint32_t page_addr = ventry.physical_addr + (sector - ventry_offset_sector) * FAT_VOLUME_SECTOR_SIZE;
+#endif
+
+    const uint32_t page_addr = ventry.physical_addr + (sector - first_sector) * FAT_VOLUME_SECTOR_SIZE;
     
+    if (page_addr < USB_FLASH_END) {
+      FLASH_Unlock();
+      FLASH_EraseOnePage(page_addr);
+      usbd_transfer_op(buffer_access_addr, page_addr, transferring_len,
+                       usbd_transfer_write, usbd_transfer_inc);
+      FLASH_Lock();
+    }
+  }
+
   return 0;
 }
