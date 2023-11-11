@@ -32,6 +32,7 @@ static void
 RCC_Config() {
   RCC_EnableAHBPeriphClk(RCC_AHB_PERIPH_DMA, ENABLE);
   RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_I2C1
+                          |RCC_APB1_PERIPH_TIM3
                           |RCC_APB1_PERIPH_TIM4
                           , ENABLE);
   RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOA
@@ -90,11 +91,11 @@ static void GPIO_IO_Config() {
   initGPIO.GPIO_Current = GPIO_DC_8mA;
 
   // PB4/5 for EVB testing
-  initGPIO.Pin = GPIO_PIN_4 | GPIO_PIN_5;
-  initGPIO.GPIO_Pull = GPIO_No_Pull;
-  initGPIO.GPIO_Mode = GPIO_Mode_Out_PP;
-  initGPIO.GPIO_Current = GPIO_DC_8mA;
-  GPIO_InitPeripheral(GPIOB, &initGPIO);
+  // initGPIO.Pin = GPIO_PIN_4 | GPIO_PIN_5;
+  // initGPIO.GPIO_Pull = GPIO_No_Pull;
+  // initGPIO.GPIO_Mode = GPIO_Mode_Out_PP;
+  // initGPIO.GPIO_Current = GPIO_DC_8mA;
+  // GPIO_InitPeripheral(GPIOB, &initGPIO);
 }
 
 static void GPIO_Config() {

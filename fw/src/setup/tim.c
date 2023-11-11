@@ -313,7 +313,7 @@ void TIM_Config() {
   TIM1_Config();
   // TIM2_Config();
   TIM3_Config();
-  TIM4_Config();
+  SK6812_Config();
   // TIM5_Config();
   TIM8_Config();
   // TIM9_Config();
@@ -386,14 +386,10 @@ void TIM_Config() {
   TIM_SetCmp2(LED_LowSide_TIM, 0); // R
   TIM_SetCmp3(LED_LowSide_TIM, 0); // G
 
-  TIM_SetCmp1(LED_SAO_GPIO_TIM, 0); // SAO1 GPIO1
-  TIM_SetCmp2(LED_SAO_GPIO_TIM, 0); // SAO1 GPIO2
-  TIM_SetCmp3(LED_SAO_GPIO_TIM, 0); // SAO2 GPIO1
-  TIM_SetCmp4(LED_SAO_GPIO_TIM, 0); // SAO2 GPIO2
-  
   // TIM_Enable(TIM2, ENABLE);
   TIM_Enable(LED_LowSide_TIM, ENABLE);
   TIM_Enable(TIM3, ENABLE); // for DISP COM IN
+  TIM_Enable(LED_SAO_GPIO_TIM, ENABLE);
   // TIM_Enable(TIM5, ENABLE);
   // TIM_Enable(TIM8, ENABLE);
   // TIM_Enable(TIM9, ENABLE);
