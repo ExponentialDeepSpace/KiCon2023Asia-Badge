@@ -24,7 +24,7 @@
 // To make setup.h independent to all components
 // CherryUSB has macro definitions conflicted with <n32l40x.h>
 
-#define USE_PAUL_HAT
+// #define USE_PAUL_HAT
 
 #define LED_PWM_CLOCK 2000 // Hz
 #define SK6812_PWM_CLOCK 833333 // Hz, 1.2us

@@ -121,9 +121,9 @@ void Setup() {
 
   TIM_Config();
 
-#ifndef USE_PAUL_HAT
   LED_Config();
 
+#ifndef USE_PAUL_HAT
   FLASH_ClockInit();
 #endif
 }

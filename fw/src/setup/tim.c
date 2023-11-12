@@ -96,18 +96,22 @@ static void TIMx_PWM_Config(TIM_Module *TIMx, uint8_t channels) {
   if (channels & CH1) {
     TIM_InitOc1(TIMx, &ocInit);
     TIM_ConfigOc1Fast(TIMx, TIM_OC_FAST_ENABLE);
+    TIM_SetCmp1(TIMx, 0);
   }
   if (channels & CH2) {
     TIM_InitOc2(TIMx, &ocInit);
     TIM_ConfigOc2Fast(TIMx, TIM_OC_FAST_ENABLE);
+  TIM_SetCmp3(TIMx, 0);
   }
   if (channels & CH3) {
     TIM_InitOc3(TIMx, &ocInit);
     TIM_ConfigOc3Fast(TIMx, TIM_OC_FAST_ENABLE);
+    TIM_SetCmp3(TIMx, 0);
   }
   if (channels & CH4) {
     TIM_InitOc4(TIMx, &ocInit);
     TIM_ConfigOc4Fast(TIMx, TIM_OC_FAST_ENABLE);
+    TIM_SetCmp4(TIMx, 0);
   }
 
   TIM_ConfigArPreload(TIMx, DISABLE);
@@ -133,7 +137,9 @@ static void TIM1_Config() {
   GPIO_InitPeripheral(GPIOA, &initGPIO);
 
   TIMx_PWM_Config(TIM1, (uint8_t)(CH1|CH2|CH3));
+#ifndef USE_PAUL_HAT
   TIM_ConfigInt(TIM1, TIM_INT_UPDATE|TIM_INT_CC1, ENABLE);
+#endif // USE_PAUL_HAT
 
   // Master Trigger
   TIM_SelectOutputTrig(TIM1, TIM_TRGO_SRC_ENABLE);
@@ -307,17 +313,11 @@ void TIM_Config() {
   TIM1_Config();
 #ifdef USE_PAUL_HAT
   SK6812_Config();
-#else
-  // TIM2_Config();
+#endif
   
   TIM3_Config();
-  // TIM5_Config();
   TIM8_Config();
-  // TIM9_Config();
 
-  // TIM_DMA_Config();
-  // DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
-#endif
   TIM_ClrIntPendingBit(TIM1,
                        TIM_INT_UPDATE
                        |TIM_INT_CC1
