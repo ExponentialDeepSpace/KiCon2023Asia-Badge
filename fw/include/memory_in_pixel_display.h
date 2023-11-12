@@ -27,10 +27,8 @@
 #define DISP_HEIGHT (144)
 #define DISP_FIRST_LINE (1)
 
-#define Display_DMA_IRQHandler DMA_Channel2_IRQHandler
-#define Display_SPI_IRQHandler SPI1_IRQHandler
-#define DISPLAY_STACK_SIZE 400
-#define tskDisplay_PRIORITY 3
+#define DISPLAY_STACK_SIZE 800
+#define tskDisplay_PRIORITY 4
 
 extern TaskHandle_t DisplayTaskHandle;
 extern StaticTask_t xDisplayTaskBuffer;

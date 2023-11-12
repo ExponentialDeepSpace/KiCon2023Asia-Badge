@@ -43,7 +43,7 @@ StaticTask_t xDisplayTaskBuffer;
 StackType_t xDisplayStack[ DISPLAY_STACK_SIZE ];
 
 void DisplayBufferInit() {
-  memset(DisplayBuffer, 0x0000, sizeof(DisplayBuffer));
+  memset(DisplayBuffer, 0xff, sizeof(DisplayBuffer));
 
   assert(LINE_WIDTH_HALFWORDS == IMAGE_ROW_LENGTH);
   memcpy(DisplayBuffer, image + 0 * IMAGE_ROW_LENGTH, sizeof(uint16_t) * DISP_HEIGHT * IMAGE_ROW_LENGTH);
@@ -63,7 +63,9 @@ static inline void wait_for_spi_completion() {
 }
 
 static void wait_for_transmission_completion() {
-  ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+  // ulTaskNotifyTake(pdTRUE, 10 / portTICK_PERIOD_MS);
+  // ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+  while (!DMA_GetFlagStatus(DISPLAY_DMA_INT_TXC, DMA));
   wait_for_spi_completion();
 }
 
@@ -179,36 +181,27 @@ void DisplayTransferLines_DMA(uint8_t first_row, uint8_t rows) {
   DMA_StructInit(&dmaInit);
 
   DMA_DeInit(DISPLAY_SPI_DMA_CHANNEL);
-  
+
   dmaInit.PeriphAddr = (uint32_t)&DISPLAY_SPI->DAT;
   dmaInit.PeriphInc = DMA_PERIPH_INC_DISABLE;
   dmaInit.PeriphDataSize = DMA_PERIPH_DATA_SIZE_HALFWORD;
   dmaInit.Direction = DMA_DIR_PERIPH_DST;
-  dmaInit.MemAddr = (uint32_t)buf;
+  dmaInit.MemAddr = (uint32_t)&buf;
   dmaInit.BufSize = rows * LINE_WIDTH_HALFWORDS + 1;
   dmaInit.Mem2Mem = DMA_M2M_DISABLE;
   dmaInit.MemDataSize = DMA_MemoryDataSize_HalfWord;
   dmaInit.DMA_MemoryInc = DMA_MEM_INC_ENABLE;
   dmaInit.CircularMode = DMA_MODE_NORMAL;
-  dmaInit.Priority = DMA_PRIORITY_HIGH;
+  dmaInit.Priority = DMA_PRIORITY_VERY_HIGH;
 
   DMA_Init(DISPLAY_SPI_DMA_CHANNEL, &dmaInit);
 
-  SPI_Enable(DISPLAY_SPI, ENABLE);
   set_display_ss();
 
+  SPI_Enable(DISPLAY_SPI, ENABLE);
+  
   SPI_I2S_EnableDma(DISPLAY_SPI, SPI_I2S_DMA_TX, ENABLE);
-  DMA_RequestRemap(DISPLAY_SPI_DMA_CHANNEL_REMAP, DMA, DISPLAY_SPI_DMA_CHANNEL, ENABLE);
   DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, ENABLE);
-
-  wait_for_transmission_completion();
-
-  clear_display_ss();
-
-  GPIO_ResetBits(DISP_SS_PORT, DISP_SS_PIN);
-  DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, DISABLE);
-  SPI_Enable(DISPLAY_SPI, DISABLE);
-  SPI_I2S_EnableDma(DISPLAY_SPI, SPI_I2S_DMA_TX, DISABLE);
 
   DisplayBuffer[(first_row - 1) * LINE_WIDTH_HALFWORDS] = first_row;
   DisplayBuffer[(last_row - 1) * LINE_WIDTH_HALFWORDS] = last_row;
@@ -275,7 +268,7 @@ void prvDisplayTask(void *pvParameters) {
       vTaskDelay(500 / portTICK_PERIOD_MS);
     }
     */
-    assert(line > 0 && line <= DISP_HEIGHT);
+    assert_param(line > 0 && line <= DISP_HEIGHT);
     const uint16_t * imagep = image;
     memcpy(DisplayBuffer, imagep + (line - 1) * IMAGE_ROW_LENGTH, sizeof(uint16_t) * DISP_HEIGHT * IMAGE_ROW_LENGTH);
     for (int i = 0 * LINE_WIDTH_HALFWORDS + 1; i < LINE_WIDTH_HALFWORDS; i++) {
@@ -290,7 +283,16 @@ void prvDisplayTask(void *pvParameters) {
     if (line == DISP_HEIGHT || 1 == line) {
       direction = -direction;
     }
-    
+
+#ifdef DISPLAY_USE_DMA
+    wait_for_transmission_completion();
+
+    clear_display_ss();
+
+    GPIO_ResetBits(DISP_SS_PORT, DISP_SS_PIN);
+    SPI_Enable(DISPLAY_SPI, DISABLE);
+#endif
+
     vTaskDelayUntil(&last, 1 /*1000 / portTICK_PERIOD_MS*/);
 
     /*
@@ -308,16 +310,6 @@ void prvDisplayTask(void *pvParameters) {
 }
 
 void Display_SPI_IRQHandler(void) {
-  if (SPI_I2S_GetStatus(DISPLAY_SPI, SPI_MODERR_FLAG) != 0) {
-    while (1)
-      ;
-  } else if( SPI_I2S_GetStatus(DISPLAY_SPI, SPI_I2S_TE_FLAG) != 0) {
-    int i = 0;
-    i ++;
-  } else {
-    int i = 0;
-    i ++;
-  }
 }
 
 void Display_DMA_IRQHandler(void) {
@@ -374,12 +366,12 @@ static void Display_GPIO_Config() {
   GPIO_InitPeripheral(DISP_DISP_PORT, &initValue);
 
   // Setup PB1 for EXT COM IN
-  // initValue.Pin = DISP_COM_PIN;
-  // initValue.GPIO_Current = GPIO_DC_4mA;
-  // initValue.GPIO_Mode = GPIO_Mode_AF_PP;
-  // initValue.GPIO_Pull = GPIO_Pull_Up;
-  // initValue.GPIO_Alternate = DISP_COM_AF;
-  // GPIO_InitPeripheral(DISP_COM_PORT, &initValue);
+  initValue.Pin = DISP_COM_PIN;
+  initValue.GPIO_Current = GPIO_DC_4mA;
+  initValue.GPIO_Mode = GPIO_Mode_AF_PP;
+  initValue.GPIO_Pull = GPIO_Pull_Up;
+  initValue.GPIO_Alternate = DISP_COM_AF;
+  GPIO_InitPeripheral(DISP_COM_PORT, &initValue);
 }
 
 static void Display_SPI_Config() {
@@ -402,12 +394,13 @@ static void Display_SPI_Config() {
 
   SPI_Init(DISPLAY_SPI, &initSPI);
 
-  /* SPI_I2S_EnableInt(DISPLAY_SPI, */
-  /*                  SPI_I2S_INT_TE, */
-  /*                  ENABLE); */
-  SPI_I2S_EnableInt(DISPLAY_SPI,
-                    SPI_I2S_INT_RNE,
-                    ENABLE);
+  // continuously triggering interrupt
+  // SPI_I2S_EnableInt(DISPLAY_SPI,
+  //                  SPI_I2S_INT_TE,
+  //                  ENABLE);
+  // SPI_I2S_EnableInt(DISPLAY_SPI,
+  //                   SPI_I2S_INT_RNE,
+  //                   ENABLE);
   SPI_I2S_EnableInt(DISPLAY_SPI,
                     SPI_I2S_INT_ERR,
                     ENABLE);
@@ -433,6 +426,11 @@ static void Display_DMA_Config() {
 
   DMA_Init(DISPLAY_SPI_DMA_CHANNEL, &dmaInit);
   DMA_ConfigInt(DISPLAY_SPI_DMA_CHANNEL, DMA_INT_HTX|DMA_INT_TXC|DMA_INT_ERR, ENABLE);
+  SPI_I2S_EnableDma(DISPLAY_SPI, SPI_I2S_DMA_TX, ENABLE);
+  SPI_Enable(DISPLAY_SPI, ENABLE);
+  DMA_RequestRemap(DISPLAY_SPI_DMA_CHANNEL_REMAP, DMA, DISPLAY_SPI_DMA_CHANNEL, ENABLE);
+  // DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, ENABLE);
+
   DMA_ClrIntPendingBit(
                        DISPLAY_DMA_INT_GLB
                        |DISPLAY_DMA_INT_TXC
