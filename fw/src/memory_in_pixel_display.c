@@ -443,13 +443,14 @@ static void Display_DMA_Config() {
 
 static void Display_NVIC_Config() {
   NVIC_InitType nvicInit = {0};
-  nvicInit.NVIC_IRQChannel = DMA_Channel2_IRQn;
+#ifdef DISPLAY_USE_DMA
+  nvicInit.NVIC_IRQChannel = Display_DMA_IRQn;
   nvicInit.NVIC_IRQChannelPreemptionPriority = DISPLAY_SPI_DMA_INTERRUPT_PRIORITY_LEVEL;
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
 
   NVIC_Init(&nvicInit);
-
-  nvicInit.NVIC_IRQChannel = SPI2_IRQn;
+#endif
+  nvicInit.NVIC_IRQChannel = Display_SPI_IRQn;
   nvicInit.NVIC_IRQChannelCmd = ENABLE;
   nvicInit.NVIC_IRQChannelPreemptionPriority = DISPLAY_SPI_INTERRUPT_PRIORITY_LEVEL;
 
@@ -459,10 +460,8 @@ static void Display_NVIC_Config() {
 void Display_Config() {
   Display_GPIO_Config();
   Display_SPI_Config();
+#ifdef DISPLAY_USE_DMA
   Display_DMA_Config();
+#endif
   Display_NVIC_Config();
-
-  // DMA_EnableChannel(DISPLAY_SPI_DMA_CHANNEL, ENABLE);
-  // SPI_I2S_EnableDma(DISPLAY_SPI, SPI_I2S_DMA_TX, ENABLE);
-  // SPI_Enable(DISPLAY_SPI, ENABLE);
 }

@@ -120,7 +120,10 @@ void Setup() {
   GPIO_Config();
 
   TIM_Config();
+
+#ifndef USE_PAUL_HAT
   LED_Config();
 
   FLASH_ClockInit();
+#endif
 }

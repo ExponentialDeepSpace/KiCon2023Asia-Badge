@@ -124,10 +124,6 @@ void TIMx_GPIO_InitConfig(GPIO_InitType *initGPIO) {
 }
 
 static void TIM1_Config() {
-  // TIM1_CH1(PA8) for SAO_1_GPIO1
-  // TIM1_CH2(PA9) for SAO_2_GPIO2
-  // TIM1_CH3(PA10) for SAO_2_GPIO1
-
   // Setup GPIO for TIM1
   GPIO_InitType initGPIO;
   TIMx_GPIO_InitConfig(&initGPIO);
@@ -147,8 +143,6 @@ static void TIM1_Config() {
 }
 
 static void TIM8_Config() {
-  // TIM8_CH1(PC6) for SAO_1_GPIO2
-
   // Setup GPIO for TIM8
 
   GPIO_InitType initGPIO;
@@ -311,16 +305,19 @@ static void TIM_NVIC_Config() {
 
 void TIM_Config() {
   TIM1_Config();
-  // TIM2_Config();
-  TIM3_Config();
+#ifdef USE_PAUL_HAT
   SK6812_Config();
+#else
+  // TIM2_Config();
+  
+  TIM3_Config();
   // TIM5_Config();
   TIM8_Config();
   // TIM9_Config();
 
   // TIM_DMA_Config();
   // DMA_ClrIntPendingBit(DMA_INT_GLB1|DMA_INT_TXC1|DMA_INT_HTX1|DMA_INT_ERR1, DMA);
-
+#endif
   TIM_ClrIntPendingBit(TIM1,
                        TIM_INT_UPDATE
                        |TIM_INT_CC1
@@ -363,36 +360,25 @@ void TIM_Config() {
                        |TIM_INT_CC2
                        |TIM_INT_CC3
                        |TIM_INT_CC4);
+#ifndef USE_PAUL_HAT
   TIM_NVIC_Config();
+#endif
   
   TIM_EnableCtrlPwmOutputs(TIM1, ENABLE);
   TIM_EnableCtrlPwmOutputs(TIM8, ENABLE);
 
   const uint16_t period = TIM_GetAutoReload(LED_Main_TIM);
 
-  /*
-  for (int i = 0; i < sizeof(periods) / sizeof(periods[0]); i++) {
-    periods[i][B] = period / ((i % 2) ? (1) : (8));
-    periods[i][R] = period / ((i % 2) ? (8) : (1));
-    periods[i][G] = 0;
-  }
-
-  TIM_SetCmp1(TIM3, periods[0][B]); // B
-  TIM_SetCmp2(TIM3, periods[0][R]); // R
-  TIM_SetCmp3(TIM3, periods[0][G]); // G
-  */
-
   TIM_SetCmp1(LED_LowSide_TIM, 0); // B
   TIM_SetCmp2(LED_LowSide_TIM, 0); // R
   TIM_SetCmp3(LED_LowSide_TIM, 0); // G
 
-  // TIM_Enable(TIM2, ENABLE);
+#ifndef USE_PAUL_HAT
   TIM_Enable(LED_LowSide_TIM, ENABLE);
   TIM_Enable(TIM3, ENABLE); // for DISP COM IN
+#else
   TIM_Enable(LED_SAO_GPIO_TIM, ENABLE);
-  // TIM_Enable(TIM5, ENABLE);
-  // TIM_Enable(TIM8, ENABLE);
-  // TIM_Enable(TIM9, ENABLE);
+#endif
 
   TIM_SetCnt(LED_Main_TIM, period + 1);
   TIM_GenerateEvent(LED_Main_TIM, TIM_EVTGEN_UDGN);
